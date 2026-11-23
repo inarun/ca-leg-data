@@ -1,0 +1,19 @@
+{
+  "name": "ca-leg-districts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "California Assembly and Senate district boundary files (CRC 2021 final maps) for point-in-polygon lookup",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "check": "node check.mjs",
+    "spot-check": "node spot-check.mjs"
+  },
+  "devDependencies": {
+    "mapshaper": "^0.8.7",
+    "shapefile": "^0.6.6"
+  }
+}

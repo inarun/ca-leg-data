@@ -1,0 +1,286 @@
+{
+  "session": "20252026",
+  "entries": [
+    {
+      "house": "A",
+      "fileLocation": "AF0140",
+      "kind": null,
+      "description": "Asm Special Order",
+      "longDescription": "Special Order"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0150",
+      "kind": null,
+      "history": true,
+      "rule": "Excluded (second reading), unless the history action of the same bill, house and date whose (Ayes N. Noes M.) equals the roll call's official tally says 'concurred in' (concurrence) or 'Read third time' with 'Passed' (third reading). A constitutional amendment's floor vote is worded 'Adopted and to Assembly.' or 'Adopted and to Senate.' in the history and counts as a third reading in the same way (the house is the history row's primary_location). With no such action it stays excluded.",
+      "description": "Asm 2nd Reading File Assembly Bills",
+      "longDescription": "Second Reading File -- Assembly Bills"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0160",
+      "kind": null,
+      "history": true,
+      "rule": "Excluded (second reading), unless the history action of the same bill, house and date whose (Ayes N. Noes M.) equals the roll call's official tally says 'concurred in' (concurrence) or 'Read third time' with 'Passed' (third reading). A constitutional amendment's floor vote is worded 'Adopted and to Assembly.' or 'Adopted and to Senate.' in the history and counts as a third reading in the same way (the house is the history row's primary_location). With no such action it stays excluded.",
+      "description": "Asm 2nd Reading File Senate Bills",
+      "longDescription": "Second Reading File -- Senate Bills"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0180",
+      "kind": "concurrence",
+      "description": "Asm Concurrence in Senate Amendments",
+      "longDescription": "Concurrence in Senate Amendments"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0185",
+      "kind": "concurrence",
+      "description": "Asm Concurrence Vote: Final Form",
+      "longDescription": "Concurrence Vote: Final Form"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0190",
+      "kind": null,
+      "description": "Asm Conference Reports Pending",
+      "longDescription": "Conference Reports Pending"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0195",
+      "kind": null,
+      "description": "Asm Governor's Reorganization Plan",
+      "longDescription": "Governor's Reorganization Plan"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0200",
+      "kind": null,
+      "description": "Asm Governor's Vetoes",
+      "longDescription": "Governor's Vetoes"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0201",
+      "kind": null,
+      "description": "Asm Governor's Budget Bill Vetoes",
+      "longDescription": "Governor's Budget Bill Vetoes"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0202",
+      "kind": null,
+      "description": "Asm Governor's Vetoes Budget Items",
+      "longDescription": "Governor's Vetoes Budget Items"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0204",
+      "kind": null,
+      "description": "Asm Governor's Vetoes Budget Implement",
+      "longDescription": "Governor's Vetoes Budget Implementation Act"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0210",
+      "kind": null,
+      "description": "Asm Notice/Motion to Withdraw/Committee",
+      "longDescription": "Notice of Motion to Withdraw from Committee"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0220",
+      "kind": null,
+      "description": "Asm Notice/Intent/Remove/Inactive File",
+      "longDescription": "Notice of Intention to Remove from Inactive File"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0230",
+      "kind": null,
+      "description": "Asm Motion to Reconsider",
+      "longDescription": "Motion to Reconsider"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0232",
+      "kind": null,
+      "description": "Asm Reconsider Gov's Vetoes Budget Item",
+      "longDescription": "Reconsider Governor's Vetoes Budget Items"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0234",
+      "kind": null,
+      "description": "Asm Reconsider Gov's Vetoes-Budget Impl",
+      "longDescription": "Reconsideration Governor's Vetoes -Budget Implementation Act"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0240",
+      "kind": "third_reading",
+      "description": "Asm 3rd Reading File Assembly Bills",
+      "longDescription": "Third Reading File - Assembly Bills"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0250",
+      "kind": "third_reading",
+      "description": "Asm 3rd Reading File Senate Bills",
+      "longDescription": "Third Reading File - Senate Bills"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0260",
+      "kind": null,
+      "description": "Asm Consent Calendar 1st Day-Asm Bills",
+      "longDescription": "Consent Calendar 1st Day-Assembly Bills"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0270",
+      "kind": null,
+      "description": "Asm Consent Calendar 1st Day-Sen Bills",
+      "longDescription": "Consent Calendar 1st Day Senate Bills"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0280",
+      "kind": "consent",
+      "description": "Asm Consent Calendar 2nd Day-Asm Bills",
+      "longDescription": "Consent Calendar 2nd Day-Assembly Bills"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0290",
+      "kind": "consent",
+      "description": "Asm Consent Calendar 2nd Day--Sen Bills",
+      "longDescription": "Consent Calendar 2nd Day-Senate Bills"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0295",
+      "kind": "consent",
+      "description": "Asm SCC 1st Day Sen 3rd Reading",
+      "longDescription": "Special Consent Calendar 1st Day Senate 3rd Reading"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0297",
+      "kind": "consent",
+      "description": "Asm SCC 2nd Day Sen 3rd Reading",
+      "longDescription": "Special Consent Calendar 2nd Day Senate Third Reading"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0300",
+      "kind": "concurrence",
+      "description": "Asm SCC 1ST Day Concurrence in Sen Amend",
+      "longDescription": "Special Consent Calendar 1st Day Concurrence Sen Amendments"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0310",
+      "kind": "concurrence",
+      "description": "Asm SCC 2ND Day Concurrence in Sen Amend",
+      "longDescription": "Special Consent Calendar 2nd Day Concurrence Sen Amendments"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0320",
+      "kind": null,
+      "description": "Asm in Conference",
+      "longDescription": "In Conference"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0330",
+      "kind": null,
+      "description": "Asm Conf Report Adopt/Sen Adopt Pending",
+      "longDescription": "Conference Report Adopted In Asm Adoption in Sen Pending"
+    },
+    {
+      "house": "A",
+      "fileLocation": "AF0340",
+      "kind": null,
+      "description": "Asm Inactive File",
+      "longDescription": "Inactive File"
+    },
+    {
+      "house": "S",
+      "fileLocation": "Assembly 2nd Reading",
+      "kind": null,
+      "history": true,
+      "rule": "Excluded (second reading), unless the history action of the same bill, house and date whose (Ayes N. Noes M.) equals the roll call's official tally says 'concurred in' (concurrence) or 'Read third time' with 'Passed' (third reading). A constitutional amendment's floor vote is worded 'Adopted and to Assembly.' or 'Adopted and to Senate.' in the history and counts as a third reading in the same way (the house is the history row's primary_location). With no such action it stays excluded.",
+      "description": null,
+      "longDescription": null
+    },
+    {
+      "house": "S",
+      "fileLocation": "Assembly 3rd Reading",
+      "kind": "third_reading",
+      "description": null,
+      "longDescription": null
+    },
+    {
+      "house": "S",
+      "fileLocation": "Consent Calendar 2nd",
+      "kind": "consent",
+      "history": true,
+      "rule": "Consent, unless the history action of the same bill, house and date with the same (Ayes N. Noes M.) says 'concurred in': then concurrence. With no matching history action it stays consent.",
+      "description": null,
+      "longDescription": null
+    },
+    {
+      "house": "S",
+      "fileLocation": "Senate 2nd Reading",
+      "kind": null,
+      "history": true,
+      "rule": "Excluded (second reading), unless the history action of the same bill, house and date whose (Ayes N. Noes M.) equals the roll call's official tally says 'concurred in' (concurrence) or 'Read third time' with 'Passed' (third reading). A constitutional amendment's floor vote is worded 'Adopted and to Assembly.' or 'Adopted and to Senate.' in the history and counts as a third reading in the same way (the house is the history row's primary_location). With no such action it stays excluded.",
+      "description": null,
+      "longDescription": null
+    },
+    {
+      "house": "S",
+      "fileLocation": "Senate 3rd Reading",
+      "kind": "third_reading",
+      "description": null,
+      "longDescription": null
+    },
+    {
+      "house": "S",
+      "fileLocation": "Special Consent",
+      "kind": "consent",
+      "history": true,
+      "rule": "Consent, unless the history action of the same bill, house and date with the same (Ayes N. Noes M.) says 'concurred in': then concurrence. With no matching history action it stays consent.",
+      "description": null,
+      "longDescription": null
+    },
+    {
+      "house": "S",
+      "fileLocation": "Unfinished Business",
+      "kind": "concurrence",
+      "requiresMotionText": "Concurrence",
+      "description": null,
+      "longDescription": null
+    },
+    {
+      "house": "S",
+      "fileLocation": "W/O REF. TO FILE",
+      "kind": "by_history",
+      "rule": "Decided by the bill history: the history action of the same bill, house and date whose (Ayes N. Noes M.) equals the roll call's official tally. 'concurred in' makes it a concurrence; 'Read third time' with 'Passed' makes it a third reading; no match excludes it (no-history-match). A constitutional amendment's floor vote is worded 'Adopted and to Assembly.' or 'Adopted and to Senate.' in the history and counts as a third reading in the same way (the house is the history row's primary_location).",
+      "description": null,
+      "longDescription": null
+    },
+    {
+      "house": "S",
+      "fileLocation": null,
+      "kind": "by_history",
+      "rule": "Decided by the bill history: the history action of the same bill, house and date whose (Ayes N. Noes M.) equals the roll call's official tally. 'concurred in' makes it a concurrence; 'Read third time' with 'Passed' makes it a third reading; no match excludes it (no-history-match). A constitutional amendment's floor vote is worded 'Adopted and to Assembly.' or 'Adopted and to Senate.' in the history and counts as a third reading in the same way (the house is the history row's primary_location).",
+      "description": null,
+      "longDescription": null
+    }
+  ]
+}

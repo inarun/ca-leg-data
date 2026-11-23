@@ -1,0 +1,1218 @@
+{
+  "session": "20252026",
+  "people": [
+    {
+      "id": "ca-a-addis",
+      "house": "A",
+      "voteNames": [
+        "Addis"
+      ],
+      "rows": [
+        "AD30|Addis, Dawn"
+      ]
+    },
+    {
+      "id": "ca-a-aguiar-curry",
+      "house": "A",
+      "voteNames": [
+        "Aguiar-Curry"
+      ],
+      "rows": [
+        "AD04|Aguiar-Curry, Cecilia M."
+      ]
+    },
+    {
+      "id": "ca-a-ahrens",
+      "house": "A",
+      "voteNames": [
+        "Ahrens"
+      ],
+      "rows": [
+        "AD26|Ahrens, Patrick"
+      ]
+    },
+    {
+      "id": "ca-a-alanis",
+      "house": "A",
+      "voteNames": [
+        "Alanis"
+      ],
+      "rows": [
+        "AD22|Alanis, Juan"
+      ]
+    },
+    {
+      "id": "ca-a-alvarez",
+      "house": "A",
+      "voteNames": [
+        "Alvarez"
+      ],
+      "rows": [
+        "AD80|Alvarez, David"
+      ]
+    },
+    {
+      "id": "ca-a-arambula",
+      "house": "A",
+      "voteNames": [
+        "Arambula"
+      ],
+      "rows": [
+        "AD31|Arambula, Joaquin"
+      ]
+    },
+    {
+      "id": "ca-a-avila-farias",
+      "house": "A",
+      "voteNames": [
+        "Ávila Farías",
+        "Avila Farias"
+      ],
+      "rows": [
+        "AD15|Ávila Farías, Anamarie",
+        "AD15|Avila Farias, Anamarie"
+      ]
+    },
+    {
+      "id": "ca-a-bains",
+      "house": "A",
+      "voteNames": [
+        "Bains"
+      ],
+      "rows": [
+        "AD35|Bains, Jasmeet"
+      ]
+    },
+    {
+      "id": "ca-a-bauer-kahan",
+      "house": "A",
+      "voteNames": [
+        "Bauer-Kahan"
+      ],
+      "rows": [
+        "AD16|Bauer-Kahan, Rebecca"
+      ]
+    },
+    {
+      "id": "ca-a-bennett",
+      "house": "A",
+      "voteNames": [
+        "Bennett"
+      ],
+      "rows": [
+        "AD38|Bennett, Steve"
+      ]
+    },
+    {
+      "id": "ca-a-berman",
+      "house": "A",
+      "voteNames": [
+        "Berman"
+      ],
+      "rows": [
+        "AD23|Berman, Marc"
+      ]
+    },
+    {
+      "id": "ca-a-blanca-rubio",
+      "house": "A",
+      "voteNames": [
+        "Blanca Rubio"
+      ],
+      "rows": [
+        "AD48|Rubio, Blanca E."
+      ]
+    },
+    {
+      "id": "ca-a-boerner",
+      "house": "A",
+      "voteNames": [
+        "Boerner"
+      ],
+      "rows": [
+        "AD77|Boerner, Tasha"
+      ]
+    },
+    {
+      "id": "ca-a-bonta",
+      "house": "A",
+      "voteNames": [
+        "Bonta"
+      ],
+      "rows": [
+        "AD18|Bonta, Mia"
+      ]
+    },
+    {
+      "id": "ca-a-bryan",
+      "house": "A",
+      "voteNames": [
+        "Bryan"
+      ],
+      "rows": [
+        "AD55|Bryan, Isaac G."
+      ]
+    },
+    {
+      "id": "ca-a-calderon",
+      "house": "A",
+      "voteNames": [
+        "Calderon"
+      ],
+      "rows": [
+        "AD56|Calderon, Lisa"
+      ]
+    },
+    {
+      "id": "ca-a-caloza",
+      "house": "A",
+      "voteNames": [
+        "Caloza"
+      ],
+      "rows": [
+        "AD52|Caloza, Jessica"
+      ]
+    },
+    {
+      "id": "ca-a-carrillo",
+      "house": "A",
+      "voteNames": [
+        "Carrillo"
+      ],
+      "rows": [
+        "AD39|Carrillo, Juan"
+      ]
+    },
+    {
+      "id": "ca-a-castillo",
+      "house": "A",
+      "voteNames": [
+        "Castillo"
+      ],
+      "rows": [
+        "AD58|Castillo, Leticia"
+      ]
+    },
+    {
+      "id": "ca-a-celeste-rodriguez",
+      "house": "A",
+      "voteNames": [
+        "Celeste Rodriguez"
+      ],
+      "rows": [
+        "AD43|Rodriguez, Celeste"
+      ]
+    },
+    {
+      "id": "ca-a-chen",
+      "house": "A",
+      "voteNames": [
+        "Chen"
+      ],
+      "rows": [
+        "AD59|Chen, Phillip"
+      ]
+    },
+    {
+      "id": "ca-a-connolly",
+      "house": "A",
+      "voteNames": [
+        "Connolly"
+      ],
+      "rows": [
+        "AD12|Connolly, Damon"
+      ]
+    },
+    {
+      "id": "ca-a-davies",
+      "house": "A",
+      "voteNames": [
+        "Davies"
+      ],
+      "rows": [
+        "AD74|Davies, Laurie"
+      ]
+    },
+    {
+      "id": "ca-a-demaio",
+      "house": "A",
+      "voteNames": [
+        "DeMaio"
+      ],
+      "rows": [
+        "AD75|DeMaio, Carl"
+      ]
+    },
+    {
+      "id": "ca-a-dixon",
+      "house": "A",
+      "voteNames": [
+        "Dixon"
+      ],
+      "rows": [
+        "AD72|Dixon, Diane"
+      ]
+    },
+    {
+      "id": "ca-a-elhawary",
+      "house": "A",
+      "voteNames": [
+        "Elhawary"
+      ],
+      "rows": [
+        "AD57|Elhawary, Sade"
+      ]
+    },
+    {
+      "id": "ca-a-ellis",
+      "house": "A",
+      "voteNames": [
+        "Ellis"
+      ],
+      "rows": [
+        "AD32|Ellis, Stan"
+      ]
+    },
+    {
+      "id": "ca-a-essayli",
+      "house": "A",
+      "voteNames": [
+        "Essayli"
+      ],
+      "rows": [
+        "AD63|Essayli, Bill"
+      ]
+    },
+    {
+      "id": "ca-a-flora",
+      "house": "A",
+      "voteNames": [
+        "Flora"
+      ],
+      "rows": [
+        "AD09|Flora, Heath"
+      ]
+    },
+    {
+      "id": "ca-a-fong",
+      "house": "A",
+      "voteNames": [
+        "Fong"
+      ],
+      "rows": [
+        "AD49|Fong, Mike"
+      ]
+    },
+    {
+      "id": "ca-a-gabriel",
+      "house": "A",
+      "voteNames": [
+        "Gabriel"
+      ],
+      "rows": [
+        "AD46|Gabriel, Jesse"
+      ]
+    },
+    {
+      "id": "ca-a-gallagher",
+      "house": "A",
+      "voteNames": [
+        "Gallagher"
+      ],
+      "rows": [
+        "AD03|Gallagher, James"
+      ]
+    },
+    {
+      "id": "ca-a-garcia",
+      "house": "A",
+      "voteNames": [
+        "Garcia"
+      ],
+      "rows": [
+        "AD50|Garcia, Robert"
+      ]
+    },
+    {
+      "id": "ca-a-gipson",
+      "house": "A",
+      "voteNames": [
+        "Gipson"
+      ],
+      "rows": [
+        "AD65|Gipson, Mike A."
+      ]
+    },
+    {
+      "id": "ca-a-hadwick",
+      "house": "A",
+      "voteNames": [
+        "Hadwick"
+      ],
+      "rows": [
+        "AD01|Hadwick, Heather"
+      ]
+    },
+    {
+      "id": "ca-a-haney",
+      "house": "A",
+      "voteNames": [
+        "Haney"
+      ],
+      "rows": [
+        "AD17|Haney, Matt"
+      ]
+    },
+    {
+      "id": "ca-a-harabedian",
+      "house": "A",
+      "voteNames": [
+        "Harabedian"
+      ],
+      "rows": [
+        "AD41|Harabedian, John"
+      ]
+    },
+    {
+      "id": "ca-a-hart",
+      "house": "A",
+      "voteNames": [
+        "Hart"
+      ],
+      "rows": [
+        "AD37|Hart, Gregg"
+      ]
+    },
+    {
+      "id": "ca-a-hoover",
+      "house": "A",
+      "voteNames": [
+        "Hoover"
+      ],
+      "rows": [
+        "AD07|Hoover, Josh"
+      ]
+    },
+    {
+      "id": "ca-a-irwin",
+      "house": "A",
+      "voteNames": [
+        "Irwin"
+      ],
+      "rows": [
+        "AD42|Irwin, Jacqui"
+      ]
+    },
+    {
+      "id": "ca-a-jackson",
+      "house": "A",
+      "voteNames": [
+        "Jackson"
+      ],
+      "rows": [
+        "AD60|Jackson, Corey A."
+      ]
+    },
+    {
+      "id": "ca-a-jeff-gonzalez",
+      "house": "A",
+      "voteNames": [
+        "Jeff Gonzalez"
+      ],
+      "rows": [
+        "AD36|Gonzalez, Jeff"
+      ]
+    },
+    {
+      "id": "ca-a-johnson",
+      "house": "A",
+      "voteNames": [
+        "Johnson"
+      ],
+      "rows": [
+        "AD63|Johnson, Natasha"
+      ]
+    },
+    {
+      "id": "ca-a-kalra",
+      "house": "A",
+      "voteNames": [
+        "Kalra"
+      ],
+      "rows": [
+        "AD25|Kalra, Ash"
+      ]
+    },
+    {
+      "id": "ca-a-krell",
+      "house": "A",
+      "voteNames": [
+        "Krell"
+      ],
+      "rows": [
+        "AD06|Krell, Maggy"
+      ]
+    },
+    {
+      "id": "ca-a-lackey",
+      "house": "A",
+      "voteNames": [
+        "Lackey"
+      ],
+      "rows": [
+        "AD34|Lackey, Tom"
+      ]
+    },
+    {
+      "id": "ca-a-lee",
+      "house": "A",
+      "voteNames": [
+        "Lee"
+      ],
+      "rows": [
+        "AD24|Lee, Alex"
+      ]
+    },
+    {
+      "id": "ca-a-lowenthal",
+      "house": "A",
+      "voteNames": [
+        "Lowenthal"
+      ],
+      "rows": [
+        "AD69|Lowenthal, Josh"
+      ]
+    },
+    {
+      "id": "ca-a-macedo",
+      "house": "A",
+      "voteNames": [
+        "Macedo"
+      ],
+      "rows": [
+        "AD33|Macedo, Alexandra"
+      ]
+    },
+    {
+      "id": "ca-a-mark-gonzalez",
+      "house": "A",
+      "voteNames": [
+        "Mark González"
+      ],
+      "rows": [
+        "AD54|González, Mark"
+      ]
+    },
+    {
+      "id": "ca-a-mckinnor",
+      "house": "A",
+      "voteNames": [
+        "McKinnor"
+      ],
+      "rows": [
+        "AD61|McKinnor, Tina"
+      ]
+    },
+    {
+      "id": "ca-a-michelle-rodriguez",
+      "house": "A",
+      "voteNames": [
+        "Michelle Rodriguez"
+      ],
+      "rows": [
+        "AD53|Rodriguez, Michelle"
+      ]
+    },
+    {
+      "id": "ca-a-muratsuchi",
+      "house": "A",
+      "voteNames": [
+        "Muratsuchi"
+      ],
+      "rows": [
+        "AD66|Muratsuchi, Al"
+      ]
+    },
+    {
+      "id": "ca-a-nguyen",
+      "house": "A",
+      "voteNames": [
+        "Nguyen"
+      ],
+      "rows": [
+        "AD10|Nguyen, Stephanie"
+      ]
+    },
+    {
+      "id": "ca-a-ortega",
+      "house": "A",
+      "voteNames": [
+        "Ortega"
+      ],
+      "rows": [
+        "AD20|Ortega, Liz"
+      ]
+    },
+    {
+      "id": "ca-a-pacheco",
+      "house": "A",
+      "voteNames": [
+        "Pacheco"
+      ],
+      "rows": [
+        "AD64|Pacheco, Blanca"
+      ]
+    },
+    {
+      "id": "ca-a-papan",
+      "house": "A",
+      "voteNames": [
+        "Papan"
+      ],
+      "rows": [
+        "AD21|Papan, Diane"
+      ]
+    },
+    {
+      "id": "ca-a-patel",
+      "house": "A",
+      "voteNames": [
+        "Patel"
+      ],
+      "rows": [
+        "AD76|Patel, Darshana R."
+      ]
+    },
+    {
+      "id": "ca-a-patterson",
+      "house": "A",
+      "voteNames": [
+        "Patterson"
+      ],
+      "rows": [
+        "AD05|Patterson, Joe"
+      ]
+    },
+    {
+      "id": "ca-a-pellerin",
+      "house": "A",
+      "voteNames": [
+        "Pellerin"
+      ],
+      "rows": [
+        "AD28|Pellerin, Gail"
+      ]
+    },
+    {
+      "id": "ca-a-petrie-norris",
+      "house": "A",
+      "voteNames": [
+        "Petrie-Norris"
+      ],
+      "rows": [
+        "AD73|Petrie-Norris, Cottie"
+      ]
+    },
+    {
+      "id": "ca-a-quirk-silva",
+      "house": "A",
+      "voteNames": [
+        "Quirk-Silva"
+      ],
+      "rows": [
+        "AD67|Quirk-Silva, Sharon"
+      ]
+    },
+    {
+      "id": "ca-a-ramos",
+      "house": "A",
+      "voteNames": [
+        "Ramos"
+      ],
+      "rows": [
+        "AD45|Ramos, James C."
+      ]
+    },
+    {
+      "id": "ca-a-ransom",
+      "house": "A",
+      "voteNames": [
+        "Ransom"
+      ],
+      "rows": [
+        "AD13|Ransom, Rhodesia"
+      ]
+    },
+    {
+      "id": "ca-a-rivas",
+      "house": "A",
+      "voteNames": [
+        "Rivas"
+      ],
+      "rows": [
+        "AD29|Rivas, Robert"
+      ]
+    },
+    {
+      "id": "ca-a-rogers",
+      "house": "A",
+      "voteNames": [
+        "Rogers"
+      ],
+      "rows": [
+        "AD02|Rogers, Chris"
+      ]
+    },
+    {
+      "id": "ca-a-sanchez",
+      "house": "A",
+      "voteNames": [
+        "Sanchez"
+      ],
+      "rows": [
+        "AD71|Sanchez, Kate"
+      ]
+    },
+    {
+      "id": "ca-a-schiavo",
+      "house": "A",
+      "voteNames": [
+        "Schiavo"
+      ],
+      "rows": [
+        "AD40|Schiavo, Pilar"
+      ]
+    },
+    {
+      "id": "ca-a-schultz",
+      "house": "A",
+      "voteNames": [
+        "Schultz"
+      ],
+      "rows": [
+        "AD44|Schultz, Nick"
+      ]
+    },
+    {
+      "id": "ca-a-sharp-collins",
+      "house": "A",
+      "voteNames": [
+        "Sharp-Collins"
+      ],
+      "rows": [
+        "AD79|Sharp-Collins, LaShae"
+      ]
+    },
+    {
+      "id": "ca-a-solache",
+      "house": "A",
+      "voteNames": [
+        "Solache"
+      ],
+      "rows": [
+        "AD62|Solache, Jr., José Luis"
+      ]
+    },
+    {
+      "id": "ca-a-soria",
+      "house": "A",
+      "voteNames": [
+        "Soria"
+      ],
+      "rows": [
+        "AD27|Soria, Esmeralda"
+      ]
+    },
+    {
+      "id": "ca-a-stefani",
+      "house": "A",
+      "voteNames": [
+        "Stefani"
+      ],
+      "rows": [
+        "AD19|Stefani, Catherine"
+      ]
+    },
+    {
+      "id": "ca-a-ta",
+      "house": "A",
+      "voteNames": [
+        "Ta"
+      ],
+      "rows": [
+        "AD70|Ta, Tri"
+      ]
+    },
+    {
+      "id": "ca-a-tangipa",
+      "house": "A",
+      "voteNames": [
+        "Tangipa"
+      ],
+      "rows": [
+        "AD08|Tangipa, David J."
+      ]
+    },
+    {
+      "id": "ca-a-valencia",
+      "house": "A",
+      "voteNames": [
+        "Valencia"
+      ],
+      "rows": [
+        "AD68|Valencia, Avelino"
+      ]
+    },
+    {
+      "id": "ca-a-wallis",
+      "house": "A",
+      "voteNames": [
+        "Wallis"
+      ],
+      "rows": [
+        "AD47|Wallis, Greg"
+      ]
+    },
+    {
+      "id": "ca-a-ward",
+      "house": "A",
+      "voteNames": [
+        "Ward"
+      ],
+      "rows": [
+        "AD78|Ward, Christopher M."
+      ]
+    },
+    {
+      "id": "ca-a-wicks",
+      "house": "A",
+      "voteNames": [
+        "Wicks"
+      ],
+      "rows": [
+        "AD14|Wicks, Buffy"
+      ]
+    },
+    {
+      "id": "ca-a-wilson",
+      "house": "A",
+      "voteNames": [
+        "Wilson"
+      ],
+      "rows": [
+        "AD11|Wilson, Lori D."
+      ]
+    },
+    {
+      "id": "ca-a-zbur",
+      "house": "A",
+      "voteNames": [
+        "Zbur"
+      ],
+      "rows": [
+        "AD51|Zbur, Rick Chavez"
+      ]
+    },
+    {
+      "id": "ca-s-allen",
+      "house": "S",
+      "voteNames": [
+        "Allen"
+      ],
+      "rows": [
+        "SD24|Allen, Benjamin"
+      ]
+    },
+    {
+      "id": "ca-s-alvarado-gil",
+      "house": "S",
+      "voteNames": [
+        "Alvarado-Gil"
+      ],
+      "rows": [
+        "SD04|Alvarado-Gil, Marie"
+      ]
+    },
+    {
+      "id": "ca-s-archuleta",
+      "house": "S",
+      "voteNames": [
+        "Archuleta"
+      ],
+      "rows": [
+        "SD30|Archuleta, Bob"
+      ]
+    },
+    {
+      "id": "ca-s-arreguin",
+      "house": "S",
+      "voteNames": [
+        "Arreguín"
+      ],
+      "rows": [
+        "SD07|Arreguín, Jesse"
+      ]
+    },
+    {
+      "id": "ca-s-ashby",
+      "house": "S",
+      "voteNames": [
+        "Ashby"
+      ],
+      "rows": [
+        "SD08|Ashby, Angelique V."
+      ]
+    },
+    {
+      "id": "ca-s-becker",
+      "house": "S",
+      "voteNames": [
+        "Becker"
+      ],
+      "rows": [
+        "SD13|Becker, Josh"
+      ]
+    },
+    {
+      "id": "ca-s-blakespear",
+      "house": "S",
+      "voteNames": [
+        "Blakespear"
+      ],
+      "rows": [
+        "SD38|Blakespear, Catherine S."
+      ]
+    },
+    {
+      "id": "ca-s-cabaldon",
+      "house": "S",
+      "voteNames": [
+        "Cabaldon"
+      ],
+      "rows": [
+        "SD03|Cabaldon, Christopher"
+      ]
+    },
+    {
+      "id": "ca-s-caballero",
+      "house": "S",
+      "voteNames": [
+        "Caballero"
+      ],
+      "rows": [
+        "SD14|Caballero, Anna M."
+      ]
+    },
+    {
+      "id": "ca-s-cervantes",
+      "house": "S",
+      "voteNames": [
+        "Cervantes"
+      ],
+      "rows": [
+        "SD31|Cervantes, Sabrina"
+      ]
+    },
+    {
+      "id": "ca-s-choi",
+      "house": "S",
+      "voteNames": [
+        "Choi"
+      ],
+      "rows": [
+        "SD37|Choi, Steven S."
+      ]
+    },
+    {
+      "id": "ca-s-cortese",
+      "house": "S",
+      "voteNames": [
+        "Cortese"
+      ],
+      "rows": [
+        "SD15|Cortese, Dave"
+      ]
+    },
+    {
+      "id": "ca-s-dahle",
+      "house": "S",
+      "voteNames": [
+        "Dahle"
+      ],
+      "rows": [
+        "SD01|Dahle, Megan"
+      ]
+    },
+    {
+      "id": "ca-s-durazo",
+      "house": "S",
+      "voteNames": [
+        "Durazo"
+      ],
+      "rows": [
+        "SD26|Durazo, Maria Elena"
+      ]
+    },
+    {
+      "id": "ca-s-gonzalez",
+      "house": "S",
+      "voteNames": [
+        "Gonzalez"
+      ],
+      "rows": [
+        "SD33|Gonzalez, Lena A."
+      ]
+    },
+    {
+      "id": "ca-s-grayson",
+      "house": "S",
+      "voteNames": [
+        "Grayson"
+      ],
+      "rows": [
+        "SD09|Grayson, Timothy S."
+      ]
+    },
+    {
+      "id": "ca-s-grove",
+      "house": "S",
+      "voteNames": [
+        "Grove"
+      ],
+      "rows": [
+        "SD12|Grove, Shannon"
+      ]
+    },
+    {
+      "id": "ca-s-hurtado",
+      "house": "S",
+      "voteNames": [
+        "Hurtado"
+      ],
+      "rows": [
+        "SD16|Hurtado, Melissa"
+      ]
+    },
+    {
+      "id": "ca-s-jones",
+      "house": "S",
+      "voteNames": [
+        "Jones"
+      ],
+      "rows": [
+        "SD40|Jones, Brian W."
+      ]
+    },
+    {
+      "id": "ca-s-laird",
+      "house": "S",
+      "voteNames": [
+        "Laird"
+      ],
+      "rows": [
+        "SD17|Laird, John"
+      ]
+    },
+    {
+      "id": "ca-s-limon",
+      "house": "S",
+      "voteNames": [
+        "Limón"
+      ],
+      "rows": [
+        "SD21|Limón, Monique"
+      ]
+    },
+    {
+      "id": "ca-s-mcguire",
+      "house": "S",
+      "voteNames": [
+        "McGuire"
+      ],
+      "rows": [
+        "SD02|McGuire, Mike"
+      ]
+    },
+    {
+      "id": "ca-s-mcnerney",
+      "house": "S",
+      "voteNames": [
+        "McNerney"
+      ],
+      "rows": [
+        "SD05|McNerney, Jerry"
+      ]
+    },
+    {
+      "id": "ca-s-menjivar",
+      "house": "S",
+      "voteNames": [
+        "Menjivar"
+      ],
+      "rows": [
+        "SD20|Menjivar, Caroline"
+      ]
+    },
+    {
+      "id": "ca-s-niello",
+      "house": "S",
+      "voteNames": [
+        "Niello"
+      ],
+      "rows": [
+        "SD06|Niello, Roger W."
+      ]
+    },
+    {
+      "id": "ca-s-ochoa-bogh",
+      "house": "S",
+      "voteNames": [
+        "Ochoa Bogh"
+      ],
+      "rows": [
+        "SD19|Ochoa Bogh, Rosilicie"
+      ]
+    },
+    {
+      "id": "ca-s-padilla",
+      "house": "S",
+      "voteNames": [
+        "Padilla"
+      ],
+      "rows": [
+        "SD18|Padilla, Stephen C."
+      ]
+    },
+    {
+      "id": "ca-s-perez",
+      "house": "S",
+      "voteNames": [
+        "Pérez"
+      ],
+      "rows": [
+        "SD25|Pérez, Sasha Renée"
+      ]
+    },
+    {
+      "id": "ca-s-reyes",
+      "house": "S",
+      "voteNames": [
+        "Reyes"
+      ],
+      "rows": [
+        "SD29|Reyes, Eloise Gómez"
+      ]
+    },
+    {
+      "id": "ca-s-richardson",
+      "house": "S",
+      "voteNames": [
+        "Richardson"
+      ],
+      "rows": [
+        "SD35|Richardson, Laura"
+      ]
+    },
+    {
+      "id": "ca-s-rubio",
+      "house": "S",
+      "voteNames": [
+        "Rubio"
+      ],
+      "rows": [
+        "SD22|Rubio, Susan"
+      ]
+    },
+    {
+      "id": "ca-s-seyarto",
+      "house": "S",
+      "voteNames": [
+        "Seyarto"
+      ],
+      "rows": [
+        "SD32|Seyarto, Kelly"
+      ]
+    },
+    {
+      "id": "ca-s-smallwood-cuevas",
+      "house": "S",
+      "voteNames": [
+        "Smallwood-Cuevas"
+      ],
+      "rows": [
+        "SD28|Smallwood-Cuevas, Lola"
+      ]
+    },
+    {
+      "id": "ca-s-stern",
+      "house": "S",
+      "voteNames": [
+        "Stern"
+      ],
+      "rows": [
+        "SD27|Stern, Henry I."
+      ]
+    },
+    {
+      "id": "ca-s-strickland",
+      "house": "S",
+      "voteNames": [
+        "Strickland"
+      ],
+      "rows": [
+        "SD36|Strickland, Tony"
+      ]
+    },
+    {
+      "id": "ca-s-umberg",
+      "house": "S",
+      "voteNames": [
+        "Umberg"
+      ],
+      "rows": [
+        "SD34|Umberg, Thomas J."
+      ]
+    },
+    {
+      "id": "ca-s-valladares",
+      "house": "S",
+      "voteNames": [
+        "Valladares"
+      ],
+      "rows": [
+        "SD23|Valladares, Suzette Martinez"
+      ]
+    },
+    {
+      "id": "ca-s-wahab",
+      "house": "S",
+      "voteNames": [
+        "Wahab"
+      ],
+      "rows": [
+        "SD10|Wahab, Aisha"
+      ]
+    },
+    {
+      "id": "ca-s-weber-pierson",
+      "house": "S",
+      "voteNames": [
+        "Weber Pierson",
+        "Weber"
+      ],
+      "rows": [
+        "SD39|Weber Pierson, M.D., Akilah"
+      ]
+    },
+    {
+      "id": "ca-s-wiener",
+      "house": "S",
+      "voteNames": [
+        "Wiener"
+      ],
+      "rows": [
+        "SD11|Wiener, Scott D."
+      ]
+    }
+  ]
+}

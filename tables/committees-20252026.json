@@ -1,0 +1,395 @@
+{
+  "session": "20252026",
+  "committees": [
+    {
+      "code": "CS40",
+      "house": "S",
+      "name": "Agriculture",
+      "issueId": "agriculture"
+    },
+    {
+      "code": "CS42",
+      "house": "S",
+      "name": "Business, Professions and Economic Development",
+      "issueId": "business-and-professions"
+    },
+    {
+      "code": "CS44",
+      "house": "S",
+      "name": "Education",
+      "issueId": "education"
+    },
+    {
+      "code": "CS45",
+      "house": "S",
+      "name": "Elections and Constitutional Amendments",
+      "issueId": "elections"
+    },
+    {
+      "code": "CS48",
+      "house": "S",
+      "name": "Governmental Organization",
+      "issueId": "governmental-organization"
+    },
+    {
+      "code": "CS51",
+      "house": "S",
+      "name": "Labor and Industrial Relations",
+      "issueId": "labor-and-employment"
+    },
+    {
+      "code": "CS53",
+      "house": "S",
+      "name": "Judiciary",
+      "issueId": "judiciary"
+    },
+    {
+      "code": "CS55",
+      "house": "S",
+      "name": "Natural Resources and Water",
+      "issueId": "natural-resources-and-water"
+    },
+    {
+      "code": "CS56",
+      "house": "S",
+      "name": "Labor, Public Employment and Retirement",
+      "issueId": "labor-and-employment"
+    },
+    {
+      "code": "CS58",
+      "house": "S",
+      "name": "Rules",
+      "issueId": null
+    },
+    {
+      "code": "CS59",
+      "house": "S",
+      "name": "Transportation",
+      "issueId": "transportation"
+    },
+    {
+      "code": "CS60",
+      "house": "S",
+      "name": "Health",
+      "issueId": "health"
+    },
+    {
+      "code": "CS61",
+      "house": "S",
+      "name": "Appropriations",
+      "issueId": null
+    },
+    {
+      "code": "CS62",
+      "house": "S",
+      "name": "Budget and Fiscal Review",
+      "issueId": null
+    },
+    {
+      "code": "CS64",
+      "house": "S",
+      "name": "Environmental Quality",
+      "issueId": "environmental-quality"
+    },
+    {
+      "code": "CS66",
+      "house": "S",
+      "name": "Military and Veterans Affairs",
+      "issueId": "military-and-veterans-affairs"
+    },
+    {
+      "code": "CS67",
+      "house": "S",
+      "name": "Transportation and Infrastructure Development",
+      "issueId": "transportation"
+    },
+    {
+      "code": "CS69",
+      "house": "S",
+      "name": "Banking and Financial Institutions",
+      "issueId": "banking-and-finance"
+    },
+    {
+      "code": "CS70",
+      "house": "S",
+      "name": "Insurance",
+      "issueId": "insurance"
+    },
+    {
+      "code": "CS71",
+      "house": "S",
+      "name": "Energy, Utilities and Communications",
+      "issueId": "energy-and-utilities"
+    },
+    {
+      "code": "CS72",
+      "house": "S",
+      "name": "Public Safety",
+      "issueId": "public-safety"
+    },
+    {
+      "code": "CS73",
+      "house": "S",
+      "name": "Governance and Finance",
+      "issueId": "local-government"
+    },
+    {
+      "code": "CS74",
+      "house": "S",
+      "name": "Human Services",
+      "issueId": "human-services"
+    },
+    {
+      "code": "CS75",
+      "house": "S",
+      "name": "Housing",
+      "issueId": "housing"
+    },
+    {
+      "code": "CS80",
+      "house": "S",
+      "name": "Insurance, Banking and Financial Institutions",
+      "issueId": "insurance"
+    },
+    {
+      "code": "CS82",
+      "house": "S",
+      "name": "Local Government",
+      "issueId": "local-government"
+    },
+    {
+      "code": "CS83",
+      "house": "S",
+      "name": "Revenue and Taxation",
+      "issueId": "revenue-and-taxation"
+    },
+    {
+      "code": "CS85",
+      "house": "S",
+      "name": "Fuel Supply and Price Spikes",
+      "issueId": "energy-and-utilities"
+    },
+    {
+      "code": "CS86",
+      "house": "S",
+      "name": "Emergency Management",
+      "issueId": "emergency-management"
+    },
+    {
+      "code": "CS87",
+      "house": "S",
+      "name": "Privacy, Digital Technologies, and Consumer Protection",
+      "issueId": "privacy-and-consumer-protection"
+    },
+    {
+      "code": "CX01",
+      "house": "A",
+      "name": "Agriculture",
+      "issueId": "agriculture"
+    },
+    {
+      "code": "CX02",
+      "house": "A",
+      "name": "Accountability and Administrative Review",
+      "issueId": "governmental-organization"
+    },
+    {
+      "code": "CX03",
+      "house": "A",
+      "name": "Education",
+      "issueId": "education"
+    },
+    {
+      "code": "CX04",
+      "house": "A",
+      "name": "Elections",
+      "issueId": "elections"
+    },
+    {
+      "code": "CX05",
+      "house": "A",
+      "name": "Environmental Safety and Toxic Materials",
+      "issueId": "environmental-quality"
+    },
+    {
+      "code": "CX07",
+      "house": "A",
+      "name": "Governmental Organization",
+      "issueId": "governmental-organization"
+    },
+    {
+      "code": "CX08",
+      "house": "A",
+      "name": "Health",
+      "issueId": "health"
+    },
+    {
+      "code": "CX09",
+      "house": "A",
+      "name": "Higher Education",
+      "issueId": "higher-education"
+    },
+    {
+      "code": "CX10",
+      "house": "A",
+      "name": "Housing and Community Development",
+      "issueId": "housing"
+    },
+    {
+      "code": "CX11",
+      "house": "A",
+      "name": "Human Services",
+      "issueId": "human-services"
+    },
+    {
+      "code": "CX12",
+      "house": "A",
+      "name": "Transportation and Infrastructure Development",
+      "issueId": "transportation"
+    },
+    {
+      "code": "CX13",
+      "house": "A",
+      "name": "Judiciary",
+      "issueId": "judiciary"
+    },
+    {
+      "code": "CX14",
+      "house": "A",
+      "name": "Labor and Employment",
+      "issueId": "labor-and-employment"
+    },
+    {
+      "code": "CX15",
+      "house": "A",
+      "name": "Local Government",
+      "issueId": "local-government"
+    },
+    {
+      "code": "CX16",
+      "house": "A",
+      "name": "Natural Resources",
+      "issueId": "natural-resources-and-water"
+    },
+    {
+      "code": "CX17",
+      "house": "A",
+      "name": "Public Employment and Retirement",
+      "issueId": "public-employment-and-retirement"
+    },
+    {
+      "code": "CX18",
+      "house": "A",
+      "name": "Public Safety",
+      "issueId": "public-safety"
+    },
+    {
+      "code": "CX19",
+      "house": "A",
+      "name": "Revenue and Taxation",
+      "issueId": "revenue-and-taxation"
+    },
+    {
+      "code": "CX20",
+      "house": "A",
+      "name": "Rules",
+      "issueId": null
+    },
+    {
+      "code": "CX22",
+      "house": "A",
+      "name": "Transportation",
+      "issueId": "transportation"
+    },
+    {
+      "code": "CX23",
+      "house": "A",
+      "name": "Utilities and Energy",
+      "issueId": "energy-and-utilities"
+    },
+    {
+      "code": "CX24",
+      "house": "A",
+      "name": "Water, Parks and Wildlife",
+      "issueId": "natural-resources-and-water"
+    },
+    {
+      "code": "CX25",
+      "house": "A",
+      "name": "Appropriations",
+      "issueId": null
+    },
+    {
+      "code": "CX27",
+      "house": "A",
+      "name": "Banking and Finance",
+      "issueId": "banking-and-finance"
+    },
+    {
+      "code": "CX28",
+      "house": "A",
+      "name": "Insurance",
+      "issueId": "insurance"
+    },
+    {
+      "code": "CX29",
+      "house": "A",
+      "name": "Budget",
+      "issueId": null
+    },
+    {
+      "code": "CX31",
+      "house": "A",
+      "name": "Aging and Long Term Care",
+      "issueId": "aging"
+    },
+    {
+      "code": "CX32",
+      "house": "A",
+      "name": "Privacy and Consumer Protection",
+      "issueId": "privacy-and-consumer-protection"
+    },
+    {
+      "code": "CX33",
+      "house": "A",
+      "name": "Business and Professions",
+      "issueId": "business-and-professions"
+    },
+    {
+      "code": "CX34",
+      "house": "A",
+      "name": "Economic Development, Growth, & Household Impact",
+      "issueId": "economic-development"
+    },
+    {
+      "code": "CX37",
+      "house": "A",
+      "name": "Arts, Entertainment, Sports, and Tourism",
+      "issueId": "arts-and-entertainment"
+    },
+    {
+      "code": "CX38",
+      "house": "A",
+      "name": "Military and Veterans Affairs",
+      "issueId": "military-and-veterans-affairs"
+    },
+    {
+      "code": "CX39",
+      "house": "A",
+      "name": "Communications and Conveyance",
+      "issueId": "communications"
+    },
+    {
+      "code": "CX81",
+      "house": "A",
+      "name": "Emergency Management",
+      "issueId": "emergency-management"
+    },
+    {
+      "code": "CX84",
+      "house": "A",
+      "name": "Petroleum and Gasoline Supply",
+      "issueId": "energy-and-utilities"
+    }
+  ]
+}

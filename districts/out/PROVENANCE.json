@@ -1,0 +1,88 @@
+{
+  "generated": "2026-11-23T02:21:32.702Z",
+  "description": "California Assembly and Senate districts, Citizens Redistricting Commission final 2021 maps, simplified for on-device point-in-polygon lookup.",
+  "terms": "CRC website content is public domain unless otherwise indicated: https://wedrawthelines.ca.gov/conditions_of_use/",
+  "sources": {
+    "assembly": {
+      "role": "primary",
+      "label": "CRC 2021 final Assembly map",
+      "url": "https://wedrawthelines.ca.gov/wp-content/uploads/sites/64/2023/01/OneDrive_2023-01-19-5.zip",
+      "downloaded": "2026-11-23",
+      "zipSha256": "c9a426d14804687977f2ff7d4123a5fab13987e580497a1e47195e39c8bb2137",
+      "zipBytes": 6248041,
+      "shapefile": "CRC_2021_Assembly_Final 2021-12-20.shp",
+      "districtAttribute": "DISTRICT",
+      "sourceCrs": "GEOGCS[\"GCS_North_American_1983\",DATUM[\"D_North_American_1983\",SPHEROID[\"GRS_1980\",6378137,298.257222101]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.017453292519943295]]",
+      "featureCount": 80
+    },
+    "senate": {
+      "role": "primary",
+      "label": "CRC 2021 final Senate map",
+      "url": "https://wedrawthelines.ca.gov/wp-content/uploads/sites/64/2023/01/OneDrive_2023-01-19-3.zip",
+      "downloaded": "2026-11-23",
+      "zipSha256": "9276b03e5acf538f38b2add3e0a4a2a8a6722830d51e27e1b1cc64020f86f6f3",
+      "zipBytes": 4960413,
+      "shapefile": "SD_Final.shp",
+      "districtAttribute": "DISTRICT",
+      "sourceCrs": "GEOGCS[\"GCS_North_American_1983\",DATUM[\"D_North_American_1983\",SPHEROID[\"GRS_1980\",6378137,298.257222101]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.017453292519943295]]",
+      "featureCount": 40
+    },
+    "census_assembly": {
+      "role": "cross-check",
+      "label": "Census TIGER/Line 2026 SLDL (California) (cross-check only, not shipped)",
+      "url": "https://www2.census.gov/geo/tiger/TIGER2026/SLDL/tl_2026_06_sldl.zip",
+      "downloaded": "2026-11-23",
+      "zipSha256": "e23b8e468f6e5e299943b92ea8ac66a06e14288b32994c099bcbc2cdff7e4233",
+      "zipBytes": 4123431,
+      "districtAttribute": "SLDLST"
+    },
+    "census_senate": {
+      "role": "cross-check",
+      "label": "Census TIGER/Line 2026 SLDU (California) (cross-check only, not shipped)",
+      "url": "https://www2.census.gov/geo/tiger/TIGER2026/SLDU/tl_2026_06_sldu.zip",
+      "downloaded": "2026-11-23",
+      "zipSha256": "bdcb8e8f712a4ab291e9d7434d054feb2482ddd989a231f7161e82965b537ffa",
+      "zipBytes": 3249504,
+      "districtAttribute": "SLDUST"
+    }
+  },
+  "processing": {
+    "assembly": {
+      "datumNote": "Source is geographic NAD83; coordinates used as WGS84 lon/lat unchanged (difference is about 1-2 m in California)."
+    },
+    "senate": {
+      "datumNote": "Source is geographic NAD83; coordinates used as WGS84 lon/lat unchanged (difference is about 1-2 m in California)."
+    },
+    "common": {
+      "algorithm": "mapshaper -simplify dp (Douglas-Peucker), topology-preserving: shared borders are simplified once so neighbours neither gap nor overlap; keep-shapes retains every polygon (islands)",
+      "toleranceMeters": 30,
+      "coordinateDecimals": 5,
+      "output": "GeoJSON FeatureCollection, WGS84 lon/lat, properties {district: integer}"
+    }
+  },
+  "outputs": {
+    "assembly": {
+      "file": "out/ca-assembly-2021.geojson",
+      "featureCount": 80,
+      "bytesRaw": 1054637,
+      "bytesGzip": 284168,
+      "simplifyLog": "[simplify] Repaired 4 intersections"
+    },
+    "senate": {
+      "file": "out/ca-senate-2021.geojson",
+      "featureCount": 40,
+      "bytesRaw": 869716,
+      "bytesGzip": 241167,
+      "simplifyLog": "[simplify] Repaired 6 intersections"
+    },
+    "total": {
+      "bytesRaw": 1924353,
+      "bytesGzip": 525335
+    }
+  },
+  "tools": {
+    "node": "v24.20.0",
+    "mapshaper": "0.8.7 (MPL-2.0, build tool only, not shipped)",
+    "shapefile": "0.6.6 (BSD-3-Clause, used by check.mjs)"
+  }
+}

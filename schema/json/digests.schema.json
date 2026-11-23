@@ -1,0 +1,64 @@
+{
+  "title": "digests-<hash8>.json, schema v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "snapshotId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "digests": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "versionId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "src": {
+            "type": "object",
+            "properties": {
+              "table": {
+                "type": "string",
+                "const": "BILL_VERSION_TBL"
+              },
+              "billVersionId": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "table",
+              "billVersionId"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "versionId",
+          "text",
+          "src"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "snapshotId",
+    "digests"
+  ],
+  "additionalProperties": false
+}
