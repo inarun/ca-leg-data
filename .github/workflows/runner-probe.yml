@@ -1,0 +1,26 @@
+name: runner-probe
+# One-off check: can a GitHub-hosted runner download the official bulk file?
+on:
+  workflow_dispatch:
+  pull_request:
+    paths: ['.github/workflows/runner-probe.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Headers
+        run: |
+          day=$(date -u -d '8 hours ago' +%a)
+          echo "day=$day"
+          curl -sS -I -m 60 "https://downloads.leginfo.legislature.ca.gov/pubinfo_daily_${day}.zip" | tee headers.txt
+          grep -qi '^HTTP/.* 200' headers.txt
+      - name: Full download
+        run: |
+          day=$(date -u -d '8 hours ago' +%a)
+          curl -sS -m 900 -o pubinfo.zip -w 'http=%{http_code} bytes=%{size_download} secs=%{time_total}\n' "https://downloads.leginfo.legislature.ca.gov/pubinfo_daily_${day}.zip"
+          ls -la pubinfo.zip
+          unzip -l pubinfo.zip | grep -E '\.dat$'
+          df -h . ; free -m
