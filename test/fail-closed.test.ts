@@ -1,8 +1,8 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { validateFile } from "../schema/validate-v1.ts";
-import { assertAllRecordsHaveSrc, crossCheck } from "../src/checks.ts";
+import { assertAllRecordsHaveSrc, assertSourceReadable, crossCheck } from "../src/checks.ts";
 import type { IngestArgs } from "../src/ingest.ts";
 import { IngestError, stableStringify } from "../src/util.ts";
 import {
@@ -104,8 +104,8 @@ describe("fail closed: nothing is written", () => {
   });
 
   it("a broken tally: roll calls whose members do not reproduce the official count fall under 99.9%", async () => {
-    // The unmodified slice already has the one real mismatch (SB 329): 150 of 151 is below 99.9%.
-    const err = await expectFailure({ tallyThreshold: undefined }, "tally", /150 of 151/);
+    // The unmodified slice already has the one real mismatch (SB 329): 195 of 196 is below 99.9%.
+    const err = await expectFailure({ tallyThreshold: undefined }, "tally", /195 of 196/);
     expect(err.details[0]).toContain("202520260SB329|AFLOOR|2026-08-25 11:57:42|1050");
   });
 
@@ -119,7 +119,7 @@ describe("fail closed: nothing is written", () => {
       (raw) => raw.replace("`AYE`", "`NOE`").replace(/\tAYE\t/, "\tNOE\t"),
     );
     expect(n).toBe(1);
-    const err = await expectFailure({ source, tallyThreshold: 0.99 }, "tally", /149 of 151/);
+    const err = await expectFailure({ source, tallyThreshold: 0.99 }, "tally", /194 of 196/);
     expect(err.details.join("\n")).toContain("202520260AB550|AFLOOR|2026-08-26 11:27:01");
   });
 
@@ -148,14 +148,14 @@ describe("fail closed: nothing is written", () => {
     await writeFile(join(dir, `${earlier.snapshotId}.json`), stableStringify(earlier), "utf8");
     const err = await expectFailure({ manifestsDir: dir }, "count-drop");
     expect(err.details).toHaveLength(1);
-    expect(err.details[0]).toMatch(/rollCalls: 151 is below 98%/);
+    expect(err.details[0]).toMatch(/rollCalls: 196 is below 98%/);
   });
 
   it("counts at or above 98% of the earlier maximum pass and the manifest is accepted", async () => {
     const dir = await tempDir("manifests-ok-");
     const earlier = JSON.parse(JSON.stringify(base.manifest)) as typeof base.manifest;
     earlier.snapshotId = "20260101T000000Z-00000000";
-    (earlier.counts[0] as { rollCalls: number }).rollCalls = Math.floor(151 / 0.985);
+    (earlier.counts[0] as { rollCalls: number }).rollCalls = Math.floor(196 / 0.985);
     await writeFile(join(dir, `${earlier.snapshotId}.json`), stableStringify(earlier), "utf8");
     const out = await tempDir("ok-");
     const res = await runIngest(ingestArgs({ out, manifestsDir: dir }));
@@ -279,5 +279,85 @@ describe("snapshot id", () => {
     expect(changed.manifest.files.votes.sha256).not.toBe(base.manifest.files.votes.sha256);
     expect(changed.manifest.snapshotId).not.toBe(base.manifest.snapshotId);
     expect(changed.manifest.snapshotId.slice(0, 16)).toBe(base.manifest.snapshotId.slice(0, 16));
+  });
+});
+
+describe("fail closed: an empty or damaged source never becomes a snapshot", () => {
+  // Every case runs on a mutated copy of the fixture with no earlier manifest, so the failure cannot come from a count drop.
+  const dropAll = (source: string, file: string): Promise<number> => editRows(source, file, () => true, () => null);
+
+  it("no roll calls: the tally total is 0", async () => {
+    const source = await fixtureCopy();
+    expect(await dropAll(source, "BILL_SUMMARY_VOTE_TBL.dat")).toBe(196);
+    const err = await expectFailure({ source }, "empty-source", /no data in a table/);
+    expect(err.details.join("\n")).toContain("BILL_SUMMARY_VOTE_TBL has no roll calls for the session (tally total is 0)");
+  });
+
+  it("no member votes", async () => {
+    const source = await fixtureCopy();
+    expect(await dropAll(source, "BILL_DETAIL_VOTE_TBL.dat")).toBeGreaterThan(4000);
+    const err = await expectFailure({ source }, "empty-source");
+    expect(err.details.join("\n")).toContain("BILL_DETAIL_VOTE_TBL has no member votes");
+  });
+
+  it("no versions", async () => {
+    const source = await fixtureCopy();
+    expect(await dropAll(source, "BILL_VERSION_TBL.dat")).toBeGreaterThan(100);
+    const err = await expectFailure({ source }, "empty-source");
+    expect(err.details.join("\n")).toContain("BILL_VERSION_TBL has no versions");
+  });
+
+  it("no bills", async () => {
+    const source = await fixtureCopy();
+    expect(await dropAll(source, "BILL_TBL.dat")).toBe(41);
+    const err = await expectFailure({ source }, "empty-source");
+    expect(err.details.join("\n")).toContain("BILL_TBL has no bills");
+  });
+
+  it("no in-scope bills: only the resolution is left", async () => {
+    const source = await fixtureCopy();
+    expect(await editRows(source, "BILL_TBL.dat", (c) => c[0] !== "202520260SCR15", () => null)).toBe(40);
+    const err = await expectFailure({ source }, "empty-source");
+    expect(err.details.join("\n")).toContain("no bill of an in-scope measure type");
+  });
+
+  it("an in-scope bill with no BILL_HISTORY_TBL rows (SB 1189)", async () => {
+    const source = await fixtureCopy();
+    expect(await editRows(source, "BILL_HISTORY_TBL.dat", (c) => c[0] === "202520260SB1189", () => null)).toBe(21);
+    const err = await expectFailure({ source }, "unreadable-source", /damaged or incomplete/);
+    expect(err.details.join("\n")).toContain("1 in-scope bills have no BILL_HISTORY_TBL rows: 202520260SB1189");
+  });
+
+  /** Removes the analysis LOB files named by BILL_ANALYSIS_TBL rows that `which` selects; returns how many. */
+  async function removeAnalysisFiles(source: string, which: (cells: Array<string | null>) => boolean): Promise<number> {
+    const names: string[] = [];
+    await editRows(source, "BILL_ANALYSIS_TBL.dat", (c) => {
+      if (which(c)) names.push(c[10] as string);
+      return false;
+    }, (raw) => raw);
+    for (const n of names) await rm(join(source, n), { force: true });
+    return names.length;
+  }
+
+  it("analysis rows exist but no analysis file can be read", async () => {
+    const source = await fixtureCopy();
+    expect(await removeAnalysisFiles(source, () => true)).toBe(67);
+    const err = await expectFailure({ source }, "unreadable-source");
+    expect(err.details.join("\n")).toMatch(/in-scope bills have analysis rows but no analysis file could be read/);
+  });
+
+  it("the latest analysis file of a bill is unreadable: over the 0.5% share of bills with an analysis", async () => {
+    const source = await fixtureCopy();
+    // AB 550's latest analysis (405279); its earlier committee analysis is kept, so the build could fall back to it.
+    expect(await removeAnalysisFiles(source, (c) => c[0] === "405279")).toBe(1);
+    const err = await expectFailure({ source }, "unreadable-source");
+    expect(err.details.join("\n")).toMatch(/latest analysis file is unreadable for 1 of 37 bills, more than 0\.5%/);
+  });
+
+  it("the share is 0.5%: 18 of 3729 passes and 19 does not (the real file has 0 of 3729)", () => {
+    const ok = { billsWithoutHistory: [], analysisBills: 3729, analysesRead: 3711 };
+    expect(() => assertSourceReadable({ ...ok, unreadableLatest: 0 })).not.toThrow();
+    expect(() => assertSourceReadable({ ...ok, unreadableLatest: 18 })).not.toThrow();
+    expect(() => assertSourceReadable({ ...ok, unreadableLatest: 19 })).toThrow(/unreadable for 19 of 3729/);
   });
 });

@@ -24,6 +24,10 @@ export interface HistoryCandidate {
   fileLocation: string | null;
   /** Excluded by its motion text or location before any history rule. */
   excluded: boolean;
+  /** For "optional": the exclusion reason when no history action matches (default "location"). */
+  noMatchReason?: ExclusionReason;
+  /** The motion text names a reconsideration: never counts as another roll call's duplicate. */
+  reconsideration?: boolean;
 }
 
 export interface HistoryDecision {
@@ -52,6 +56,8 @@ export interface HistoryUpgrade {
   ayes: number;
   noes: number;
   kind: VoteKind;
+  /** Why the roll call would otherwise be excluded: "location" (second reading) or "reconsideration". */
+  wouldBeExcludedAs: ExclusionReason;
   /** BILL_HISTORY_TBL.action of the matching row, verbatim, and its id. */
   historyLine: string;
   billHistoryId: string;
@@ -90,6 +96,9 @@ const inc = (m: Record<string, number>, k: string): void => {
  * A Senate roll call on the urgency clause is a separate vote: it is excluded (urgency-clause) when
  * another roll call of the bill, house and date matched the history; if it is the only one, the
  * rules above apply to it. A tally matching both a concurrence and a passage fails the build.
+ * A roll call filed under a motion to reconsider counts like a second-reading one (only with a matching action), unless
+ * another counted roll call of the same bill, house, date and tally already stands for that passage: then it is the
+ * reconsideration vote itself, a second vote on the same question, and stays excluded.
  */
 export function applyHistoryRules(candidates: HistoryCandidate[], index: FloorActionIndex): HistoryRuleResult {
   const result: HistoryRuleResult = { upgrades: [], groups: {}, decisions: [], noMatch: [], consentBecameConcurrence: {}, urgencyClauseOutside: {}, excludedByReason: {} };
@@ -118,6 +127,13 @@ export function applyHistoryRules(candidates: HistoryCandidate[], index: FloorAc
   for (const c of candidates) if (c.history !== null && !c.excluded) matches.set(c, matchOf(c));
   const matched = (c: HistoryCandidate): PassageKind | null => (matches.has(c) ? (matches.get(c) as PassageKind | null) : matchOf(c));
 
+  // Another roll call of the bill, house, date and tally that counts on its own: one outside the history-decided
+  // locations with a kind, or one the history matched.
+  const countedElsewhere = (c: HistoryCandidate): boolean =>
+    (sameDay.get(`${c.billId}|${c.house}|${c.date}`) ?? []).some(
+      (o) => o !== c && !o.excluded && !o.reconsideration && o.ayes === c.ayes && o.noes === c.noes && (o.history === null ? o.kind !== null : matched(o) !== null),
+    );
+
   for (const c of candidates) {
     if (c.history === null || c.excluded) continue;
     let kind: VoteKind | null;
@@ -127,7 +143,7 @@ export function applyHistoryRules(candidates: HistoryCandidate[], index: FloorAc
       c.house === "S" &&
       isUrgencyClauseMotion(c.motionText) &&
       (sameDay.get(`${c.billId}|${c.house}|${c.date}`) ?? []).some(
-        (o) => o !== c && !o.excluded && !isUrgencyClauseMotion(o.motionText) && matched(o) !== null,
+        (o) => o !== c && !o.excluded && !o.reconsideration && !isUrgencyClauseMotion(o.motionText) && matched(o) !== null,
       );
     if (duplicateOfAnother) {
       kind = null;
@@ -139,8 +155,8 @@ export function applyHistoryRules(candidates: HistoryCandidate[], index: FloorAc
         result.noMatch.push({ group: c.group, id: c.key, motionText: c.motionText, ayes: c.ayes, noes: c.noes, keptAs: null });
       }
     } else if (c.history === "optional") {
-      kind = m;
-      if (kind === null) reason = "location";
+      kind = c.reconsideration && countedElsewhere(c) ? null : m;
+      if (kind === null) reason = c.noMatchReason ?? "location";
       else {
         const a = index.find(c.billId, c.house, c.date, c.ayes, c.noes)[0] as FloorAction;
         result.upgrades.push({
@@ -154,6 +170,7 @@ export function applyHistoryRules(candidates: HistoryCandidate[], index: FloorAc
           ayes: c.ayes,
           noes: c.noes,
           kind,
+          wouldBeExcludedAs: c.noMatchReason ?? "location",
           historyLine: a.row.action,
           billHistoryId: a.row.historyId,
         });

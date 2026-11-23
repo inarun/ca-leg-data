@@ -56,10 +56,13 @@ export interface Classification {
   /**
    * "required": kind is decided by the bill history (kind is null until then).
    * "refine": kind is "consent" unless the bill history says concurrence.
-   * "optional": excluded (second reading) unless the bill history has a same-tally passage or concurrence.
+   * "optional": excluded (second reading, or a motion to reconsider) unless the bill history has an applied
+   * same-tally passage or concurrence of the same bill, house and date.
    * null: the location decides.
    */
   history: "required" | "refine" | "optional" | null;
+  /** For "optional": why the roll call stays excluded when the history has no matching action. */
+  noMatchReason?: ExclusionReason;
 }
 
 const SUPPLEMENTAL = /\s*\(Supplemental File \d+\)\s*$/;
@@ -120,6 +123,9 @@ export class FloorClassifier {
     }
     const history = entry.kind === "by_history" ? "required" : entry.history ? (entry.kind === null ? "optional" : "refine") : null;
     const excluded = motionExclusion(motionText);
+    // A roll call filed under a motion to reconsider can be the passage vote itself (the motion text is
+    // shared with the first, reconsidered vote). It counts only when an applied history passage matches it.
+    if (excluded === "reconsideration") return { kind: null, reason: null, history: "optional", noMatchReason: "reconsideration" };
     if (excluded) return { kind: null, reason: excluded, history };
     if (entry.kind === null) return { kind: null, reason: history === "optional" ? null : "location", history };
     if (entry.kind === "by_history") return { kind: null, reason: null, history };

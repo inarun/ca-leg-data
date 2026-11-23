@@ -4,9 +4,16 @@ name: ingest
 # - Pull requests: tests plus a full dry run (nothing is published).
 # - Schedule / manual on main: publish. Fails closed: if any check fails, nothing is published
 #   and an issue is opened.
-# - Manual with `rollback_to`: republish an earlier snapshot without rebuilding.
-# State (one small manifest per snapshot) lives on the `snapshots` branch. Snapshot files are
-# archived as release assets and are never committed.
+# - Manual with `rollback_to`: republish an earlier snapshot without rebuilding. Snapshots newer
+#   than the target are revoked (moved to `revoked/` on the state branch) and never republished.
+# State lives on the `snapshots` branch: `manifests/<id>.json`, `latest.json`, `heartbeat.json`,
+# `revoked/<id>.json`, `skip-etag`. It is written only AFTER a successful Pages deploy, so a
+# failed deploy is retried by the next run. Snapshot files are archived as release assets and
+# are never committed.
+#
+# Security: values that come from outside (HTTP headers, workflow inputs) reach shell scripts
+# only through `env:` and are validated before use. The token is given only to the steps that
+# call gh or push; `npm ci` and the build never see it.
 
 on:
   schedule:
@@ -38,6 +45,7 @@ env:
   KEEP_PUBLISHED: "7" # snapshots kept on the site (latest + 6)
   KEEP_RELEASES: "30"
   MIN_APP_VERSION: "0.1.0"
+  STATE_URL: https://github.com/${{ github.repository }}.git
 
 jobs:
   test:
@@ -59,16 +67,18 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     permissions:
-      contents: write # snapshots branch + releases (not used on pull requests)
+      contents: write # release asset + heartbeat (not used on pull requests)
       issues: write
     outputs:
       published: ${{ steps.result.outputs.published }}
       snapshot: ${{ steps.ingest.outputs.snapshot }}
     env:
-      GH_TOKEN: ${{ github.token }}
       DRY_RUN: ${{ github.event_name == 'pull_request' && '1' || '0' }}
+      FORCE: ${{ inputs.force && '1' || '0' }}
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v7
         with:
           node-version: 24
@@ -77,60 +87,85 @@ jobs:
 
       - name: Load state (snapshots branch)
         run: |
-          mkdir -p state/manifests
-          if git ls-remote --exit-code --heads origin snapshots >/dev/null 2>&1; then
-            git fetch --depth 1 origin snapshots
-            git --work-tree=state checkout FETCH_HEAD -- . || true
-            git reset -q
+          set -euo pipefail
+          if git ls-remote --exit-code --heads "$STATE_URL" snapshots >/dev/null 2>&1; then
+            git clone -q --depth 1 --branch snapshots "$STATE_URL" state
+            n=$(ls -1 state/manifests 2>/dev/null | wc -l)
+            [ "$n" -ge 1 ] || { echo "State branch exists but holds no manifests; refusing to continue."; exit 1; }
+            echo "manifests: $n"
+          else
+            mkdir -p state/manifests
+            echo "No state branch yet (first run)."
           fi
-          ls state/manifests | wc -l
 
       - name: Pick the newest nightly file
         id: pick
         run: |
-          best=""; best_ts=0
+          set -uo pipefail
+          best=""; best_ts=0; best_lm=""; best_et=""
           for d in Mon Tue Wed Thu Fri Sat Sun; do
             f="pubinfo_daily_${d}.zip"
             h=$(curl -sS -I -m 60 --retry 3 "$SOURCE_BASE/$f" | tr -d '\r') || continue
-            echo "$h" | grep -qi '^HTTP/.* 200' || continue
-            lm=$(echo "$h" | grep -i '^last-modified:' | cut -d' ' -f2-)
-            et=$(echo "$h" | grep -i '^etag:' | cut -d' ' -f2- | tr -d '"')
-            ts=$(date -u -d "$lm" +%s)
-            echo "$f  $lm  $et"
+            printf '%s\n' "$h" | grep -qi '^HTTP/.* 200' || continue
+            lm=$(printf '%s\n' "$h" | grep -i '^last-modified:' | head -n1 | cut -d' ' -f2-)
+            et=$(printf '%s\n' "$h" | grep -i '^etag:' | head -n1 | cut -d' ' -f2- | tr -d '"')
+            ts=$(date -u -d "$lm" +%s 2>/dev/null) || continue
+            # An ETag is only ever compared and stored; anything unusual is dropped, not trusted.
+            printf '%s' "$et" | grep -Eq '^[A-Za-z0-9:._/+=-]{1,128}$' || et=""
+            echo "$f  ts=$ts  etag=$et"
             if [ "$ts" -gt "$best_ts" ]; then best_ts=$ts; best=$f; best_lm=$lm; best_et=$et; fi
           done
           [ -n "$best" ] || { echo "No nightly file reachable"; exit 1; }
           iso=$(date -u -d "$best_lm" +%Y-%m-%dT%H:%M:%SZ)
-          echo "file=$best" >> "$GITHUB_OUTPUT"
-          echo "date=$iso" >> "$GITHUB_OUTPUT"
-          echo "etag=$best_et" >> "$GITHUB_OUTPUT"
+          # With no usable ETag, the Last-Modified time is the change key.
+          key="${best_et:-lm-$iso}"
+          {
+            echo "file=$best"
+            echo "date=$iso"
+            echo "etag=$best_et"
+          } >> "$GITHUB_OUTPUT"
           last=""
-          if [ -f state/latest.json ]; then last=$(node -e "const m=require('./state/latest.json');console.log((m.sources.find(s=>s.session===process.env.SESSION)||{}).etag||'')"); fi
-          if [ "$DRY_RUN" = "0" ] && [ "${{ inputs.force }}" != "true" ] && [ -n "$last" ] && [ "$last" = "$best_et" ]; then
-            echo "Source unchanged ($best_et)."; echo "changed=0" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=1" >> "$GITHUB_OUTPUT"
+          if [ -f state/latest.json ]; then
+            last=$(node -e "const m=require('./state/latest.json');const s=m.sources.find(s=>s.session===process.env.SESSION)||{};console.log(s.etag||('lm-'+s.sourceFileDate))")
           fi
+          skip=""
+          [ -f state/skip-etag ] && skip=$(head -c 200 state/skip-etag | tr -d '\n')
+          changed=1
+          if [ "$DRY_RUN" = "0" ] && [ "$FORCE" != "1" ]; then
+            if [ -n "$last" ] && [ "$last" = "$key" ]; then echo "Source unchanged."; changed=0; fi
+            if [ -n "$skip" ] && [ "$skip" = "$key" ]; then echo "Source is the one that was rolled back; waiting for a new file (or run with force)."; changed=0; fi
+          fi
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
 
       - name: Download
         if: steps.pick.outputs.changed == '1'
+        env:
+          SRC_FILE: ${{ steps.pick.outputs.file }}
         run: |
-          curl -sS -m 2400 --retry 3 --retry-delay 30 -o source.zip \
+          set -euo pipefail
+          case "$SRC_FILE" in pubinfo_daily_Mon.zip|pubinfo_daily_Tue.zip|pubinfo_daily_Wed.zip|pubinfo_daily_Thu.zip|pubinfo_daily_Fri.zip|pubinfo_daily_Sat.zip|pubinfo_daily_Sun.zip) ;; *) echo "Unexpected file name"; exit 1;; esac
+          curl -sS -f -m 2400 --retry 3 --retry-delay 30 -o source.zip \
             -w 'http=%{http_code} bytes=%{size_download} secs=%{time_total}\n' \
-            "$SOURCE_BASE/${{ steps.pick.outputs.file }}"
+            "$SOURCE_BASE/$SRC_FILE"
           unzip -tq source.zip >/dev/null || { echo "Downloaded zip is corrupt"; exit 1; }
 
       - name: Build snapshot (fails closed)
         id: ingest
         if: steps.pick.outputs.changed == '1'
+        env:
+          SRC_FILE: ${{ steps.pick.outputs.file }}
+          SRC_DATE: ${{ steps.pick.outputs.date }}
+          SRC_ETAG: ${{ steps.pick.outputs.etag }}
         run: |
+          set -euo pipefail
           prev=$(ls -1 state/manifests 2>/dev/null | sed 's/\.json$//' | sort -r | head -n $((KEEP_PUBLISHED - 1)) | paste -sd, -)
-          npm run ingest -- --source source.zip --session "$SESSION" \
-            --source-file "${{ steps.pick.outputs.file }}" --source-date "${{ steps.pick.outputs.date }}" \
-            --etag "${{ steps.pick.outputs.etag }}" --min-app-version "$MIN_APP_VERSION" \
-            --manifests state/manifests --previous "$prev" \
-            --out out/snapshot --report out/report.json
+          args=(--source source.zip --session "$SESSION" --source-file "$SRC_FILE" --source-date "$SRC_DATE"
+            --min-app-version "$MIN_APP_VERSION" --manifests state/manifests --previous "$prev"
+            --out out/snapshot --report out/report.json)
+          if [ -n "$SRC_ETAG" ]; then args+=(--etag "$SRC_ETAG"); fi
+          npm run ingest -- "${args[@]}"
           id=$(node -e "console.log(require('./out/snapshot/latest.json').snapshotId)")
+          printf '%s' "$id" | grep -Eq '^[0-9]{8}T[0-9]{6}Z-[0-9a-f]{8}$' || { echo "Unexpected snapshot id"; exit 1; }
           echo "snapshot=$id" >> "$GITHUB_OUTPUT"
           node -e "const r=require('./out/report.json');console.log(JSON.stringify({snapshot:r.snapshotId,seconds:r.wallSeconds,rssMb:r.peakRssMb,counts:r.stats.counts,kinds:r.stats.emittedByKind,final:r.stats.finalRollCalls},null,1))" >> "$GITHUB_STEP_SUMMARY"
 
@@ -146,49 +181,46 @@ jobs:
 
       - name: Archive as a release asset
         if: env.DRY_RUN == '0' && steps.pick.outputs.changed == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SNAP: ${{ steps.ingest.outputs.snapshot }}
+          SRC_FILE: ${{ steps.pick.outputs.file }}
+          SRC_DATE: ${{ steps.pick.outputs.date }}
         run: |
-          id="${{ steps.ingest.outputs.snapshot }}"
-          tar -C out/snapshot -czf "snapshot-$id.tar.gz" .
-          gh release create "snap-$id" "snapshot-$id.tar.gz" --title "Snapshot $id" \
-            --notes "Built from ${{ steps.pick.outputs.file }} (${{ steps.pick.outputs.date }})." --latest=false
-
-      - name: Record manifest on the snapshots branch
-        if: env.DRY_RUN == '0'
-        run: |
-          changed="${{ steps.pick.outputs.changed }}"
-          if [ "$changed" = "1" ]; then
-            id="${{ steps.ingest.outputs.snapshot }}"
-            cp "out/snapshot/manifests/$id.json" state/manifests/
-            cp out/snapshot/latest.json state/latest.json
-            msg="Snapshot $id"
+          set -euo pipefail
+          tar -C out/snapshot -czf "snapshot-$SNAP.tar.gz" .
+          # A release can already exist when an earlier run built this snapshot but its deploy failed.
+          if gh release view "snap-$SNAP" >/dev/null 2>&1; then
+            gh release upload "snap-$SNAP" "snapshot-$SNAP.tar.gz" --clobber
           else
-            # Weekly heartbeat so the scheduled workflow is not disabled for inactivity.
-            last=$(node -e "try{console.log(require('./state/heartbeat.json').at)}catch{console.log('1970-01-01')}")
-            age=$(( ( $(date -u +%s) - $(date -u -d "$last" +%s) ) / 86400 ))
-            [ "$age" -ge 7 ] || { echo "No change; heartbeat is $age days old."; exit 0; }
-            echo "{\"at\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > state/heartbeat.json
-            msg="Heartbeat"
+            gh release create "snap-$SNAP" "snapshot-$SNAP.tar.gz" --title "Snapshot $SNAP" \
+              --notes "Built from $SRC_FILE ($SRC_DATE)." --latest=false
           fi
-          tmp=$(mktemp -d); cp -r state/. "$tmp/"
-          cd "$tmp" && git init -q -b snapshots
-          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          if git ls-remote --exit-code --heads origin snapshots >/dev/null 2>&1; then
-            git fetch -q --depth 1 origin snapshots && git reset -q --soft FETCH_HEAD
-          fi
-          git add -A && git commit -q -m "$msg" && git push -q origin snapshots
 
-      - name: Prune old releases
-        if: env.DRY_RUN == '0' && steps.pick.outputs.changed == '1'
+      - name: Weekly heartbeat when nothing changed
+        if: env.DRY_RUN == '0' && steps.pick.outputs.changed == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          gh release list --limit 200 --json tagName,createdAt --jq 'sort_by(.createdAt) | reverse | .[].tagName' \
-            | grep '^snap-' | tail -n +$((KEEP_RELEASES + 1)) | while read -r t; do gh release delete "$t" --yes --cleanup-tag; done
+          set -euo pipefail
+          # Keeps the scheduled workflow from being disabled for repository inactivity.
+          [ -d state/.git ] || { echo "No state branch; nothing to do."; exit 0; }
+          last=$(node -e "try{console.log(require('./state/heartbeat.json').at)}catch{console.log('1970-01-01')}")
+          age=$(( ( $(date -u +%s) - $(date -u -d "$last" +%s) ) / 86400 ))
+          [ "$age" -ge 7 ] || { echo "No change; heartbeat is $age days old."; exit 0; }
+          echo "{\"at\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > state/heartbeat.json
+          cd state
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -q -m "Heartbeat"
+          git push -q "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:snapshots
 
       - id: result
         run: echo "published=${{ env.DRY_RUN == '0' && steps.pick.outputs.changed == '1' && '1' || '0' }}" >> "$GITHUB_OUTPUT"
 
       - name: Open an issue on failure
         if: failure() && env.DRY_RUN == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh issue create --title "Ingest failed $(date -u +%Y-%m-%d)" \
             --body "The scheduled ingest failed and nothing was published. The site keeps serving the previous snapshot. Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
@@ -200,47 +232,93 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
-      contents: read
+      contents: write # state branch, written after the deploy; release pruning
+      issues: write
       pages: write
       id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     env:
-      GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
+      ROLLBACK_TO: ${{ inputs.rollback_to }}
+      BUILT: ${{ needs.build.outputs.snapshot }}
     steps:
-      - uses: actions/checkout@v7
-        with:
-          ref: snapshots
-      - name: Assemble the site from release assets
+      - name: Load state and choose the target
+        id: target
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          target="${{ inputs.rollback_to }}"
-          if [ -z "$target" ]; then target="${{ needs.build.outputs.snapshot }}"; fi
-          [ -f "manifests/$target.json" ] || { echo "Unknown snapshot $target"; exit 1; }
-          mkdir -p site/v1/manifests
-          # The target plus the newest others, up to KEEP_PUBLISHED in total.
-          ids=$( (echo "$target"; ls -1 manifests | sed 's/\.json$//' | sort -r | grep -vx "$target") | head -n 7 )
+          set -euo pipefail
+          idre='^[0-9]{8}T[0-9]{6}Z-[0-9a-f]{8}$'
+          if git ls-remote --exit-code --heads "$STATE_URL" snapshots >/dev/null 2>&1; then
+            git clone -q --depth 1 --branch snapshots "$STATE_URL" state
+            [ "$(ls -1 state/manifests 2>/dev/null | wc -l)" -ge 1 ] || { echo "State branch holds no manifests"; exit 1; }
+          else
+            mkdir -p state/manifests && git -C state init -q -b snapshots
+          fi
+          cd state
+          if [ -n "$ROLLBACK_TO" ]; then
+            target="$ROLLBACK_TO"
+            printf '%s' "$target" | grep -Eq "$idre" || { echo "rollback_to is not a snapshot id"; exit 1; }
+            [ -f "manifests/$target.json" ] || { echo "Unknown snapshot $target"; exit 1; }
+            # Everything newer than the target is revoked: off the site, out of `previous`,
+            # and out of the count-drop comparison for later builds.
+            mkdir -p revoked
+            newest=""
+            for id in $(ls -1 manifests | sed 's/\.json$//' | sort -r); do
+              if [[ "$id" > "$target" ]]; then
+                [ -n "$newest" ] || newest="$id"
+                mv "manifests/$id.json" "revoked/$id.json"; echo "revoked $id"
+              fi
+            done
+            if [ -n "$newest" ]; then
+              # Do not rebuild from the same source file that produced the revoked snapshot.
+              SESSION="$SESSION" node -e "const m=require('./revoked/'+process.argv[1]+'.json');const s=m.sources.find(s=>s.session===process.env.SESSION)||{};process.stdout.write(s.etag||('lm-'+s.sourceFileDate))" "$newest" > skip-etag
+            fi
+            msg="Rollback to $target"
+          else
+            target="$BUILT"
+            printf '%s' "$target" | grep -Eq "$idre" || { echo "No built snapshot id"; exit 1; }
+            gh release download "snap-$target" --pattern "snapshot-$target.tar.gz" --dir ../dl
+            mkdir -p "../x/$target" && tar -C "../x/$target" -xzf "../dl/snapshot-$target.tar.gz"
+            cp "../x/$target/manifests/$target.json" manifests/
+            rm -f skip-etag
+            msg="Snapshot $target"
+          fi
+          echo "id=$target" >> "$GITHUB_OUTPUT"
+          echo "msg=$msg" >> "$GITHUB_OUTPUT"
+
+      - name: Assemble the site from release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET: ${{ steps.target.outputs.id }}
+        run: |
+          set -euo pipefail
+          mkdir -p site/v1/manifests dl x
+          # The target plus the newest older ones, up to KEEP_PUBLISHED in total.
+          ids=$( (echo "$TARGET"; ls -1 state/manifests | sed 's/\.json$//' | sort -r | awk -v t="$TARGET" '$0 < t') | head -n "$KEEP_PUBLISHED" )
           kept=""
           for id in $ids; do
-            if gh release download "snap-$id" --pattern "snapshot-$id.tar.gz" --dir dl 2>/dev/null; then
-              mkdir -p "x/$id" && tar -C "x/$id" -xzf "dl/snapshot-$id.tar.gz"
+            if [ -d "x/$id" ] || gh release download "snap-$id" --pattern "snapshot-$id.tar.gz" --dir dl 2>/dev/null; then
+              [ -d "x/$id" ] || { mkdir -p "x/$id" && tar -C "x/$id" -xzf "dl/snapshot-$id.tar.gz"; }
               # Content-hashed files are shared between snapshots; copy without overwriting.
               (cd "x/$id" && find . -type f ! -name latest.json ! -path './manifests/*' -exec cp -n --parents {} "$GITHUB_WORKSPACE/site/v1/" \;)
-              cp "manifests/$id.json" site/v1/manifests/
+              cp "state/manifests/$id.json" site/v1/manifests/
               kept="$kept $id"
             else
               echo "Release for $id is gone; leaving it out."
             fi
           done
-          echo "$kept" | grep -qw "$target" || { echo "Target snapshot archive missing"; exit 1; }
-          # latest.json = the target manifest, with `previous` rewritten to what is actually on the site.
+          echo "$kept" | grep -qw "$TARGET" || { echo "Target snapshot archive missing"; exit 1; }
+          # latest.json = the target manifest, with `previous` rewritten to the older ids actually on the site.
           node -e "
             const fs=require('fs');const [t,...rest]=process.argv.slice(1);
-            const m=JSON.parse(fs.readFileSync('manifests/'+t+'.json','utf8'));
-            m.previous=rest.filter(x=>x!==t);
+            const m=JSON.parse(fs.readFileSync('state/manifests/'+t+'.json','utf8'));
+            m.previous=rest.filter(x=>x<t);
             fs.writeFileSync('site/v1/latest.json',JSON.stringify(m));
-          " $target $kept
+            fs.writeFileSync('state/latest.json',JSON.stringify(m));
+          " $TARGET $kept
           cat > site/index.html <<'HTML'
           <!doctype html><meta charset="utf-8"><title>ca-leg-data</title>
           <p>Public-domain California Legislature data snapshots (Gov. Code §10248.5).
@@ -249,8 +327,36 @@ jobs:
           HTML
           touch site/.nojekyll
           du -sh site; ls site/v1 | wc -l
+
       - uses: actions/upload-pages-artifact@v5
         with:
           path: site
       - id: deploy
         uses: actions/deploy-pages@v5
+
+      - name: Record state (only after a successful deploy)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MSG: ${{ steps.target.outputs.msg }}
+        run: |
+          set -euo pipefail
+          cd state
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -q -m "$MSG"
+          git push -q "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:snapshots
+
+      - name: Prune old releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release list --limit 200 --json tagName,createdAt --jq 'sort_by(.createdAt) | reverse | .[].tagName' \
+            | grep '^snap-' | tail -n +$((KEEP_RELEASES + 1)) | while read -r t; do gh release delete "$t" --yes --cleanup-tag; done
+
+      - name: Open an issue on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create --title "Publish failed $(date -u +%Y-%m-%d)" \
+            --body "Publishing failed. The site keeps serving the previous snapshot and the next scheduled run will try again. Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"

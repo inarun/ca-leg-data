@@ -1,3 +1,16 @@
+`202520260SB1189`	118906154	2026-02-20 00:00:00	`From printer. May be acted upon on or after March  22.`	`LEG_ESI`	2026-08-31 11:02:19	2	`4`	`Applied`	`Senate`	`Rules`	NULL	`Pending Referral`
+`202520260SB1189`	118906155	2026-03-04 00:00:00	`Referred to Coms. on  JUD. and  APPR.`	`LEG_ESI`	2026-08-31 11:02:20	3	`144`	`Applied`	`Senate`	`Committee`	`CS53`	`In Committee Process`
+`202520260SB1189`	118906156	2026-03-10 00:00:00	`Set for hearing March  24.`	`LEG_ESI`	2026-08-31 11:02:20	4	`124`	`Applied`	`Senate`	`Committee`	`CS53`	`In Committee Process`
+`202520260SB1189`	118906157	2026-03-24 00:00:00	`From committee: Do pass and re-refer to Com. on  APPR. with recommendation: To consent calendar. (Ayes 12. Noes  0. Page 3659.) (March  24). Re-referred to Com. on  APPR.`	`LEG_ESI`	2026-08-31 11:02:20	5	`27`	`Applied`	`Senate`	`Committee`	`CS61`	`In Committee Process`
+`202520260SB1189`	118906158	2026-03-27 00:00:00	`Set for hearing April  13.`	`LEG_ESI`	2026-08-31 11:02:20	6	`124`	`Applied`	`Senate`	`Committee`	`CS61`	`In Committee Process`
+`202520260SB1189`	118906159	2026-04-13 00:00:00	`From committee: Be ordered to second reading pursuant to Senate Rule 28.8 and ordered to consent calendar.`	`LEG_ESI`	2026-08-31 11:02:20	7	`42`	`Applied`	`Senate`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260SB1189`	118906160	2026-04-14 00:00:00	`Read second time. Ordered to consent calendar.`	`LEG_ESI`	2026-08-31 11:02:20	8	`34`	`Applied`	`Senate`	`Floor`	`Consent`	`In Floor Process`
+`202520260SB1189`	118906153	2026-02-19 00:00:00	`Introduced.  Read first time.  To Com. on RLS. for assignment.  To print.`	`LEG_ESI`	2026-08-31 11:02:19	1	`126`	`Applied`	`Senate`	`Rules`	NULL	`Pending Referral`
+`202520260ACA8`	118189026	2025-08-21 00:00:00	`From committee: Ordered to third reading.`	`LEG_ESI`	2025-10-22 12:23:38	9	`920`	`Applied`	`Senate`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260ACA8`	118189027	2025-08-21 00:00:00	`Adopted and to Assembly. (Ayes 30. Noes  8. Page 2231.)`	`LEG_ESI`	2025-10-22 12:23:38	9	`134`	`Applied`	`Senate`	`Desk`	NULL	`Passed`
+`202520260ACA8`	118189028	2025-08-21 00:00:00	`In Assembly. Ordered to Engrossing and Enrolling.`	`LEG_ESI`	2025-10-22 12:23:38	10	`63`	`Applied`	`Assembly`	`E&E`	`Enrollment`	`Passed`
+`202520260ACA8`	118189029	2025-08-21 00:00:00	`Enrolled and filed with the Secretary of State at  3:45 p.m.`	`LEG_ESI`	2025-10-22 12:23:38	11	`218`	`Applied`	`Secretary of State`	NULL	NULL	`Enrolled`
+`202520260ACA8`	118189030	2025-08-21 00:00:00	`Chaptered by Secretary of State - Res. Chapter  156, Statutes of  2025.`	`LEG_ESI`	2025-10-22 12:23:38	12	`219`	`Applied`	`Secretary of State`	NULL	NULL	`Chaptered`
 `202520260SB280`	118189094	2025-02-05 00:00:00	`Introduced.  Read first time.  To Com. on RLS. for assignment.  To print.`	`LEG_ESI`	2025-10-22 12:28:28	1	`126`	`Applied`	`Senate`	`Rules`	NULL	`Pending Referral`
 `202520260SB280`	118189095	2025-02-06 00:00:00	`From printer. May be acted upon on or after March  8.`	`LEG_ESI`	2025-10-22 12:28:28	2	`4`	`Applied`	`Senate`	`Rules`	NULL	`Pending Referral`
 `202520260SB280`	118189096	2025-02-14 00:00:00	`Referred to Com. on  E. & C.A.`	`LEG_ESI`	2025-10-22 12:28:28	3	`5`	`Applied`	`Senate`	`Committee`	`CS45`	`In Committee Process`
@@ -6,6 +19,27 @@
 `202520260SB280`	118189099	2025-04-01 00:00:00	`From committee: Do pass and re-refer to Com. on  APPR. (Ayes  5. Noes  0. Page 609.) (April  1). Re-referred to Com. on  APPR.`	`LEG_ESI`	2025-10-22 12:28:28	6	`21`	`Applied`	`Senate`	`Committee`	`CS61`	`In Committee Process`
 `202520260SB280`	118189100	2025-04-04 00:00:00	`Set for hearing April  21.`	`LEG_ESI`	2025-10-22 12:28:28	7	`124`	`Applied`	`Senate`	`Committee`	`CS61`	`In Committee Process`
 `202520260SB280`	118189101	2025-04-10 00:00:00	`From committee with author's amendments. Read second time and amended. Re-referred to Com. on  APPR.`	`LEG_ESI`	2025-10-22 12:28:28	8	`39`	`Applied`	`Senate`	`Committee`	`CS61`	`In Committee Process`
+`202520260ACA8`	118189005	2025-02-20 00:00:00	`Introduced.  To print.`	`LEG_ESI`	2025-10-22 12:23:38	1	`104`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260ACA8`	118189006	2025-02-21 00:00:00	`From printer.  May be heard in committee  March  23.`	`LEG_ESI`	2025-10-22 12:23:38	2	`3`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260ACA8`	118189007	2025-06-16 00:00:00	`Referred to Coms. on  ELECTIONS and  APPR.`	`LEG_ESI`	2025-10-22 12:23:38	3	`504`	`Applied`	`Assembly`	`Committee`	`CX04`	`In Committee Process`
+`202520260ACA8`	118189008	2025-07-16 00:00:00	`From committee: Be adopted, and re-refer to Com. on  APPR. Re-referred. (Ayes  4. Noes  2.) (July  16). Re-referred to Com. on  APPR.`	`LEG_ESI`	2025-10-22 12:23:38	4	`186`	`Applied`	`Assembly`	`Committee`	`CX25`	`In Committee Process`
+`202520260ACA8`	118189009	2025-08-18 00:00:00	`From committee chair, with author's amendments:  Amend, and re-refer to Com. on  APPR. Read second time and amended.`	`LEG_ESI`	2025-10-22 12:23:38	5	`5`	`Applied`	`Assembly`	`E&E`	`Engrossing`	`In Desk Process`
+`202520260ACA8`	118189010	2025-08-18 00:00:00	`Re-referred to Com. on  ELECTIONS. pursuant to Assembly Rule 96.`	`LEG_ESI`	2025-10-22 12:23:38	5	`266`	`Applied`	`Assembly`	`Committee`	`CX04`	`In Committee Process`
+`202520260ACA8`	118189011	2025-08-18 00:00:00	`(Ayes 57. Noes 18. Page 2644.)`	`LEG_ESI`	2025-10-22 12:23:38	5	`161`	`Applied`	`Assembly`	`Committee`	`CX04`	`In Committee Process`
+`202520260ACA8`	118189012	2025-08-18 00:00:00	`Joint Rule 62(a), file notice suspended. (Ayes 58. Noes 18. Page 2644.)`	`LEG_ESI`	2025-10-22 12:23:38	5	`508`	`Applied`	`Assembly`	`Committee`	`CX04`	`In Committee Process`
+`202520260ACA8`	118189013	2025-08-18 00:00:00	`Assembly Rule 56 suspended. (Ayes 57. Noes 18. Page 2645.)`	`LEG_ESI`	2025-10-22 12:23:38	5	`111`	`Applied`	`Assembly`	`Committee`	`CX04`	`In Committee Process`
+`202520260ACA8`	118189014	2025-08-18 00:00:00	`Joint Rule 62(a), file notice suspended. (Ayes 57. Noes 18. Page 2645.)`	`LEG_ESI`	2025-10-22 12:23:38	5	`508`	`Applied`	`Assembly`	`Committee`	`CX04`	`In Committee Process`
+`202520260ACA8`	118189015	2025-08-18 00:00:00	`Assembly Rule 63 suspended. (Ayes 57. Noes 18. Page 2646.)`	`LEG_ESI`	2025-10-22 12:23:38	5	`111`	`Applied`	`Assembly`	`Committee`	`CX04`	`In Committee Process`
+`202520260ACA8`	118189016	2025-08-18 00:00:00	`Assembly Rule 66 suspended. (Ayes 57. Noes 18. Page 2646.)`	`LEG_ESI`	2025-10-22 12:23:38	5	`111`	`Applied`	`Assembly`	`Committee`	`CX04`	`In Committee Process`
+`202520260ACA8`	118189017	2025-08-19 00:00:00	`From committee: Be adopted, and re-refer to Com. on  APPR. Re-referred. (Ayes  5. Noes  2.) (August  19). Re-referred to Com. on  APPR.`	`LEG_ESI`	2025-10-22 12:23:38	6	`186`	`Applied`	`Assembly`	`Committee`	`CX25`	`In Committee Process`
+`202520260ACA8`	118189018	2025-08-20 00:00:00	`From committee: Be adopted. Ordered to Third Reading. (Ayes 11. Noes  4.) (August  20).`	`LEG_ESI`	2025-10-22 12:23:38	7	`194`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260ACA8`	118189019	2025-08-21 00:00:00	`Assembly Rule 69(b)(1) suspended. (Ayes 58. Noes 19. Page 2683.)`	`LEG_ESI`	2025-10-22 12:23:38	8	`111`	`Applied`	`Assembly`	`Desk`	NULL	`Passed`
+`202520260ACA8`	118189020	2025-08-21 00:00:00	`Amended. Ordered to third reading.`	`LEG_ESI`	2025-10-22 12:23:38	8	`210`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260ACA8`	118189021	2025-08-21 00:00:00	`Assembly Rule 63 suspended. (Ayes 58. Noes 20. Page 2684.)`	`LEG_ESI`	2025-10-22 12:23:38	8	`111`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260ACA8`	118189022	2025-08-21 00:00:00	`Adopted and to Senate. (Ayes 57. Noes 20. Page 2688.)`	`LEG_ESI`	2025-10-22 12:23:38	8	`213`	`Applied`	`Assembly`	`Desk`	NULL	`Passed`
+`202520260ACA8`	118189023	2025-08-21 00:00:00	`Senate Rule 19 suspended. (Ayes 30. Noes  9. Page 2226.)`	`LEG_ESI`	2025-10-22 12:23:38	9	`171`	`Applied`	`Assembly`	`Desk`	NULL	`Passed`
+`202520260ACA8`	118189024	2025-08-21 00:00:00	`Joint Rule 10.5 suspended. (Ayes 30. Noes  9. Page 2227.)`	`LEG_ESI`	2025-10-22 12:23:38	9	`110`	`Applied`	`Assembly`	`Desk`	NULL	`Passed`
+`202520260ACA8`	118189025	2025-08-21 00:00:00	`In Senate. To Com. on  RLS.`	`LEG_ESI`	2025-10-22 12:23:38	9	`113`	`Applied`	`Senate`	`Committee`	`CS58`	`In Committee Process`
 `202520260SB280`	118189127	2025-08-21 00:00:00	`Amendments by Assembly Member Tangipa tabled on motion by Assembly Member Aguiar-Curry. (Ayes 54. Noes 19. Page 2692.)`	`LEG_ESI`	2025-10-22 12:28:28	21	`983`	`Applied`	`Assembly`	`Desk`	NULL	`Passed`
 `202520260SB280`	118189128	2025-08-21 00:00:00	`Read third time. Urgency clause adopted. Passed. (Ayes 57. Noes 20. Page 2693.) Ordered to the Senate.`	`LEG_ESI`	2025-10-22 12:28:28	21	`60`	`Applied`	`Assembly`	`Desk`	NULL	`Passed`
 `202520260SB280`	118189129	2025-08-21 00:00:00	`Senate Rule 29.10(d) suspended. (Ayes 30. Noes  9. Page 2226.)`	`LEG_ESI`	2025-10-22 12:28:28	22	`948`	`Applied`	`Assembly`	`Desk`	NULL	`Passed`
@@ -25,6 +59,14 @@
 `202520260AB435`	119101823	2025-05-08 00:00:00	`Read second time. Ordered to third reading.`	`LEG_ESI`	2026-10-15 15:34:43	8	`23`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
 `202520260AB435`	119101824	2025-05-19 00:00:00	`Read third time and amended. Ordered to third reading. (Page 1616.)`	`LEG_ESI`	2026-10-15 15:34:43	9	`40`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
 `202520260SB627`	118207075	2025-09-20 00:00:00	`Chaptered by Secretary of State.  Chapter 125, Statutes of 2025.`	`LEG_ESI`	2025-11-17 16:30:30	29	`94`	`Applied`	`Secretary of State`	NULL	NULL	`Chaptered`
+`202520260AB2746`	118351669	2026-02-20 00:00:00	`Read first time.  To print.`	`LEG_ESI`	2026-04-23 12:53:51	1	`1`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260AB2746`	118351670	2026-02-21 00:00:00	`From printer.  May be heard in committee  March  23.`	`LEG_ESI`	2026-04-23 12:53:51	2	`3`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260AB2746`	118351671	2026-03-16 00:00:00	`Referred to Coms. on  B. & F. and  HEALTH.`	`LEG_ESI`	2026-04-23 12:53:51	3	`504`	`Applied`	`Assembly`	`Committee`	`CX27`	`In Committee Process`
+`202520260AB2746`	118351672	2026-04-03 00:00:00	`In committee:  Hearing postponed by committee.`	`LEG_ESI`	2026-04-23 12:53:51	4	`143`	`Applied`	`Assembly`	`Committee`	`CX27`	`In Committee Process`
+`202520260AB2746`	118351673	2026-04-06 00:00:00	`Re-referred to Coms. on  HEALTH and  B. & F. pursuant to Assembly Rule 96.`	`LEG_ESI`	2026-04-23 12:53:51	5	`937`	`Applied`	`Assembly`	`Committee`	`CX08`	`In Committee Process`
+`202520260AB2746`	118351674	2026-04-15 00:00:00	`Coauthors revised.`	`LEG_ESI`	2026-04-23 12:53:51	6	`29`	`Applied`	`Assembly`	`Committee`	`CX27`	`In Committee Process`
+`202520260AB2746`	118351675	2026-04-15 00:00:00	`From committee: Do pass and re-refer to Com. on  B. & F. (Ayes 12. Noes  4.) (April  14). Re-referred to Com. on  B. & F.`	`LEG_ESI`	2026-04-23 12:53:51	6	`6`	`Applied`	`Assembly`	`Committee`	`CX27`	`In Committee Process`
+`202520260AB2746`	118351676	2026-04-16 00:00:00	`From committee chair, with author's amendments:  Amend, and re-refer to Com. on  B. & F. Read second time and amended.`	`LEG_ESI`	2026-04-23 12:53:51	7	`5`	`Applied`	`Assembly`	`E&E`	`Engrossing`	`In Desk Process`
 `202520260SB280`	118189111	2025-08-18 00:00:00	`From consent calendar on motion of Assembly Member  Pellerin.`	`LEG_ESI`	2025-10-22 12:28:28	17	`916`	`Applied`	`Assembly`	`Floor`	NULL	`In Floor Process`
 `202520260SB280`	118189112	2025-08-18 00:00:00	`Ordered to third reading.`	`LEG_ESI`	2025-10-22 12:28:28	17	`851`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
 `202520260SB280`	118189113	2025-08-18 00:00:00	`Read third time and amended.`	`LEG_ESI`	2025-10-22 12:28:28	17	`855`	`Applied`	`Assembly`	`Desk`	NULL	`In Floor Process`
@@ -116,6 +158,19 @@
 `202520260AB212`	117544592	2025-03-20 00:00:00	`Read third time. Passed. Ordered to the Senate. (Ayes 53. Noes 17. Page 769.)`	`LEG_ESI`	2025-05-09 09:35:47	6	`41`	`Applied`	`Assembly`	`E&E`	`Engrossing`	`Passed`
 `202520260AB212`	117544593	2025-03-20 00:00:00	`In Senate.  Read first time.  To Com. on RLS. for assignment.`	`LEG_ESI`	2025-05-09 09:35:47	7	`112`	`Applied`	`Senate`	`Rules`	NULL	`Pending Referral`
 `202520260AB212`	117544594	2025-04-02 00:00:00	`Referred to Com. on  B. & F. R.`	`LEG_ESI`	2025-05-09 09:35:47	8	`2`	`Applied`	`Senate`	`Committee`	`CS62`	`In Committee Process`
+`202520260SB1189`	118906168	2026-06-16 00:00:00	`In Senate. Concurrence in Assembly amendments pending.`	`LEG_ESI`	2026-08-31 11:02:20	16	`76`	`Applied`	`Senate`	`Floor`	`Unfinished Business`	`In Floor Process`
+`202520260SB1189`	118906169	2026-06-22 00:00:00	`Ordered to the Assembly.`	`LEG_ESI`	2026-08-31 11:02:20	17	`994`	`Applied`	`Senate`	`Floor`	`Unfinished Business`	`In Floor Process`
+`202520260SB1189`	118906170	2026-06-23 00:00:00	`In Assembly.  Held at Desk.`	`LEG_ESI`	2026-08-31 11:02:20	18	`58`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260SB1189`	118906171	2026-07-02 00:00:00	`Action rescinded whereby bill was read third time, passed, and ordered to the Senate.`	`LEG_ESI`	2026-08-31 11:02:20	19	`998`	`Applied`	NULL	NULL	NULL	NULL
+`202520260SB1189`	118906172	2026-07-02 00:00:00	`Ordered to third reading.`	`LEG_ESI`	2026-08-31 11:02:20	19	`851`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260SB1189`	118906173	2026-08-31 00:00:00	`Ordered to inactive file on request of Assembly Member Aguiar-Curry.`	`LEG_ESI`	2026-08-31 11:02:20	20	`164`	`Applied`	`Assembly`	`Floor`	`Inactive`	`In Floor Process`
+`202520260SB1189`	118906161	2026-04-16 00:00:00	`Read third time. Passed. (Ayes 38. Noes  0. Page 3920.) Ordered to the Assembly.`	`LEG_ESI`	2026-08-31 11:02:20	9	`45`	`Applied`	`Senate`	`Desk`	NULL	`Passed`
+`202520260SB1189`	118906162	2026-04-16 00:00:00	`In Assembly.  Read first time.  Held at Desk.`	`LEG_ESI`	2026-08-31 11:02:20	10	`56`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260SB1189`	118906163	2026-05-11 00:00:00	`Referred to Com. on  JUD.`	`LEG_ESI`	2026-08-31 11:02:20	11	`5`	`Applied`	`Assembly`	`Committee`	`CX13`	`In Committee Process`
+`202520260SB1189`	118906164	2026-06-04 00:00:00	`From committee with author's amendments. Read second time and amended. Re-referred to Com. on  JUD.`	`LEG_ESI`	2026-08-31 11:02:20	12	`39`	`Applied`	`Assembly`	`Committee`	`CX13`	`In Committee Process`
+`202520260SB1189`	118906165	2026-06-09 00:00:00	`From committee: Do pass. Ordered to consent calendar. (Ayes 12. Noes  0.) (June  9).`	`LEG_ESI`	2026-08-31 11:02:20	13	`9`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260SB1189`	118906166	2026-06-10 00:00:00	`Read second time. Ordered to consent calendar.`	`LEG_ESI`	2026-08-31 11:02:20	14	`34`	`Applied`	`Assembly`	`Floor`	`Consent`	`In Floor Process`
+`202520260SB1189`	118906167	2026-06-15 00:00:00	`Read third time. Passed. (Ayes 77. Noes  0. Page 5706.) Ordered to the Senate.`	`LEG_ESI`	2026-08-31 11:02:20	15	`61`	`Rescinded`	`Assembly`	`Desk`	NULL	`Passed`
 `202520260AB1250`	118207631	2025-02-21 00:00:00	`Introduced.  To print.`	`LEG_ESI`	2025-11-18 10:27:47	1	`104`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
 `202520260AB1250`	118207632	2025-02-22 00:00:00	`From printer.  May be heard in committee  March  24.`	`LEG_ESI`	2025-11-18 10:27:47	2	`3`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
 `202520260AB1250`	118207633	2025-02-24 00:00:00	`Read first time.`	`LEG_ESI`	2025-11-18 10:27:47	3	`103`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
@@ -163,6 +218,10 @@
 `202520260AB435`	119101839	2025-10-07 00:00:00	`Approved by the Governor.`	`LEG_ESI`	2026-10-15 15:34:43	22	`80`	`Applied`	`Governor`	NULL	NULL	`Signed by Governor`
 `202520260AB435`	119101840	2025-10-07 00:00:00	`Chaptered by Secretary of State - Chapter 434, Statutes of 2025.`	`LEG_ESI`	2026-10-15 15:34:43	23	`79`	`Applied`	`Secretary of State`	NULL	NULL	`Chaptered`
 `202520260AB435`	119101838	2025-09-15 00:00:00	`Enrolled and presented to the Governor at  4:30 p.m.`	`LEG_ESI`	2026-10-15 15:34:43	21	`77`	`Applied`	`Governor`	NULL	NULL	`Enrolled`
+`202520260SB493`	118958873	2025-02-19 00:00:00	`Introduced.  Read first time.  To Com. on RLS. for assignment.  To print.`	`LEG_ESI`	2026-09-08 12:27:52	1	`126`	`Applied`	`Senate`	`Rules`	NULL	`Pending Referral`
+`202520260SB493`	118958874	2025-02-20 00:00:00	`From printer. May be acted upon on or after March  22.`	`LEG_ESI`	2026-09-08 12:27:52	2	`4`	`Applied`	`Senate`	`Rules`	NULL	`Pending Referral`
+`202520260SB493`	118958875	2025-02-26 00:00:00	`Referred to Com. on  AGRI.`	`LEG_ESI`	2026-09-08 12:27:52	3	`5`	`Applied`	`Senate`	`Committee`	`CS40`	`In Committee Process`
+`202520260SB493`	118958876	2025-03-28 00:00:00	`Set for hearing April  29.`	`LEG_ESI`	2026-09-08 12:27:52	4	`124`	`Applied`	`Senate`	`Committee`	`CS40`	`In Committee Process`
 `202520260AB379`	118061216	2025-02-03 00:00:00	`Read first time.  To print.`	`LEG_ESI`	2025-09-18 13:46:23	1	`1`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
 `202520260AB379`	118061217	2025-02-04 00:00:00	`From printer.  May be heard in committee  March  6.`	`LEG_ESI`	2025-09-18 13:46:23	2	`3`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
 `202520260AB379`	118061218	2025-02-24 00:00:00	`Referred to Com. on  PUB. S.`	`LEG_ESI`	2025-09-18 13:46:23	3	`2`	`Applied`	`Assembly`	`Committee`	`CX18`	`In Committee Process`
@@ -184,6 +243,40 @@
 `202520260SB773`	117812363	2025-07-16 00:00:00	`From committee: Do pass. Ordered to consent calendar. (Ayes 13. Noes  0.) (July  16).`	`LEG_ESI`	2025-07-17 10:36:01	13	`9`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
 `202520260SB773`	117812364	2025-07-17 00:00:00	`Read second time. Ordered to consent calendar.`	`LEG_ESI`	2025-07-17 10:36:01	14	`34`	`Applied`	`Assembly`	`Floor`	`Consent`	`In Floor Process`
 `202520260SB773`	117812365	2025-07-17 00:00:00	`Ordered to inactive file on request of Assembly Member Aguiar-Curry.`	`LEG_ESI`	2025-07-17 10:36:01	14	`164`	`Applied`	`Assembly`	`Floor`	`Inactive`	`In Floor Process`
+`202520260SB493`	118958884	2025-05-27 00:00:00	`Read second time. Ordered to third reading.`	`LEG_ESI`	2026-09-08 12:27:52	11	`32`	`Applied`	`Senate`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260SB493`	118958885	2025-05-29 00:00:00	`Read third time. Passed. (Ayes 38. Noes  0. Page 1319.) Ordered to the Assembly.`	`LEG_ESI`	2026-09-08 12:27:52	12	`45`	`Applied`	`Senate`	`Desk`	NULL	`Passed`
+`202520260SB493`	118958886	2025-05-29 00:00:00	`In Assembly.  Read first time.  Held at Desk.`	`LEG_ESI`	2026-09-08 12:27:52	13	`56`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260SB493`	118958887	2025-06-05 00:00:00	`Referred to Com. on  AGRI.`	`LEG_ESI`	2026-09-08 12:27:52	14	`5`	`Applied`	`Assembly`	`Committee`	`CX01`	`In Committee Process`
+`202520260SB493`	118958888	2025-06-25 00:00:00	`From committee with author's amendments. Read second time and amended. Re-referred to Com. on  AGRI.`	`LEG_ESI`	2026-09-08 12:27:52	15	`39`	`Applied`	`Assembly`	`Committee`	`CX01`	`In Committee Process`
+`202520260SB493`	118958889	2025-07-03 00:00:00	`From committee: Do pass and re-refer to Com. on  APPR. (Ayes  8. Noes  0.) (July  2). Re-referred to Com. on  APPR.`	`LEG_ESI`	2026-09-08 12:27:52	16	`21`	`Applied`	`Assembly`	`Committee`	`CX25`	`In Committee Process`
+`202520260SB493`	118958890	2025-08-20 00:00:00	`Coauthors revised.`	`LEG_ESI`	2026-09-08 12:27:52	17	`59`	`Applied`	`Assembly`	`Committee`	`CX25`	`In Committee Process`
+`202520260SB493`	118958891	2025-08-20 00:00:00	`From committee: Do pass. (Ayes 15. Noes  0.) (August  20).`	`LEG_ESI`	2026-09-08 12:27:52	17	`7`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260SB493`	118958892	2025-08-21 00:00:00	`Read second time. Ordered to third reading.`	`LEG_ESI`	2026-09-08 12:27:52	18	`32`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260SB493`	118958893	2025-08-28 00:00:00	`Read third time. Passed. (Ayes 75. Noes  1. Page 2773.) Ordered to the Senate.`	`LEG_ESI`	2026-09-08 12:27:52	19	`61`	`Rescinded`	`Assembly`	`Desk`	NULL	`Passed`
+`202520260SB493`	118958894	2025-08-28 00:00:00	`In Senate. Concurrence in Assembly amendments pending.`	`LEG_ESI`	2026-09-08 12:27:52	20	`76`	`Applied`	`Senate`	`Floor`	`Unfinished Business`	`In Floor Process`
+`202520260SB493`	118958895	2025-08-29 00:00:00	`Ordered to the Assembly.`	`LEG_ESI`	2026-09-08 12:27:52	21	`994`	`Applied`	`Senate`	`Floor`	`Unfinished Business`	`In Floor Process`
+`202520260SB493`	118958896	2025-08-29 00:00:00	`In Assembly.  Held at Desk.`	`LEG_ESI`	2026-09-08 12:27:52	22	`58`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260SB493`	118958897	2026-06-08 00:00:00	`Action rescinded whereby bill was read third time, passed, and ordered to the Senate.`	`LEG_ESI`	2026-09-08 12:27:52	23	`998`	`Applied`	NULL	NULL	NULL	NULL
+`202520260SB493`	118958898	2026-06-08 00:00:00	`Ordered to third reading.`	`LEG_ESI`	2026-09-08 12:27:52	23	`851`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260AB2746`	118351677	2026-04-20 00:00:00	`Re-referred to Com. on  B. & F.`	`LEG_ESI`	2026-04-23 12:53:51	8	`30`	`Applied`	`Assembly`	`Committee`	`CX27`	`In Committee Process`
+`202520260AB2746`	118351678	2026-04-22 00:00:00	`Measure version as amended on April  16 corrected.`	`LEG_ESI`	2026-04-23 12:53:51	9	`158`	`Applied`	`Assembly`	`Committee`	`CX27`	`In Committee Process`
+`202520260AB2746`	118351679	2026-04-23 00:00:00	`In committee: Set,  first hearing. Hearing canceled at the request of author.`	`LEG_ESI`	2026-04-23 12:53:51	10	`316`	`Applied`	`Assembly`	`Committee`	`CX27`	`In Committee Process`
+`202520260SB493`	118958877	2025-04-29 00:00:00	`From committee: Do pass and re-refer to Com. on  APPR. (Ayes  4. Noes  0. Page 933.) (April  29). Re-referred to Com. on  APPR.`	`LEG_ESI`	2026-09-08 12:27:52	5	`21`	`Applied`	`Senate`	`Committee`	`CS61`	`In Committee Process`
+`202520260SB493`	118958878	2025-05-02 00:00:00	`Set for hearing May  12.`	`LEG_ESI`	2026-09-08 12:27:52	6	`124`	`Applied`	`Senate`	`Committee`	`CS61`	`In Committee Process`
+`202520260SB493`	118958879	2025-05-06 00:00:00	`From committee with author's amendments. Read second time and amended. Re-referred to Com. on  APPR.`	`LEG_ESI`	2026-09-08 12:27:52	7	`39`	`Applied`	`Senate`	`Committee`	`CS61`	`In Committee Process`
+`202520260SB493`	118958880	2025-05-12 00:00:00	`May  12 hearing: Placed on  APPR. suspense file.`	`LEG_ESI`	2026-09-08 12:27:52	8	`343`	`Applied`	`Senate`	`Committee`	`CS61`	`In Committee Process`
+`202520260SB493`	118958881	2025-05-16 00:00:00	`Set for hearing May  23.`	`LEG_ESI`	2026-09-08 12:27:52	9	`124`	`Applied`	`Senate`	`Committee`	`CS61`	`In Committee Process`
+`202520260SB493`	118958882	2025-05-23 00:00:00	`From committee: Do pass as amended. (Ayes  6. Noes  0. Page 1202.) (May  23).`	`LEG_ESI`	2026-09-08 12:27:52	10	`8`	`Applied`	`Senate`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260SB493`	118958883	2025-05-23 00:00:00	`Read second time and amended. Ordered to second reading.`	`LEG_ESI`	2026-09-08 12:27:52	10	`36`	`Applied`	`Senate`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260SB493`	118958899	2026-06-11 00:00:00	`Read third time and amended.`	`LEG_ESI`	2026-09-08 12:27:52	24	`855`	`Applied`	`Assembly`	`Desk`	NULL	`In Floor Process`
+`202520260SB493`	118958900	2026-06-11 00:00:00	`Ordered to third reading.`	`LEG_ESI`	2026-09-08 12:27:52	24	`851`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260SB493`	118958901	2026-06-15 00:00:00	`Re-referred to Coms. on  PUB. S. and  APPR. pursuant to Assembly Rule 77.2.`	`LEG_ESI`	2026-09-08 12:27:52	25	`940`	`Applied`	`Assembly`	`Committee`	`CS72`	`In Committee Process`
+`202520260SB493`	118958902	2026-06-18 00:00:00	`From committee with author's amendments. Read second time and amended. Re-referred to Com. on  PUB. S.`	`LEG_ESI`	2026-09-08 12:27:52	26	`39`	`Applied`	`Assembly`	`Committee`	`CX18`	`In Committee Process`
+`202520260SB493`	118958903	2026-07-01 00:00:00	`From committee: Do pass as amended and re-refer to Com. on  APPR. (Ayes  5. Noes  2.) (June  30).`	`LEG_ESI`	2026-09-08 12:27:52	27	`22`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260SB493`	118958904	2026-07-02 00:00:00	`Read second time and amended. Re-referred to Com. on  APPR.`	`LEG_ESI`	2026-09-08 12:27:52	28	`37`	`Applied`	`Assembly`	`Committee`	`CX25`	`In Committee Process`
+`202520260SB493`	118958905	2026-08-05 00:00:00	`August  5 set for first hearing. Placed on   suspense file.`	`LEG_ESI`	2026-09-08 12:27:52	29	`969`	`Applied`	`Assembly`	`Committee`	`CX25`	`In Committee Process`
+`202520260SB493`	118958906	2026-08-13 00:00:00	`Assembly Rule 63 suspended.`	`LEG_ESI`	2026-09-08 12:27:52	30	`985`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260SB493`	118958907	2026-08-13 00:00:00	`From committee: Do pass as amended. (Ayes 11. Noes  4.) (August  13).`	`LEG_ESI`	2026-09-08 12:27:52	30	`8`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
 `202520260SB773`	117812350	2025-02-21 00:00:00	`Introduced.  To Com. on RLS. for assignment.  To print.`	`LEG_ESI`	2025-07-17 10:36:01	1	`1`	`Applied`	`Senate`	`Rules`	NULL	`Pending Referral`
 `202520260SB773`	117812351	2025-02-24 00:00:00	`From printer. May be acted upon on or after March  24.`	`LEG_ESI`	2025-07-17 10:36:01	2	`4`	`Applied`	`Senate`	`Rules`	NULL	`Pending Referral`
 `202520260SB773`	117812352	2025-02-24 00:00:00	`Read first time.`	`LEG_ESI`	2025-07-17 10:36:01	2	`3`	`Applied`	`Senate`	`Rules`	NULL	`Pending Referral`
@@ -208,6 +301,12 @@
 `202520260AB379`	118061242	2025-07-18 00:00:00	`Enrolled and presented to the Governor at 11:30 a.m.`	`LEG_ESI`	2025-09-18 13:46:23	24	`77`	`Applied`	`Governor`	NULL	NULL	`Enrolled`
 `202520260AB379`	118061243	2025-07-30 00:00:00	`Approved by the Governor.`	`LEG_ESI`	2025-09-18 13:46:23	25	`80`	`Applied`	`Governor`	NULL	NULL	`Signed by Governor`
 `202520260AB379`	118061244	2025-07-30 00:00:00	`Chaptered by Secretary of State - Chapter 82, Statutes of 2025.`	`LEG_ESI`	2025-09-18 13:46:23	26	`79`	`Applied`	`Secretary of State`	NULL	NULL	`Chaptered`
+`202520260SB493`	118958909	2026-08-17 00:00:00	`Read second time. Ordered to third reading.`	`LEG_ESI`	2026-09-08 12:27:52	31	`32`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260SB493`	118958910	2026-08-21 00:00:00	`Assembly Rule 69(b)(1) suspended. (Ayes 55. Noes 17. Page 6296.)`	`LEG_ESI`	2026-09-08 12:27:52	32	`985`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260SB493`	118958911	2026-08-21 00:00:00	`Read third time and amended.`	`LEG_ESI`	2026-09-08 12:27:52	32	`855`	`Applied`	`Assembly`	`Desk`	NULL	`In Floor Process`
+`202520260SB493`	118958912	2026-08-21 00:00:00	`Ordered to third reading.`	`LEG_ESI`	2026-09-08 12:27:52	32	`851`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260SB493`	118958913	2026-08-30 00:00:00	`Ordered to inactive file on request of Assembly Member Aguiar-Curry.`	`LEG_ESI`	2026-09-08 12:27:52	33	`164`	`Applied`	`Assembly`	`Floor`	`Inactive`	`In Floor Process`
+`202520260SB493`	118958908	2026-08-13 00:00:00	`Read second time and amended. Ordered to second reading.`	`LEG_ESI`	2026-09-08 12:27:52	30	`36`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
 `202520260SB352`	118217327	2025-08-20 00:00:00	`August  20 set for first hearing. Placed on  APPR. suspense file.`	`LEG_ESI`	2025-12-02 16:22:15	20	`969`	`Applied`	`Assembly`	`Committee`	`CX25`	`In Committee Process`
 `202520260SB352`	118217328	2025-08-29 00:00:00	`From committee: Do pass as amended. (Ayes 11. Noes  0.) (August  29).`	`LEG_ESI`	2025-12-02 16:22:15	21	`8`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
 `202520260SB352`	118217329	2025-09-02 00:00:00	`Read second time and amended. Ordered to second reading.`	`LEG_ESI`	2025-12-02 16:22:15	22	`36`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
@@ -260,6 +359,14 @@
 `202520260SB352`	118217346	2025-09-15 00:00:00	`Enrolled and presented to the Governor at  2 p.m.`	`LEG_ESI`	2025-12-02 16:22:15	30	`86`	`Applied`	`Governor`	NULL	NULL	`Enrolled`
 `202520260SB352`	118217347	2025-09-19 00:00:00	`Approved by the Governor.`	`LEG_ESI`	2025-12-02 16:22:15	31	`90`	`Applied`	`Governor`	NULL	NULL	`Signed by Governor`
 `202520260SB352`	118217348	2025-09-19 00:00:00	`Chaptered by Secretary of State.  Chapter 120, Statutes of 2025.`	`LEG_ESI`	2025-12-02 16:22:15	32	`94`	`Applied`	`Secretary of State`	NULL	NULL	`Chaptered`
+`202520260AB387`	119126954	2026-08-27 00:00:00	`In Assembly.  Concurrence in Senate amendments pending.`	`LEG_ESI`	2026-11-09 10:53:05	23	`64`	`Applied`	`Assembly`	`Desk`	NULL	`In Floor Process`
+`202520260AB387`	119126955	2026-08-28 00:00:00	`Re-referred to Com. on  A.,E.,S., & T. pursuant to Assembly Rule 77.2.`	`LEG_ESI`	2026-11-09 10:53:05	24	`266`	`Applied`	`Assembly`	`Committee`	`CX37`	`In Committee Process`
+`202520260AB387`	119126956	2026-08-28 00:00:00	`Joint Rule 62(a), file notice suspended. (Page 6793.)`	`LEG_ESI`	2026-11-09 10:53:05	24	`508`	`Applied`	`Assembly`	`Committee`	`CX37`	`In Committee Process`
+`202520260AB387`	119126957	2026-08-28 00:00:00	`From committee: That the Senate amendments be concurred in. (Ayes  8. Noes  0.) (August  28).`	`LEG_ESI`	2026-11-09 10:53:05	24	`101`	`Applied`	`Assembly`	`Floor`	`Unfinished Business`	`In Floor Process`
+`202520260AB387`	119126958	2026-08-30 00:00:00	`Senate amendments concurred in. To Engrossing and Enrolling. (Ayes 77. Noes  0. Page 6852.).`	`LEG_ESI`	2026-11-09 10:53:05	25	`65`	`Applied`	`Assembly`	`E&E`	`Enrollment`	`Passed`
+`202520260AB387`	119126959	2026-09-09 00:00:00	`Enrolled and presented to the Governor at  1 p.m.`	`LEG_ESI`	2026-11-09 10:53:05	26	`77`	`Applied`	`Governor`	NULL	NULL	`Enrolled`
+`202520260AB387`	119126960	2026-09-27 00:00:00	`Approved by the Governor.`	`LEG_ESI`	2026-11-09 10:53:05	27	`80`	`Applied`	`Governor`	NULL	NULL	`Signed by Governor`
+`202520260AB387`	119126961	2026-09-27 00:00:00	`Chaptered by Secretary of State - Chapter 502, Statutes of 2026.`	`LEG_ESI`	2026-11-09 10:53:05	28	`79`	`Applied`	`Secretary of State`	NULL	NULL	`Chaptered`
 `202520260AB940`	118214929	2025-05-28 00:00:00	`In Senate.  Read first time.  To Com. on RLS. for assignment.`	`LEG_ESI`	2025-12-02 14:49:52	9	`112`	`Applied`	`Senate`	`Rules`	NULL	`Pending Referral`
 `202520260AB940`	118214930	2025-06-04 00:00:00	`Referred to Coms. on  B. P. & E.D. and  L. GOV.`	`LEG_ESI`	2025-12-02 14:49:52	10	`504`	`Applied`	`Senate`	`Committee`	`CS42`	`In Committee Process`
 `202520260AB940`	118214931	2025-06-11 00:00:00	`In committee:  Hearing postponed by committee.`	`LEG_ESI`	2025-12-02 14:49:52	11	`143`	`Applied`	`Senate`	`Committee`	`CS42`	`In Committee Process`
@@ -298,6 +405,29 @@
 `202520260SB627`	118207058	2025-08-20 00:00:00	`From committee: Do pass as amended. (Ayes 10. Noes  3.) (August  20).`	`LEG_ESI`	2025-11-17 16:30:30	19	`8`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
 `202520260SB627`	118207059	2025-08-21 00:00:00	`Read second time and amended. Ordered to second reading.`	`LEG_ESI`	2025-11-17 16:30:30	20	`36`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
 `202520260SB627`	118207047	2025-05-01 00:00:00	`Read second time. Ordered to consent calendar.`	`LEG_ESI`	2025-11-17 16:30:30	8	`34`	`Applied`	`Senate`	`Floor`	`Consent`	`In Floor Process`
+`202520260AB387`	119126932	2025-02-04 00:00:00	`From printer.  May be heard in committee  March  6.`	`LEG_ESI`	2026-11-09 10:53:05	2	`3`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260AB387`	119126933	2025-02-18 00:00:00	`Referred to Com. on  JUD.`	`LEG_ESI`	2026-11-09 10:53:05	3	`2`	`Applied`	`Assembly`	`Committee`	`CX13`	`In Committee Process`
+`202520260AB387`	119126934	2025-03-05 00:00:00	`From committee chair, with author's amendments:  Amend, and re-refer to Com. on  JUD. Read second time and amended.`	`LEG_ESI`	2026-11-09 10:53:05	4	`5`	`Applied`	`Assembly`	`E&E`	`Engrossing`	`In Desk Process`
+`202520260AB387`	119126935	2025-03-06 00:00:00	`Re-referred to Com. on  JUD.`	`LEG_ESI`	2026-11-09 10:53:05	5	`30`	`Applied`	`Assembly`	`Committee`	`CX13`	`In Committee Process`
+`202520260AB387`	119126936	2025-03-11 00:00:00	`From committee:  Do pass. (Ayes 11. Noes  1.) (March  11).`	`LEG_ESI`	2026-11-09 10:53:05	6	`8`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260AB387`	119126937	2025-03-12 00:00:00	`Read second time. Ordered to third reading.`	`LEG_ESI`	2026-11-09 10:53:05	7	`23`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260AB387`	119126938	2025-03-13 00:00:00	`Read third time. Passed. Ordered to the Senate. (Ayes 67. Noes  0. Page 618.)`	`LEG_ESI`	2026-11-09 10:53:05	8	`41`	`Applied`	`Assembly`	`E&E`	`Engrossing`	`Passed`
+`202520260AB387`	119126939	2025-03-13 00:00:00	`In Senate.  Read first time.  To Com. on RLS. for assignment.`	`LEG_ESI`	2026-11-09 10:53:05	9	`112`	`Applied`	`Senate`	`Rules`	NULL	`Pending Referral`
+`202520260AB387`	119126940	2025-05-07 00:00:00	`Referred to Com. on  PUB. S.`	`LEG_ESI`	2026-11-09 10:53:05	10	`2`	`Applied`	`Senate`	`Committee`	`CS72`	`In Committee Process`
+`202520260AB387`	119126941	2025-06-10 00:00:00	`In committee: Set,  first hearing. Hearing canceled at the request of author.`	`LEG_ESI`	2026-11-09 10:53:05	11	`316`	`Applied`	`Senate`	`Committee`	`CS72`	`In Committee Process`
+`202520260AB387`	119126942	2025-06-23 00:00:00	`From committee chair, with author's amendments:  Amend, and re-refer to committee.  Read second time, amended, and re-referred to Com. on  PUB. S.`	`LEG_ESI`	2026-11-09 10:53:05	12	`114`	`Applied`	`Senate`	`Committee`	`CS72`	`In Committee Process`
+`202520260AB387`	119126943	2025-06-24 00:00:00	`Withdrawn from committee.`	`LEG_ESI`	2026-11-09 10:53:05	13	`32`	`Applied`	`Senate`	`Desk`	`CS72`	`In Desk Process`
+`202520260AB387`	119126944	2025-06-24 00:00:00	`Re-referred to Com. on  RLS.`	`LEG_ESI`	2026-11-09 10:53:05	13	`30`	`Applied`	`Senate`	`Committee`	`CS58`	`In Committee Process`
+`202520260AB387`	119126945	2025-06-25 00:00:00	`Re-referred to Coms. on  HEALTH and  ED.`	`LEG_ESI`	2026-11-09 10:53:05	14	`441`	`Applied`	`Senate`	`Committee`	`CS60`	`In Committee Process`
+`202520260AB387`	119126946	2026-06-15 00:00:00	`From committee chair, with author's amendments:  Amend, and re-refer to committee.  Read second time, amended, and re-referred to Com. on  HEALTH.`	`LEG_ESI`	2026-11-09 10:53:05	15	`114`	`Applied`	`Senate`	`Committee`	`CS60`	`In Committee Process`
+`202520260AB387`	119126947	2026-06-25 00:00:00	`From committee: Do pass and re-refer to Com. on  ED. (Ayes 11. Noes  0.) (June  24). Re-referred to Com. on  ED.`	`LEG_ESI`	2026-11-09 10:53:05	16	`6`	`Applied`	`Senate`	`Committee`	`CS44`	`In Committee Process`
+`202520260AB387`	119126948	2026-06-25 00:00:00	`From committee chair, with author's amendments:  Amend, and re-refer to committee.  Read second time, amended, and re-referred to Com. on  ED.`	`LEG_ESI`	2026-11-09 10:53:05	17	`114`	`Applied`	`Senate`	`Committee`	`CS44`	`In Committee Process`
+`202520260AB387`	119126949	2026-07-02 00:00:00	`From committee: Amend, and do pass as amended. (Ayes  7. Noes  0.) (July  1).`	`LEG_ESI`	2026-11-09 10:53:05	18	`13`	`Applied`	`Senate`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260AB387`	119126950	2026-08-03 00:00:00	`Read second time and amended.  Ordered to third reading.`	`LEG_ESI`	2026-11-09 10:53:05	19	`98`	`Applied`	`Senate`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260AB387`	119126951	2026-08-21 00:00:00	`Read third time and amended. Ordered to second reading.`	`LEG_ESI`	2026-11-09 10:53:05	20	`126`	`Applied`	`Senate`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260AB387`	119126952	2026-08-24 00:00:00	`Read second time. Ordered to third reading.`	`LEG_ESI`	2026-11-09 10:53:05	21	`23`	`Applied`	`Senate`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260AB387`	119126953	2026-08-27 00:00:00	`Read third time. Passed. Ordered to the Assembly. (Ayes 40. Noes  0. Page 6007.).`	`LEG_ESI`	2026-11-09 10:53:05	22	`124`	`Applied`	`Senate`	`Desk`	NULL	`Passed`
+`202520260AB387`	119126931	2025-02-03 00:00:00	`Read first time.  To print.`	`LEG_ESI`	2026-11-09 10:53:05	1	`1`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
 `202520260AB940`	118214946	2025-09-13 00:00:00	`Assembly Rule 63 suspended. (Page 3484.)`	`LEG_ESI`	2025-12-02 14:49:52	17	`111`	`Applied`	`Assembly`	`Desk`	NULL	`In Floor Process`
 `202520260AB940`	118214947	2025-09-13 00:00:00	`Senate amendments concurred in. To Engrossing and Enrolling. (Ayes 76. Noes  0. Page 3501.).`	`LEG_ESI`	2025-12-02 14:49:52	17	`65`	`Applied`	`Assembly`	`E&E`	`Enrollment`	`Passed`
 `202520260AB940`	118214948	2025-09-24 00:00:00	`Enrolled and presented to the Governor at  3 p.m.`	`LEG_ESI`	2025-12-02 14:49:52	18	`77`	`Applied`	`Governor`	NULL	NULL	`Enrolled`
@@ -393,6 +523,10 @@
 `202520260SB1080`	118642403	2026-03-26 00:00:00	`Read third time. Passed. (Ayes 37. Noes  0. Page 3699.) Ordered to the Assembly.`	`LEG_ESI`	2026-07-15 15:50:09	7	`45`	`Applied`	`Senate`	`Desk`	NULL	`Passed`
 `202520260SB1080`	118642404	2026-03-26 00:00:00	`In Assembly.  Read first time.  Held at Desk.`	`LEG_ESI`	2026-07-15 15:50:09	8	`56`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
 `202520260SB1080`	118642405	2026-05-04 00:00:00	`Referred to Com. on  L. GOV.`	`LEG_ESI`	2026-07-15 15:50:09	9	`5`	`Applied`	`Assembly`	`Committee`	`CX15`	`In Committee Process`
+`202520260AB1097`	118259358	2025-04-22 00:00:00	`In committee: Set,  first hearing. Hearing canceled at the request of author.`	`LEG_ESI`	2026-02-02 17:16:01	5	`316`	`Applied`	`Assembly`	`Committee`	`CX18`	`In Committee Process`
+`202520260AB1097`	118259359	2025-04-29 00:00:00	`In committee: Set,  second hearing. Hearing canceled at the request of author.`	`LEG_ESI`	2026-02-02 17:16:01	6	`316`	`Applied`	`Assembly`	`Committee`	`CX18`	`In Committee Process`
+`202520260AB1097`	118259360	2026-01-31 00:00:00	`Died pursuant to Art. IV, Sec. 10(c) of the Constitution.`	`LEG_ESI`	2026-02-02 17:16:01	7	`178`	`Applied`	`Assembly`	`Committee`	`CX18`	`Died`
+`202520260AB1097`	118259361	2026-02-02 00:00:00	`From committee: Filed with the Chief Clerk pursuant to Joint Rule 56.`	`LEG_ESI`	2026-02-02 17:16:01	8	`177`	`Applied`	`Assembly`	`Desk`	`CX18`	`Died`
 `202520260AB2757`	118275267	2026-02-20 00:00:00	`Read first time.  To print.`	`LEG_ESI`	2026-02-23 09:59:49	1	`1`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
 `202520260AB2757`	118275268	2026-02-21 00:00:00	`From printer.  May be heard in committee  March  23.`	`LEG_ESI`	2026-02-23 09:59:49	2	`3`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
 `202520260SB274`	118278277	2025-07-08 00:00:00	`Coauthors revised.`	`LEG_ESI`	2026-03-02 14:55:27	20	`59`	`Applied`	`Assembly`	`Committee`	`CX22`	`In Committee Process`
@@ -431,6 +565,11 @@
 `202520260SB274`	118278313	2025-09-05 00:00:00	`Read third time and amended.`	`LEG_ESI`	2026-03-02 14:55:27	25	`855`	`Applied`	`Assembly`	`Desk`	NULL	`In Floor Process`
 `202520260SB274`	118278317	2025-09-05 00:00:00	`Ordered to third reading.`	`LEG_ESI`	2026-03-02 14:55:27	25	`851`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
 `202520260SB274`	118278321	2025-09-13 00:00:00	`Joint Rule 61(a)(14) and 51(a)(4) suspended.  (Ayes 59. Noes 20. Page 3413.)`	`LEG_ESI`	2026-03-02 14:55:27	26	`362`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260AB1097`	118259354	2025-02-21 00:00:00	`From printer.  May be heard in committee  March  23.`	`LEG_ESI`	2026-02-02 17:16:01	2	`3`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260AB1097`	118259355	2025-03-17 00:00:00	`Referred to Com. on  PUB. S.`	`LEG_ESI`	2026-02-02 17:16:01	3	`2`	`Applied`	`Assembly`	`Committee`	`CX18`	`In Committee Process`
+`202520260AB1097`	118259353	2025-02-20 00:00:00	`Read first time.  To print.`	`LEG_ESI`	2026-02-02 17:16:01	1	`1`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260AB1097`	118259356	2025-03-17 00:00:00	`From committee chair, with author's amendments:  Amend, and re-refer to Com. on  PUB. S. Read second time and amended.`	`LEG_ESI`	2026-02-02 17:16:01	3	`5`	`Applied`	`Assembly`	`E&E`	`Engrossing`	`In Desk Process`
+`202520260AB1097`	118259357	2025-03-18 00:00:00	`Re-referred to Com. on  PUB. S.`	`LEG_ESI`	2026-02-02 17:16:01	4	`30`	`Applied`	`Assembly`	`Committee`	`CX18`	`In Committee Process`
 `202520260SB274`	118278325	2025-09-13 00:00:00	`Read third time. Passed. (Ayes 41. Noes 29. Page 3436.) Ordered to the Senate.`	`LEG_ESI`	2026-03-02 14:55:27	26	`61`	`Applied`	`Assembly`	`Desk`	NULL	`Passed`
 `202520260SB274`	118278329	2025-09-13 00:00:00	`In Senate. Concurrence in Assembly amendments pending.`	`LEG_ESI`	2026-03-02 14:55:27	27	`76`	`Applied`	`Senate`	`Floor`	`Unfinished Business`	`In Floor Process`
 `202520260SB274`	118278333	2025-09-13 00:00:00	`Assembly amendments concurred in. (Ayes 28. Noes  6. Page 3051.) Ordered to engrossing and enrolling.`	`LEG_ESI`	2026-03-02 14:55:27	27	`77`	`Applied`	`Senate`	`E&E`	`Enrollment`	`Passed`
@@ -466,6 +605,15 @@
 `202520260SB1212`	118484385	2026-04-08 00:00:00	`Re-referred to Com. on  N.R. & W.`	`LEG_ESI`	2026-05-29 12:13:31	5	`6`	`Applied`	`Senate`	`Committee`	`CS55`	`In Committee Process`
 `202520260SB1212`	118484386	2026-04-10 00:00:00	`Set for hearing April  21.`	`LEG_ESI`	2026-05-29 12:13:31	6	`124`	`Applied`	`Senate`	`Committee`	`CS55`	`In Committee Process`
 `202520260SB1212`	118484387	2026-04-23 00:00:00	`April  21 set for first hearing. Failed passage in committee.  (Ayes  1. Noes  2. Page 3981.)`	`LEG_ESI`	2026-05-29 12:13:31	7	`340`	`Applied`	`Senate`	`Committee`	`CS55`	`Failed Passage in Committee`
+`202520260AB1723`	118317248	2026-02-05 00:00:00	`Read first time.  To print.`	`LEG_ESI`	2026-04-09 11:58:54	1	`1`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260AB1723`	118317249	2026-02-06 00:00:00	`From printer.  May be heard in committee  March  8.`	`LEG_ESI`	2026-04-09 11:58:54	2	`3`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260AB1723`	118317250	2026-03-02 00:00:00	`Referred to Coms. on  PUB. S. and  TRANS.`	`LEG_ESI`	2026-04-09 11:58:54	3	`504`	`Applied`	`Assembly`	`Committee`	`CX18`	`In Committee Process`
+`202520260AB1723`	118317251	2026-03-10 00:00:00	`From committee: Do pass and re-refer to Com. on  TRANS. with recommendation: To Consent Calendar. (Ayes  9. Noes  0.) (March  10). Re-referred to Com. on  TRANS.`	`LEG_ESI`	2026-04-09 11:58:54	4	`7`	`Applied`	`Assembly`	`Committee`	`CX22`	`In Committee Process`
+`202520260AB1723`	118317252	2026-04-09 00:00:00	`In committee: Set,  first hearing. Hearing canceled at the request of author.`	`LEG_ESI`	2026-04-09 11:58:54	5	`316`	`Applied`	`Assembly`	`Committee`	`CX22`	`In Committee Process`
+`202520260AB2558`	118351665	2026-02-20 00:00:00	`Read first time.  To print.`	`LEG_ESI`	2026-04-23 12:53:51	1	`1`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260AB2558`	118351666	2026-02-21 00:00:00	`From printer.  May be heard in committee  March  23.`	`LEG_ESI`	2026-04-23 12:53:51	2	`3`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260AB2558`	118351667	2026-03-09 00:00:00	`Referred to Com. on  B. & F.`	`LEG_ESI`	2026-04-23 12:53:51	3	`2`	`Applied`	`Assembly`	`Committee`	`CX27`	`In Committee Process`
+`202520260AB2558`	118351668	2026-04-23 00:00:00	`In committee: Set,  first hearing. Hearing canceled at the request of author.`	`LEG_ESI`	2026-04-23 12:53:51	4	`316`	`Applied`	`Assembly`	`Committee`	`CX27`	`In Committee Process`
 `202520260AB1863`	118529301	2026-04-07 00:00:00	`From committee chair, with author's amendments:  Amend, and re-refer to Com. on  E.M. Read second time and amended.`	`LEG_ESI`	2026-06-12 10:26:37	4	`5`	`Applied`	`Assembly`	`E&E`	`Engrossing`	`In Desk Process`
 `202520260AB1863`	118529302	2026-04-08 00:00:00	`Re-referred to Com. on  E.M.`	`LEG_ESI`	2026-06-12 10:26:37	5	`30`	`Applied`	`Assembly`	`Committee`	`CX81`	`In Committee Process`
 `202520260AB1863`	118529303	2026-04-23 00:00:00	`From committee: Amend, and do pass as amended. (Ayes  6. Noes  0.) (April  23).`	`LEG_ESI`	2026-06-12 10:26:37	6	`13`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
@@ -475,6 +623,12 @@
 `202520260AB1863`	118529305	2026-04-28 00:00:00	`Read second time. Ordered to third reading.`	`LEG_ESI`	2026-06-12 10:26:37	8	`23`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
 `202520260AB1863`	118529306	2026-05-04 00:00:00	`Re-referred to Com. on  APPR. pursuant to Assembly Rule 97.`	`LEG_ESI`	2026-06-12 10:26:37	9	`266`	`Applied`	`Assembly`	`Committee`	`CX25`	`In Committee Process`
 `202520260AB1863`	118529307	2026-05-04 00:00:00	`(Ayes 55. Noes 19. Page 4895.)`	`LEG_ESI`	2026-06-12 10:26:37	9	`161`	`Applied`	`Assembly`	`Committee`	`CX25`	`In Committee Process`
+`202520260AB2616`	118309073	2026-03-16 00:00:00	`From committee chair, with author's amendments:  Amend, and re-refer to Com. on  JUD. Read second time and amended.`	`LEG_ESI`	2026-04-07 13:09:10	3	`5`	`Applied`	`Assembly`	`E&E`	`Engrossing`	`In Desk Process`
+`202520260AB2616`	118309074	2026-03-17 00:00:00	`Re-referred to Com. on  JUD.`	`LEG_ESI`	2026-04-07 13:09:10	4	`30`	`Applied`	`Assembly`	`Committee`	`CX13`	`In Committee Process`
+`202520260AB2616`	118309075	2026-04-07 00:00:00	`In committee: Set,  first hearing. Hearing canceled at the request of author.`	`LEG_ESI`	2026-04-07 13:09:10	5	`316`	`Applied`	`Assembly`	`Committee`	`CX13`	`In Committee Process`
+`202520260AB2616`	118309072	2026-03-16 00:00:00	`Referred to Coms. on  JUD. and  H. & C.D.`	`LEG_ESI`	2026-04-07 13:09:10	3	`504`	`Applied`	`Assembly`	`Committee`	`CX13`	`In Committee Process`
+`202520260AB2616`	118309070	2026-02-20 00:00:00	`Read first time.  To print.`	`LEG_ESI`	2026-04-07 13:09:10	1	`1`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260AB2616`	118309071	2026-02-21 00:00:00	`From printer.  May be heard in committee  March  23.`	`LEG_ESI`	2026-04-07 13:09:10	2	`3`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
 `202520260SB1438`	119120669	2026-04-23 00:00:00	`Read second time. Ordered to consent calendar.`	`LEG_ESI`	2026-10-28 14:14:43	7	`34`	`Applied`	`Senate`	`Floor`	`Consent`	`In Floor Process`
 `202520260SB1438`	119120671	2026-04-30 00:00:00	`Read third time. Passed. (Ayes 36. Noes  0. Page 4113.) Ordered to the Assembly.`	`LEG_ESI`	2026-10-28 14:14:43	8	`45`	`Applied`	`Senate`	`Desk`	NULL	`Passed`
 `202520260SB1438`	119120673	2026-04-30 00:00:00	`In Assembly.  Read first time.  Held at Desk.`	`LEG_ESI`	2026-10-28 14:14:43	9	`56`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
@@ -498,6 +652,32 @@
 `202520260AB1863`	118529311	2026-05-18 00:00:00	`Read second time. Ordered to third reading.`	`LEG_ESI`	2026-06-12 10:26:37	12	`23`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
 `202520260AB1863`	118529312	2026-05-28 00:00:00	`Read third time. Refused passage. (Ayes 39. Noes  4. Page 5546.).`	`LEG_ESI`	2026-06-12 10:26:37	13	`43`	`Applied`	`Assembly`	`Desk`	NULL	`Failed`
 `202520260AB1863`	118529310	2026-05-14 00:00:00	`From committee:  Do pass. (Ayes 15. Noes  0.) (May  14).`	`LEG_ESI`	2026-06-12 10:26:37	11	`8`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260SB1420`	119120556	2026-02-23 00:00:00	`From printer. May be acted upon on or after March  23.`	`LEG_ESI`	2026-10-28 14:14:43	2	`4`	`Applied`	`Senate`	`Rules`	NULL	`Pending Referral`
+`202520260SB1420`	119120557	2026-02-23 00:00:00	`Read first time.`	`LEG_ESI`	2026-10-28 14:14:43	2	`3`	`Applied`	`Senate`	`Rules`	NULL	`Pending Referral`
+`202520260SB1420`	119120558	2026-03-04 00:00:00	`Referred to Com. on  E. & C.A.`	`LEG_ESI`	2026-10-28 14:14:43	3	`5`	`Applied`	`Senate`	`Committee`	`CS45`	`In Committee Process`
+`202520260SB1420`	119120559	2026-03-16 00:00:00	`Set for hearing April  7.`	`LEG_ESI`	2026-10-28 14:14:43	4	`124`	`Applied`	`Senate`	`Committee`	`CS45`	`In Committee Process`
+`202520260SB1420`	119120560	2026-03-26 00:00:00	`From committee with author's amendments. Read second time and amended. Re-referred to Com. on  E. & C.A.`	`LEG_ESI`	2026-10-28 14:14:43	5	`39`	`Applied`	`Senate`	`Committee`	`CS45`	`In Committee Process`
+`202520260SB1420`	119120561	2026-04-07 00:00:00	`From committee: Do pass and re-refer to Com. on  APPR. (Ayes  5. Noes  0. Page 3755.) (April  7). Re-referred to Com. on  APPR.`	`LEG_ESI`	2026-10-28 14:14:43	6	`21`	`Applied`	`Senate`	`Committee`	`CS61`	`In Committee Process`
+`202520260SB1420`	119120562	2026-04-10 00:00:00	`Set for hearing April  20.`	`LEG_ESI`	2026-10-28 14:14:43	7	`124`	`Applied`	`Senate`	`Committee`	`CS61`	`In Committee Process`
+`202520260SB1420`	119120563	2026-04-20 00:00:00	`April  20 hearing: Placed on  APPR. suspense file.`	`LEG_ESI`	2026-10-28 14:14:43	8	`343`	`Applied`	`Senate`	`Committee`	`CS61`	`In Committee Process`
+`202520260SB1420`	119120564	2026-05-08 00:00:00	`Set for hearing May  14.`	`LEG_ESI`	2026-10-28 14:14:43	9	`124`	`Applied`	`Senate`	`Committee`	`CS61`	`In Committee Process`
+`202520260SB1420`	119120565	2026-05-14 00:00:00	`From committee: Do pass as amended. (Ayes  7. Noes  0. Page 4276.) (May  14).`	`LEG_ESI`	2026-10-28 14:14:43	10	`8`	`Applied`	`Senate`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260SB1420`	119120566	2026-05-14 00:00:00	`Read second time and amended. Ordered to second reading.`	`LEG_ESI`	2026-10-28 14:14:43	10	`36`	`Applied`	`Senate`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260SB1420`	119120567	2026-05-18 00:00:00	`Read second time. Ordered to third reading.`	`LEG_ESI`	2026-10-28 14:14:43	11	`32`	`Applied`	`Senate`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260SB1420`	119120568	2026-05-19 00:00:00	`Read third time. Urgency clause adopted. Passed. (Ayes 39. Noes  0. Page 4365.) Ordered to the Assembly.`	`LEG_ESI`	2026-10-28 14:14:43	12	`44`	`Applied`	`Senate`	`Desk`	NULL	`Passed`
+`202520260SB1420`	119120569	2026-05-20 00:00:00	`In Assembly.  Read first time.  Held at Desk.`	`LEG_ESI`	2026-10-28 14:14:43	13	`56`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260SB1420`	119120570	2026-05-26 00:00:00	`Referred to Com. on  ELECTIONS.`	`LEG_ESI`	2026-10-28 14:14:43	14	`5`	`Applied`	`Assembly`	`Committee`	`CX04`	`In Committee Process`
+`202520260SB1420`	119120571	2026-06-17 00:00:00	`From committee: Do pass as amended and re-refer to Com. on  APPR. with recommendation: To consent calendar. (Ayes  7. Noes  0.) (June  17).`	`LEG_ESI`	2026-10-28 14:14:43	15	`28`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260SB1420`	119120572	2026-06-18 00:00:00	`Read second time and amended. Re-referred to Com. on  APPR.`	`LEG_ESI`	2026-10-28 14:14:43	16	`37`	`Applied`	`Assembly`	`Committee`	`CX25`	`In Committee Process`
+`202520260SB1420`	119120573	2026-08-05 00:00:00	`From committee: Do pass. Ordered to consent calendar. (Ayes 15. Noes  0.) (August  5).`	`LEG_ESI`	2026-10-28 14:14:43	17	`9`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260SB1420`	119120574	2026-08-06 00:00:00	`Read second time. Ordered to consent calendar.`	`LEG_ESI`	2026-10-28 14:14:43	18	`34`	`Applied`	`Assembly`	`Floor`	`Consent`	`In Floor Process`
+`202520260SB1420`	119120575	2026-08-13 00:00:00	`Read third time. Urgency clause adopted. Passed. (Ayes 72. Noes  0. Page 6159.) Ordered to the Senate.`	`LEG_ESI`	2026-10-28 14:14:43	19	`60`	`Applied`	`Assembly`	`Desk`	NULL	`Passed`
+`202520260SB1420`	119120576	2026-08-13 00:00:00	`In Senate. Concurrence in Assembly amendments pending.`	`LEG_ESI`	2026-10-28 14:14:43	20	`76`	`Applied`	`Senate`	`Floor`	`Unfinished Business`	`In Floor Process`
+`202520260SB1420`	119120577	2026-08-25 00:00:00	`Ordered to special consent calendar.`	`LEG_ESI`	2026-10-28 14:14:43	21	`110`	`Applied`	`Senate`	`Floor`	`Special Consent`	`In Floor Process`
+`202520260SB1420`	119120578	2026-08-27 00:00:00	`Assembly amendments concurred in. (Ayes 40. Noes  0. Page 5982.) Ordered to engrossing and enrolling.`	`LEG_ESI`	2026-10-28 14:14:43	22	`77`	`Applied`	`Senate`	`E&E`	`Enrollment`	`Passed`
+`202520260SB1420`	119120579	2026-09-04 00:00:00	`Enrolled and presented to the Governor at  2 p.m.`	`LEG_ESI`	2026-10-28 14:14:43	23	`86`	`Applied`	`Governor`	NULL	NULL	`Enrolled`
+`202520260SB1420`	119120580	2026-09-19 00:00:00	`Approved by the Governor.`	`LEG_ESI`	2026-10-28 14:14:43	24	`90`	`Applied`	`Governor`	NULL	NULL	`Signed by Governor`
+`202520260SB1420`	119120581	2026-09-19 00:00:00	`Chaptered by Secretary of State.  Chapter 342, Statutes of 2026.`	`LEG_ESI`	2026-10-28 14:14:43	25	`94`	`Applied`	`Secretary of State`	NULL	NULL	`Chaptered`
 `202520260AB1447`	119025107	2025-02-22 00:00:00	`From printer.  May be heard in committee  March  24.`	`LEG_ESI`	2026-09-25 09:26:50	2	`3`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
 `202520260AB1447`	119025108	2025-02-24 00:00:00	`Read first time.`	`LEG_ESI`	2026-09-25 09:26:50	3	`103`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
 `202520260AB1447`	119025109	2025-03-24 00:00:00	`Referred to Com. on  JUD.`	`LEG_ESI`	2026-09-25 09:26:50	4	`2`	`Applied`	`Assembly`	`Committee`	`CX13`	`In Committee Process`
@@ -517,6 +697,7 @@
 `202520260AB1863`	118529298	2026-02-11 00:00:00	`Read first time.  To print.`	`LEG_ESI`	2026-06-12 10:26:37	1	`1`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
 `202520260AB1863`	118529299	2026-02-12 00:00:00	`From printer.  May be heard in committee  March  14.`	`LEG_ESI`	2026-06-12 10:26:37	2	`3`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
 `202520260AB1863`	118529300	2026-03-16 00:00:00	`Referred to Com. on  E.M.`	`LEG_ESI`	2026-06-12 10:26:37	3	`2`	`Applied`	`Assembly`	`Committee`	`CX81`	`In Committee Process`
+`202520260SB1420`	119120555	2026-02-20 00:00:00	`Introduced.  To Com. on RLS. for assignment.  To print.`	`LEG_ESI`	2026-10-28 14:14:43	1	`1`	`Applied`	`Senate`	`Rules`	NULL	`Pending Referral`
 `202520260AB1447`	119025123	2025-07-17 00:00:00	`Read third time. Passed. Ordered to the Assembly. (Ayes 35. Noes  0. Page 2138.).`	`LEG_ESI`	2026-09-25 09:26:50	17	`124`	`Rescinded`	`Senate`	`Desk`	NULL	`Passed`
 `202520260AB1447`	119025124	2025-07-17 00:00:00	`In Assembly. Ordered to Engrossing and Enrolling.`	`LEG_ESI`	2026-09-25 09:26:50	18	`63`	`Applied`	`Assembly`	`E&E`	`Enrollment`	`Passed`
 `202520260AB1447`	119025125	2025-08-18 00:00:00	`Withdrawn from Engrossing and Enrolling.`	`LEG_ESI`	2026-09-25 09:26:50	19	`348`	`Applied`	`Assembly`	`Desk`	NULL	`Passed`
@@ -590,6 +771,37 @@
 `202520260SB329`	119120881	2026-09-27 00:00:00	`Approved by the Governor.`	`LEG_ESI`	2026-11-03 12:43:50	25	`90`	`Applied`	`Governor`	NULL	NULL	`Signed by Governor`
 `202520260SB329`	119120882	2026-09-27 00:00:00	`Chaptered by Secretary of State.  Chapter 646, Statutes of 2026.`	`LEG_ESI`	2026-11-03 12:43:50	26	`94`	`Applied`	`Secretary of State`	NULL	NULL	`Chaptered`
 `202520260SB329`	119120873	2026-08-13 00:00:00	`From committee: Do pass as amended. (Ayes 11. Noes  0.) (August  13).`	`LEG_ESI`	2026-11-03 12:43:50	18	`8`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260AB2414`	119132043	2026-02-20 00:00:00	`Read first time.  To print.`	`LEG_ESI`	2026-11-09 15:47:15	1	`1`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260AB2414`	119132044	2026-02-21 00:00:00	`From printer.  May be heard in committee  March  23.`	`LEG_ESI`	2026-11-09 15:47:15	2	`3`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
+`202520260AB2414`	119132045	2026-03-09 00:00:00	`Referred to Com. on  HUM. S.`	`LEG_ESI`	2026-11-09 15:47:15	3	`2`	`Applied`	`Assembly`	`Committee`	`CX11`	`In Committee Process`
+`202520260AB2414`	119132046	2026-04-15 00:00:00	`From committee: Do pass and re-refer to Com. on  APPR. with recommendation: To Consent Calendar. (Ayes  7. Noes  0.) (April  14). Re-referred to Com. on  APPR.`	`LEG_ESI`	2026-11-09 15:47:15	4	`7`	`Applied`	`Assembly`	`Committee`	`CX25`	`In Committee Process`
+`202520260AB2414`	119132047	2026-05-06 00:00:00	`In committee: Set,  first hearing. Referred to  APPR. suspense file.`	`LEG_ESI`	2026-11-09 15:47:15	5	`304`	`Applied`	`Assembly`	`Committee`	`CX25`	`In Committee Process`
+`202520260AB2414`	119132049	2026-05-14 00:00:00	`From committee:  Do pass. (Ayes 15. Noes  0.) (May  14).`	`LEG_ESI`	2026-11-09 15:47:15	6	`8`	`Applied`	`Assembly`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260AB2414`	119132051	2026-05-18 00:00:00	`Read second time. Ordered to third reading.`	`LEG_ESI`	2026-11-09 15:47:15	7	`23`	`Applied`	`Assembly`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260AB2414`	119132053	2026-05-26 00:00:00	`Read third time. Passed. Ordered to the Senate. (Ayes 78. Noes  0. Page 5322.)`	`LEG_ESI`	2026-11-09 15:47:15	8	`41`	`Applied`	`Assembly`	`E&E`	`Engrossing`	`Passed`
+`202520260AB2414`	119132055	2026-05-27 00:00:00	`In Senate.  Read first time.  To Com. on RLS. for assignment.`	`LEG_ESI`	2026-11-09 15:47:15	9	`112`	`Applied`	`Senate`	`Rules`	NULL	`Pending Referral`
+`202520260AB2414`	119132057	2026-06-10 00:00:00	`Referred to Com. on  HUMAN S.`	`LEG_ESI`	2026-11-09 15:47:15	10	`2`	`Applied`	`Senate`	`Committee`	`CS74`	`In Committee Process`
+`202520260AB2414`	119132059	2026-06-22 00:00:00	`From committee chair, with author's amendments:  Amend, and re-refer to committee.  Read second time, amended, and re-referred to Com. on  HUMAN S.`	`LEG_ESI`	2026-11-09 15:47:15	11	`114`	`Applied`	`Senate`	`Committee`	`CS74`	`In Committee Process`
+`202520260AB2414`	119132061	2026-06-29 00:00:00	`From committee: Do pass and re-refer to Com. on  APPR. with recommendation: To Consent Calendar. (Ayes  5. Noes  0.) (June  29). Re-referred to Com. on  APPR.`	`LEG_ESI`	2026-11-09 15:47:15	12	`7`	`Applied`	`Senate`	`Committee`	`CS61`	`In Committee Process`
+`202520260AB2414`	119132063	2026-08-03 00:00:00	`In committee:  Referred to  APPR. suspense file.`	`LEG_ESI`	2026-11-09 15:47:15	13	`300`	`Applied`	`Senate`	`Committee`	`CS61`	`In Committee Process`
+`202520260AB2414`	119132065	2026-08-13 00:00:00	`From committee:  Do pass. (Ayes  7. Noes  0.) (August  13).`	`LEG_ESI`	2026-11-09 15:47:15	14	`8`	`Applied`	`Senate`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260AB2414`	119132067	2026-08-13 00:00:00	`Read second time. Ordered to third reading.`	`LEG_ESI`	2026-11-09 15:47:15	14	`23`	`Applied`	`Senate`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260AB2414`	119132069	2026-08-18 00:00:00	`Ordered to special consent calendar.`	`LEG_ESI`	2026-11-09 15:47:15	15	`97`	`Applied`	`Senate`	`Floor`	`Special Consent`	`In Floor Process`
+`202520260AB2414`	119132071	2026-08-19 00:00:00	`From special consent calendar.`	`LEG_ESI`	2026-11-09 15:47:15	16	`999`	`Applied`	`Senate`	`Floor`	`Special Consent`	`In Floor Process`
+`202520260AB2414`	119132073	2026-08-19 00:00:00	`Ordered to third reading.`	`LEG_ESI`	2026-11-09 15:47:15	16	`100`	`Applied`	`Senate`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260AB2414`	119132075	2026-08-21 00:00:00	`Read third time and amended. Ordered to second reading.`	`LEG_ESI`	2026-11-09 15:47:15	17	`126`	`Applied`	`Senate`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260AB2414`	119132077	2026-08-24 00:00:00	`Read second time. Ordered to third reading.`	`LEG_ESI`	2026-11-09 15:47:15	18	`23`	`Applied`	`Senate`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260AB2414`	119132079	2026-08-26 00:00:00	`Read third time. Passed. Ordered to the Assembly. (Ayes 40. Noes  0. Page 5868.).`	`LEG_ESI`	2026-11-09 15:47:15	19	`124`	`Applied`	`Senate`	`Desk`	NULL	`Passed`
+`202520260AB2414`	119132081	2026-08-26 00:00:00	`Reconsideration granted. (Ayes 40. Noes  0. Page 5880.)`	`LEG_ESI`	2026-11-09 15:47:15	19	`57`	`Applied`	`Senate`	`Desk`	NULL	`Passed`
+`202520260AB2414`	119132083	2026-08-28 00:00:00	`Read third time and amended. Ordered to second reading.`	`LEG_ESI`	2026-11-09 15:47:15	20	`126`	`Applied`	`Senate`	`Floor`	`Second Reading`	`In Floor Process`
+`202520260AB2414`	119132085	2026-08-30 00:00:00	`Read second time. Ordered to third reading.`	`LEG_ESI`	2026-11-09 15:47:15	21	`23`	`Applied`	`Senate`	`Floor`	`Third Reading`	`In Floor Process`
+`202520260AB2414`	119132087	2026-08-31 00:00:00	`Read third time. Passed. Ordered to the Assembly. (Ayes 39. Noes  0.).`	`LEG_ESI`	2026-11-09 15:47:15	22	`124`	`Applied`	`Senate`	`Desk`	NULL	`Passed`
+`202520260AB2414`	119132089	2026-08-31 00:00:00	`In Assembly.  Concurrence in Senate amendments pending.`	`LEG_ESI`	2026-11-09 15:47:15	23	`64`	`Applied`	`Assembly`	`Desk`	NULL	`In Floor Process`
+`202520260AB2414`	119132091	2026-08-31 00:00:00	`Assembly Rule 63 suspended. (Page 7057.)`	`LEG_ESI`	2026-11-09 15:47:15	23	`111`	`Applied`	`Assembly`	`Desk`	NULL	`In Floor Process`
+`202520260AB2414`	119132092	2026-08-31 00:00:00	`Senate amendments concurred in. To Engrossing and Enrolling. (Ayes 79. Noes  0. Page 7057.).`	`LEG_ESI`	2026-11-09 15:47:15	23	`65`	`Applied`	`Assembly`	`E&E`	`Enrollment`	`Passed`
+`202520260AB2414`	119132093	2026-09-15 00:00:00	`Enrolled and presented to the Governor at  3 p.m.`	`LEG_ESI`	2026-11-09 15:47:15	24	`77`	`Applied`	`Governor`	NULL	NULL	`Enrolled`
+`202520260AB2414`	119132094	2026-09-27 00:00:00	`Approved by the Governor.`	`LEG_ESI`	2026-11-09 15:47:15	25	`80`	`Applied`	`Governor`	NULL	NULL	`Signed by Governor`
+`202520260AB2414`	119132095	2026-09-27 00:00:00	`Chaptered by Secretary of State - Chapter 603, Statutes of 2026.`	`LEG_ESI`	2026-11-09 15:47:15	26	`79`	`Applied`	`Secretary of State`	NULL	NULL	`Chaptered`
 `202520260AB113`	119024621	2025-01-08 00:00:00	`Read first time.  To print.`	`LEG_ESI`	2026-09-24 15:54:02	1	`1`	`Applied`	`Assembly`	`Desk`	NULL	`Pending Referral`
 `202520260AB113`	119024623	2025-02-03 00:00:00	`Referred to Com. on  BUDGET.`	`LEG_ESI`	2026-09-24 15:54:02	3	`2`	`Applied`	`Assembly`	`Committee`	`CX29`	`In Committee Process`
 `202520260AB113`	119024624	2025-03-17 00:00:00	`Withdrawn from committee.`	`LEG_ESI`	2026-09-24 15:54:02	4	`32`	`Applied`	`Assembly`	`Desk`	`CX29`	`In Desk Process`

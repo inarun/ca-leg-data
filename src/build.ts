@@ -26,16 +26,18 @@ import {
   normaliseFileLocation,
   type ExclusionReason,
 } from "./classify.ts";
+import { assertSourceNotEmpty, assertSourceReadable } from "./checks.ts";
 import { applyHistoryRules, type HistoryUpgrade } from "./historyKinds.ts";
 import { loadCommitteesTable, loadIssuesTable, resolveIssues } from "./issues.ts";
 import { FloorActionIndex, historyPassage, parseTally, type PassageKind } from "./passages.ts";
 import { loadPeopleTable, resolvePeople } from "./people.ts";
+import { Rescissions } from "./rescind.ts";
 import type { SourceReader } from "./reader.ts";
 import { committeeHouse, computeStage, houseFromName, isClearingCommitteeVote, STAGE_RANK } from "./stage.ts";
 import { loadTables, rollCallKey, type AnalysisRow, type BillRow, type HistoryRow, type SourceTables, type SummaryVoteRow } from "./tables.ts";
 import { docxToText, extractDigest } from "./text.ts";
 import { IngestError, compareNumericStrings, compareStrings, ordinal } from "./util.ts";
-import { chooseVersionForVote, sortVersionsOldestFirst } from "./versions.ts";
+import { chooseVersionForVote, sameDayOrder, sortVersionsOldestFirst, type SameDayOrder } from "./versions.ts";
 
 export const IN_SCOPE_TYPES: readonly MeasureType[] = ["AB", "SB", "ACA", "SCA"];
 const TYPE_ORDER: Record<string, number> = { AB: 0, ACA: 1, SB: 2, SCA: 3 };
@@ -93,8 +95,27 @@ export interface BuildStats {
     billHistoryId: string;
     rollCalls: Array<{ id: string; group: string; fileLocation: string | null; kind: VoteKind | null; motionText: string }>;
   }>;
+  /** Roll calls on a day that has a version of the bill: how the history orders the amendment and the passage. */
+  sameDayVersionOrder: Record<string, number>;
+  /** Roll calls whose version differs from what the previous-version rule alone would pick. */
+  sameDayVersionChanged: Array<{ id: string; billId: string; house: House; date: string; from: string; to: string }>;
+  /** Third-reading or consent roll calls that would be final but for a later rescission of the passage in that house. */
+  rescindedFinals: Array<{
+    id: string;
+    billId: string;
+    house: House;
+    kind: VoteKind;
+    date: string;
+    ayes: number;
+    noes: number;
+    rescindedOn: string;
+    historyAction: string;
+    billHistoryId: string;
+  }>;
   /** Second-reading roll calls counted as third reading or concurrence because a history action has the same tally. */
   secondReadingUpgrades: HistoryUpgrade[];
+  /** Roll calls filed under a motion to reconsider, counted because a history passage has the same bill, house, date and tally. */
+  reconsiderationUpgrades: HistoryUpgrade[];
   analyses: {
     billsWithAnalysis: number;
     unreadableLatest: number;
@@ -184,6 +205,8 @@ interface Candidate {
   fileLocation: string | null;
   /** Excluded by its motion text or location, before any history rule. */
   excluded: boolean;
+  noMatchReason?: ExclusionReason;
+  reconsideration: boolean;
   ayes: number;
   noes: number;
 }
@@ -247,6 +270,7 @@ export async function buildSnapshot(reader: SourceReader, opts: BuildOptions): P
   const inScopeIds = new Set(billRows.map((b) => b.billId));
   const droppedBillsByType: Record<string, number> = {};
   for (const b of t.bills) if (!inScope(b)) inc(droppedBillsByType, b.measureType);
+  assertSourceNotEmpty({ counts: { session, ...t.counts }, inScopeBills: billRows.length });
 
   const versionsByBill = new Map<string, BillVersionRef[]>();
   const versionRowsById = new Map<string, (typeof t.versions)[number]>();
@@ -296,6 +320,8 @@ export async function buildSnapshot(reader: SourceReader, opts: BuildOptions): P
       group: `${house} ${r.fileLocation === null ? "(no file_location)" : normaliseFileLocation(r.fileLocation)}`,
       fileLocation: r.fileLocation,
       excluded: c.reason !== null,
+      noMatchReason: c.noMatchReason,
+      reconsideration: c.noMatchReason === "reconsideration",
       ayes: r.ayes,
       noes: r.noes,
     };
@@ -347,13 +373,37 @@ export async function buildSnapshot(reader: SourceReader, opts: BuildOptions): P
     list.push(c);
     groups.set(k, list);
   }
-  for (const list of groups.values()) finals.add([...list].sort(compareCandidates).at(-1) as Candidate);
+  // A passage later rescinded in its house, with no later passage roll call, is not final (rescind.ts).
+  const rescissions = new Rescissions(t.history);
+  const rescindedFinals: BuildStats["rescindedFinals"] = [];
+  for (const [k, list] of groups) {
+    const last = [...list].sort(compareCandidates).at(-1) as Candidate;
+    if (!k.endsWith("|passage")) {
+      finals.add(last);
+      continue;
+    }
+    const by = rescissions.rescindedBy(last.billId, last.house, last.date, last.ayes, last.noes);
+    if (by === null) finals.add(last);
+    else {
+      rescindedFinals.push({ id: last.key, billId: last.billId, house: last.house, kind: last.kind as VoteKind, date: last.date, ayes: last.ayes, noes: last.noes, rescindedOn: by.date, historyAction: by.action, billHistoryId: by.historyId });
+    }
+  }
+  rescindedFinals.sort((a, b) => compareStrings(a.billId, b.billId) || compareStrings(a.house, b.house) || compareStrings(a.date, b.date));
 
   // ------------------------------------------------------------ emit roll calls
   const rollCalls: RollCall[] = [];
   const problems: string[] = [];
   const emittedByKind: Record<string, number> = {};
   let versionInferred = 0;
+  const historyRowsByBill = new Map<string, HistoryRow[]>();
+  for (const h of t.history) {
+    if (!inScopeIds.has(h.billId)) continue;
+    const list = historyRowsByBill.get(h.billId) ?? [];
+    list.push(h);
+    historyRowsByBill.set(h.billId, list);
+  }
+  const sameDayVersionOrder: Record<string, number> = {};
+  const sameDayVersionChanged: BuildStats["sameDayVersionChanged"] = [];
   let minA: number | null = null;
   let minS: number | null = null;
   const unmappedNames = new Set<string>();
@@ -400,7 +450,15 @@ export async function buildSnapshot(reader: SourceReader, opts: BuildOptions): P
     });
     const refs = versionsByBill.get(c.billId);
     if (!refs) throw new IngestError("no-version", `${c.billId} has no versions`);
-    const chosen = chooseVersionForVote(c.billId, refs, c.date);
+    // A version dated the day of the vote: the bill history may order its amendment before or after the passage.
+    let order: SameDayOrder = "unknown";
+    if (refs.some((v) => v.date === c.date && (v.action === "Introduced" || v.action.startsWith("Amended")))) {
+      order = sameDayOrder(historyRowsByBill.get(c.billId) ?? [], floorActions.find(c.billId, c.house, c.date, r.ayes, r.noes), c.house === "A" ? "Assembly" : "Senate", c.date);
+      inc(sameDayVersionOrder, order);
+    }
+    const plain = chooseVersionForVote(c.billId, refs, c.date);
+    const chosen = chooseVersionForVote(c.billId, refs, c.date, order);
+    if (chosen.versionId !== plain.versionId) sameDayVersionChanged.push({ id: c.key, billId: c.billId, house: c.house, date: c.date, from: plain.versionId, to: chosen.versionId });
     if (chosen.inferred) versionInferred += 1;
     const result = r.result === "(PASS)" ? "PASS" : r.result === "(FAIL)" ? "FAIL" : null;
     if (result === null) {
@@ -708,6 +766,13 @@ export async function buildSnapshot(reader: SourceReader, opts: BuildOptions): P
     analyses: sortedRecord(shards.get(shard) as Record<string, AnalysisEntry>),
   }));
 
+  assertSourceReadable({
+    billsWithoutHistory: billRows.filter((b) => !historyByBill.has(b.billId)).map((b) => b.billId),
+    analysisBills: analysesByBill.size,
+    analysesRead: entries.size,
+    unreadableLatest: analysisStats.unreadableLatest,
+  });
+
   // ------------------------------------------------------------ passages without a roll call
   const finalByBillHouse = new Set<string>();
   for (const rc of rollCalls) {
@@ -830,7 +895,11 @@ export async function buildSnapshot(reader: SourceReader, opts: BuildOptions): P
     memberCounts: { minAssembly: minA, minSenate: minS },
     noRollCall,
     noRollCallNeedsLook,
-    secondReadingUpgrades: history.upgrades,
+    rescindedFinals,
+    sameDayVersionOrder,
+    sameDayVersionChanged,
+    secondReadingUpgrades: history.upgrades.filter((u) => u.wouldBeExcludedAs === "location"),
+    reconsiderationUpgrades: history.upgrades.filter((u) => u.wouldBeExcludedAs === "reconsideration"),
     analyses: analysisStats,
     digests: { billsWithDigest: Object.keys(digests).length, billsWithoutDigest: bills.length - Object.keys(digests).length },
     stages: stageStats,

@@ -83,6 +83,32 @@ async function main(): Promise<void> {
       );
     }
     if (stats.secondReadingUpgrades.length === 0) look.push("| none | | | | | | | |");
+    look.push("", "### Roll calls filed under a motion to reconsider, counted because a history passage has the same tally", "");
+    look.push("The motion text ends \"Motion to Reconsider\" but the same text is shared by the passage vote itself. Each is counted as the kind shown because the");
+    look.push("bill history has an applied `Read third time ... Passed` (or `concurred in`) action of the same bill, house and date with the same official tally.", "");
+    look.push("| Bill | House | Date | File location | Motion text | Counted as | Tally | Matching history line |", "| --- | --- | --- | --- | --- | --- | --- | --- |");
+    for (const u of stats.reconsiderationUpgrades) {
+      look.push(
+        `| ${link(u.billId)} | ${house(u.house)} | ${u.date} | ${cell(u.fileLocation ?? "(none)")} | ${cell(flat(u.motionText))} | ${KIND_WORD[u.kind]} | ${u.ayes}-${u.noes} | ${cell(flat(u.historyLine))} |`,
+      );
+    }
+    if (stats.reconsiderationUpgrades.length === 0) look.push("| none | | | | | | | |");
+    look.push("", "### Final roll calls cleared because the passage was later rescinded", "");
+    look.push("The bill history has an applied `Action rescinded whereby ... passed` action in that house after the roll call, and no later passage roll call");
+    look.push("in that house. The roll call is still listed (`final` false) so the vote is not lost; the bill has no final passage in that house.", "");
+    look.push("| Bill | House | Date | Counted as | Tally | Rescinded on | Rescinding history line |", "| --- | --- | --- | --- | --- | --- | --- |");
+    for (const x of stats.rescindedFinals) {
+      look.push(`| ${link(x.billId)} | ${house(x.house)} | ${x.date} | ${KIND_WORD[x.kind]} | ${x.ayes}-${x.noes} | ${x.rescindedOn} | ${cell(flat(x.historyAction))} |`);
+    }
+    if (stats.rescindedFinals.length === 0) look.push("| none | | | | | | |");
+    look.push("", "### Votes placed on a same-day version by the bill history's order", "");
+    look.push("A bill version is dated the day of the vote. When the history has an applied `amended` action of that house and day before the passage action");
+    look.push("(same bill, house, date and tally), the vote is placed on that day's version instead of the previous one (`versionInferred` stays true).", "");
+    const orders = Object.entries(stats.sameDayVersionOrder).map(([k, n]) => `${k} ${n}`).join(", ");
+    look.push(`Votes on such a day, by the history's order: ${orders || "none"}.`, "");
+    look.push("| Bill | House | Date | Previous-version pick | Version used |", "| --- | --- | --- | --- | --- |");
+    for (const x of stats.sameDayVersionChanged) look.push(`| ${link(x.billId)} | ${house(x.house)} | ${x.date} | ${x.from} | ${x.to} |`);
+    if (stats.sameDayVersionChanged.length === 0) look.push("| none | | | | |");
     look.push("", "### Constitutional amendment roll calls counted by the adoption rule", "");
     look.push("A constitutional amendment's floor vote is worded `Adopted and to Assembly.` or `Adopted and to Senate.` in the history. These roll calls");
     look.push("are filed under W/O REF. TO FILE (or have no file_location) and are counted as a third reading because such an action has the same tally.", "");
@@ -151,6 +177,17 @@ async function main(): Promise<void> {
   md.push("- `CX05` Environmental Safety and Toxic Materials maps to Environmental Quality (with `CS64`).");
   md.push("- `CX02` Accountability and Administrative Review maps to Governmental Organization.");
   md.push("- Inactive Senate committees (`CS51`, `CS67`, `CS73`, `CS80`) appear in LOCATION_CODE_TBL but in no hearing or roll call; they are mapped by subject.");
+  md.push("");
+  md.push("## Needs a human look", "");
+  const committeeByCode = new Map(core.committees.map((c) => [c.code, c]));
+  const pairs: Array<[string, string]> = [["CS73", "CX19"], ["CS56", "CX17"]];
+  for (const [a, b] of pairs) {
+    const ca = committeeByCode.get(a);
+    const cb = committeeByCode.get(b);
+    if (!ca || !cb) continue;
+    const label = (c: { issueId: string | null }): string => (c.issueId ? `${issueName.get(c.issueId) ?? c.issueId} (\`${c.issueId}\`)` : "no issue");
+    md.push(`- \`${a}\` ${ca.name} maps to ${label(ca)} while \`${b}\` ${cb.name} maps to ${label(cb)}. Check whether the two should share an issue; the mapping is unchanged.`);
+  }
   md.push("");
   await writeFile(join(outDir, "issue-map.md"), md.join("\n"), "utf8");
   console.log(`wrote ${join(outDir, "vote-spot-check.md")} and ${join(outDir, "issue-map.md")}`);

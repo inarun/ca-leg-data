@@ -29,10 +29,10 @@ afterAll(cleanTemp);
 
 describe("scope", () => {
   it("keeps AB, SB, ACA, SCA and drops the resolution, still counting it", () => {
-    expect(snap.core.bills).toHaveLength(29);
+    expect(snap.core.bills).toHaveLength(40);
     expect(snap.core.bills.some((b) => b.id === "202520260SCR15")).toBe(false);
     expect(src.bills.map((b) => b.billId)).toContain("202520260SCR15");
-    expect(snap.manifest.counts[0]).toMatchObject({ session: SESSION, bills: 30 });
+    expect(snap.manifest.counts[0]).toMatchObject({ session: SESSION, bills: 41 });
     expect(stats.droppedBillsByType).toEqual({ SCR: 1 });
     expect(new Set(snap.core.bills.map((b) => b.type))).toEqual(new Set(["AB", "SB", "ACA"]));
   });
@@ -169,16 +169,36 @@ describe("roll call classification", () => {
     ]);
   });
 
-  it("SB 274: roll calls on a motion to reconsider are excluded", () => {
+  it("SB 274: a roll call on a motion to reconsider counts when a history passage has its exact bill, house, date and tally", () => {
     const motion = (id: string): string => src.motions.get(id) ?? "";
     const reconsider = src.summaryVotes.filter((r) => r.billId === "202520260SB274" && /reconsider/i.test(motion(r.motionId)));
     expect(reconsider.length).toBeGreaterThan(0);
     const emittedMotions = calls("0SB274").map((x) => x.motionText);
-    expect(emittedMotions.some((m) => /reconsider/i.test(m))).toBe(false);
-    expect(calls("0SB274").map((x) => [x.house, x.kind, x.final])).toEqual([
-      ["S", "concurrence", true],
-      ["A", "third_reading", true],
+    expect(emittedMotions.filter((m) => /reconsider/i.test(m))).toHaveLength(1);
+    // seq 1098 (27-10) and 1099 (39-0) share the motion text but no history passage has their tally; seq 1100 (26-10) does.
+    expect(calls("0SB274").map((x) => [x.house, x.date, x.kind, x.ayes, x.noes, x.final, x.src.voteDateSeq])).toEqual([
+      ["S", "2025-06-03", "third_reading", 26, 10, true, "1100"],
+      ["S", "2025-09-13", "concurrence", 28, 6, true, "1188"],
+      ["A", "2025-09-13", "third_reading", 41, 29, true, "1107"],
     ]);
+    expect(reconsider.map((r) => [r.voteDateSeq, r.ayes, r.noes])).toEqual([["1098", 27, 10], ["1099", 39, 0], ["1100", 26, 10]]);
+    expect(stats.reconsiderationUpgrades.map((u) => [u.billId, u.house, u.date, u.ayes, u.noes, u.kind])).toEqual([["202520260SB274", "S", "2025-06-03", 26, 10, "third_reading"]]);
+    expect(stats.reconsiderationUpgrades[0]?.historyLine).toBe("Read third time. Passed. (Ayes 26. Noes 10. Page 1468.) Ordered to the Assembly.");
+    // Two SB 274 roll calls, one on another bill under Unfinished Business (no matching passage) and one on AB 2414 (below).
+    expect(stats.excludedByReason["reconsideration"]).toBe(4);
+  });
+
+  it("AB 2414: a reconsideration roll call with the same tally as a counted roll call of that day is the reconsideration vote, not a second passage", () => {
+    // Senate 2026-08-26: "Assembly 3rd Reading AB2414 Nguyen By Reyes" 40-0 counts; "... By Reyes Motion to Reconsider Reconsider" 40-0 has the
+    // same bill, house, date and tally and so would match the same history passage, but another roll call already stands for it.
+    const rows = src.summaryVotes.filter((r) => r.billId === "202520260AB2414" && r.locationCode === "SFLOOR" && r.voteDateTime.startsWith("2026-08-26"));
+    expect(rows.map((r) => [r.ayes, r.noes, /Reconsider/.test(src.motions.get(r.motionId) ?? "")]).sort()).toEqual([[40, 0, false], [40, 0, true]]);
+    expect(calls("0AB2414").filter((x) => x.house === "S").map((x) => [x.date, x.ayes, x.noes, x.kind, x.final])).toEqual([
+      ["2026-08-26", 40, 0, "third_reading", false],
+      ["2026-08-31", 39, 0, "third_reading", true],
+    ]);
+    expect(calls("0AB2414").some((x) => /Reconsider/.test(x.motionText))).toBe(false);
+    expect(stats.reconsiderationUpgrades.some((u) => u.billId === "202520260AB2414")).toBe(false);
   });
 
   it("SB 627: concurrence under 'Unfinished Business (Supplemental File 1)', last of two same-day roll calls is final", () => {
@@ -212,7 +232,7 @@ describe("roll call classification", () => {
     expect(bad[0]).toMatchObject({ house: "A", ayes: 77, noes: 0 });
     expect(bad[0]?.v.split("").filter((c) => c === "A")).toHaveLength(76);
     expect(stats.tally.mismatching.map((m) => m.id)).toEqual([bad[0]?.id]);
-    expect(stats.tally).toMatchObject({ total: 151, matching: 150 });
+    expect(stats.tally).toMatchObject({ total: 196, matching: 195 });
   });
 
   it("ACA 21: the Senate W/O REF. TO FILE roll call is counted as the adoption vote, matched from the history", () => {
@@ -223,7 +243,7 @@ describe("roll call classification", () => {
     expect(counted[0]).toMatchObject({ house: "S", kind: "third_reading", date: "2026-06-25", ayes: 35, noes: 0 });
   });
 
-  it("each bill and house has at most one final passage roll call and one final concurrence", () => {
+  it("each bill and house has at most one final passage roll call and one final concurrence (none when the passage was rescinded)", () => {
     const seen = new Map<string, number>();
     for (const r of snap.votes.rollCalls) {
       if (!r.final) continue;
@@ -231,10 +251,11 @@ describe("roll call classification", () => {
       seen.set(k, (seen.get(k) ?? 0) + 1);
     }
     expect([...seen.values()].every((n) => n === 1)).toBe(true);
+    const rescinded = new Set(stats.rescindedFinals.map((x) => `${x.billId}|${x.house}`));
     for (const b of snap.core.bills) {
       for (const house of ["A", "S"] as const) {
         const list = snap.votes.rollCalls.filter((r) => r.billId === b.id && r.house === house && r.kind !== "concurrence");
-        if (list.length > 0) expect(list.filter((r) => r.final)).toHaveLength(1);
+        if (list.length > 0) expect(list.filter((r) => r.final)).toHaveLength(rescinded.has(`${b.id}|${house}`) ? 0 : 1);
       }
     }
   });
@@ -279,13 +300,8 @@ describe("passages without a member-level roll call", () => {
     expect(calls("0SB1438").filter((r) => r.house === "A")).toHaveLength(0);
   });
 
-  it("SB 274: the only same-tally roll call of the Senate passage is a motion to reconsider; it stays excluded and the passage is not claimed missing", () => {
-    expect(stats.noRollCallNeedsLook.map((x) => [x.billId, x.house, x.kind, x.date])).toEqual([["202520260SB274", "S", "third_reading", "2025-06-03"]]);
-    const n = stats.noRollCallNeedsLook[0];
-    expect(n?.rollCalls).toHaveLength(1);
-    expect(n?.rollCalls[0]).toMatchObject({ kind: null, group: "S Senate 3rd Reading" });
-    expect(n?.rollCalls[0]?.motionText).toContain("Motion to Reconsider");
-    expect(n?.historyAction).toBe("Read third time. Passed. (Ayes 26. Noes 10. Page 1468.) Ordered to the Assembly.");
+  it("SB 274: the Senate passage now has a counted roll call, so it is neither in noRollCall nor in the needs-a-look list", () => {
+    expect(stats.noRollCallNeedsLook).toEqual([]);
     expect(snap.votes.noRollCall.some((x) => x.billId === "202520260SB274")).toBe(false);
   });
 
@@ -365,7 +381,7 @@ describe("floor roll calls in history-decided locations", () => {
   it("SB 1438 and SB 329: Special Consent roll calls matching a 'concurred in' action become concurrences", () => {
     expect(find("0SB1438", "S", "2026-08-27")).toMatchObject({ kind: "concurrence", fileLocation: "Special Consent", ayes: 40, noes: 0, final: true });
     expect(find("0SB329", "S", "2026-08-28")).toMatchObject({ kind: "concurrence", fileLocation: "Special Consent" });
-    expect(stats.consentBecameConcurrence).toEqual({ "S Special Consent": 2 });
+    expect(stats.consentBecameConcurrence).toEqual({ "S Special Consent": 3 });
   });
 
   it("Special Consent and Consent Calendar 2nd roll calls matching a passage, or no action, stay consent", () => {
@@ -379,12 +395,15 @@ describe("floor roll calls in history-decided locations", () => {
 
   it("counts the history-decided roll calls by group and resulting kind", () => {
     expect(stats.historyGroups).toEqual({
-      "S Consent Calendar 2nd": { consent: 6 },
-      "S Special Consent": { consent: 2, concurrence: 2 },
+      "S Consent Calendar 2nd": { consent: 7 },
+      "S Special Consent": { consent: 2, concurrence: 3 },
       "S W/O REF. TO FILE": { concurrence: 2, third_reading: 1 },
       "S (no file_location)": { third_reading: 1 },
       "S Assembly 2nd Reading": { third_reading: 1 },
       "A AF0160": { third_reading: 1 },
+      "S Senate 3rd Reading": { third_reading: 1, reconsideration: 2 },
+      "S Unfinished Business": { reconsideration: 1 },
+      "S Assembly 3rd Reading": { reconsideration: 1 },
     });
   });
 
@@ -396,7 +415,7 @@ describe("floor roll calls in history-decided locations", () => {
 
 describe("committee referrals", () => {
   it("resolve through the history row's own committee code and come first by date", () => {
-    expect(stats.referrals).toMatchObject({ rows: 126, resolved: 125, unresolved: 1, multiCommitteeRows: 9, billsWithReferralCommittee: 27 });
+    expect(stats.referrals).toMatchObject({ rows: 174, resolved: 173, unresolved: 1, multiCommitteeRows: 17, billsWithReferralCommittee: 38 });
     expect(stats.referrals.unresolvedStrings).toEqual(["From committee chair, with author's amendments: Amend, and re-refer to committee. Read second time, amended, and re-referred to Com. on L. GOV."]);
     // SB 627 was referred to two committees in the Senate; the other names are not on the row.
     expect(stats.referrals.multiCommitteeExtraNames).toContain("PUB. S.");
@@ -565,5 +584,95 @@ describe("shards and files", () => {
       expect(f.path).toMatch(/-[0-9a-f]{8}\.json$/);
       expect(f.path.endsWith(`-${f.sha256.slice(0, 8)}.json`)).toBe(true);
     }
+  });
+});
+
+const findCall = (num: string, house: "A" | "S", date: string): RollCall => {
+  const r = calls(num).filter((x) => x.house === house && x.date === date);
+  if (r.length !== 1) throw new Error(`expected one roll call for ${num} ${house} ${date}, found ${r.length}`);
+  return r[0] as RollCall;
+};
+
+describe("passages rescinded in the bill history", () => {
+  it("AB 1447, SB 1189 and SB 493: a passage rescinded with no later passage roll call is not final", () => {
+    // History rows: AB 1447 119025123 (Rescinded) and 119025128 "Action rescinded whereby the bill was read third time, passed, and to Assembly.";
+    // SB 1189 118906167 and 118906171 "... ordered to the Senate."; SB 493 118958893 and 118958897 (same wording).
+    expect(findCall("0AB1447", "S", "2025-07-17")).toMatchObject({ kind: "consent", ayes: 35, noes: 0, final: false });
+    expect(findCall("0SB1189", "A", "2026-06-15")).toMatchObject({ kind: "consent", ayes: 77, noes: 0, final: false });
+    expect(findCall("0SB493", "A", "2025-08-28")).toMatchObject({ kind: "third_reading", ayes: 75, noes: 1, final: false });
+    expect(stats.rescindedFinals.map((x) => [x.billId, x.house, x.date, x.rescindedOn, x.billHistoryId])).toEqual([
+      ["202520260AB1447", "S", "2025-07-17", "2026-08-10", "119025128"],
+      ["202520260SB1189", "A", "2026-06-15", "2026-07-02", "118906171"],
+      ["202520260SB493", "A", "2025-08-28", "2026-06-08", "118958897"],
+    ]);
+    // The passage rows are marked Rescinded, so the bill history does not list a passage without a roll call either.
+    expect(snap.votes.noRollCall.filter((n) => ["202520260AB1447", "202520260SB1189", "202520260SB493"].includes(n.billId))).toEqual([]);
+    expect(snap.votes.noRollCall.map((n) => n.billId)).not.toContain("202520260AB1447");
+  });
+
+  it("AB 1250: a passage rescinded and then passed again makes the later roll call final", () => {
+    const s = calls("0AB1250").filter((x) => x.house === "S");
+    expect(s.map((x) => [x.date, x.ayes, x.noes, x.final])).toEqual([
+      ["2025-09-03", 40, 0, false],
+      ["2025-09-09", 40, 0, true],
+    ]);
+    expect(stats.rescindedFinals.some((x) => x.billId === "202520260AB1250")).toBe(false);
+  });
+});
+
+describe("version of a vote on a day the bill was amended", () => {
+  it("ACA 8, Assembly 2025-08-21: 'Amended. Ordered to third reading.' precedes 'Adopted and to Senate.', so the vote was on the 8/21 version", () => {
+    // History rows 118189020 (Amended, sequence 8) and 118189022 (Adopted and to Senate. (Ayes 57. Noes 20.)); versions dated 2025-08-18 and 2025-08-21.
+    expect(findCall("0ACA8", "A", "2025-08-21")).toMatchObject({ ayes: 57, noes: 20, versionId: "20250ACA897AMD", versionInferred: true });
+    expect(src.versions.find((v) => v.versionId === "20250ACA897AMD")).toMatchObject({ date: "2025-08-21" });
+    expect(stats.sameDayVersionChanged.map((x) => [x.billId, x.house, x.date, x.from, x.to])).toContainEqual(["202520260ACA8", "A", "2025-08-21", "20250ACA898AMD", "20250ACA897AMD"]);
+  });
+
+  it("ACA 8, Senate 2025-08-21: no amendment action of the Senate that day, so the previous version stays", () => {
+    expect(findCall("0ACA8", "S", "2025-08-21")).toMatchObject({ ayes: 30, noes: 8, versionId: "20250ACA898AMD", versionInferred: true });
+  });
+
+  it("reports how the history orders the same-day amendment and passage for every vote on such a day", () => {
+    const total = Object.values(stats.sameDayVersionOrder).reduce((a, b) => a + b, 0);
+    expect(total).toBeGreaterThan(0);
+    expect(stats.sameDayVersionOrder["amendment-first"]).toBeGreaterThanOrEqual(1);
+    for (const c of stats.sameDayVersionChanged) expect(c.from).not.toBe(c.to);
+  });
+});
+
+describe("analysis lists the parser cannot trust", () => {
+  const a = (num: string) => snap.analyses[`${SESSION}0${num}`];
+
+  it("AB 1097: 'Oppose Unless Amended' inside the support list, so neither list is published", () => {
+    expect(a("AB1097")).toMatchObject({ analysisId: "385330", support: null, opposition: null });
+  });
+
+  it("AB 2616: 'Opposition (unless amended)' inside the opposition list nulls that list only", () => {
+    expect(a("AB2616")?.opposition).toBeNull();
+    expect(a("AB2616")?.support).toEqual([
+      "Alliance of Californians for Community Empowerment (ACCE Action)",
+      "Courage California",
+      "Friends Committee on Legislation of California",
+      "LA Voice",
+      "Legal Aid Foundation of Los Angeles",
+      "Rubicon Programs",
+      "The W. Haywood Burns Institute",
+    ]);
+  });
+
+  it("AB 2558 and AB 2746: a 'Last verified' line in a list nulls the list", () => {
+    expect(a("AB2558")).toMatchObject({ support: null, opposition: null });
+    expect(a("AB2746")).toMatchObject({ support: null, opposition: null });
+  });
+
+  it("SB 1420: an organisation named 'Verified Voting' is not a verification line", () => {
+    expect(a("SB1420")?.support).toContain("Verified Voting");
+    expect(a("SB1420")?.positionsVerified).toBe("2026-08-14");
+  });
+
+  it("AB 1723 and AB 387: a 'None submitted' sentence is an empty list, not an organisation", () => {
+    expect(a("AB1723")?.opposition).toEqual([]);
+    expect(a("AB387")?.opposition).toEqual([]);
+    for (const x of Object.values(snap.analyses)) for (const item of [...(x.support ?? []), ...(x.opposition ?? [])]) expect(item).not.toMatch(/^none\b/i);
   });
 });

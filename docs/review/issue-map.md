@@ -116,3 +116,8 @@ An issue id and its number `n` are stored in user profiles and are never reused 
 - `CX05` Environmental Safety and Toxic Materials maps to Environmental Quality (with `CS64`).
 - `CX02` Accountability and Administrative Review maps to Governmental Organization.
 - Inactive Senate committees (`CS51`, `CS67`, `CS73`, `CS80`) appear in LOCATION_CODE_TBL but in no hearing or roll call; they are mapped by subject.
+
+## Needs a human look
+
+- `CS73` Governance and Finance maps to Local Government (`local-government`) while `CX19` Revenue and Taxation maps to Revenue and Taxation (`revenue-and-taxation`). Check whether the two should share an issue; the mapping is unchanged.
+- `CS56` Labor, Public Employment and Retirement maps to Labor and Employment (`labor-and-employment`) while `CX17` Public Employment and Retirement maps to Public Employment and Retirement (`public-employment-and-retirement`). Check whether the two should share an issue; the mapping is unchanged.

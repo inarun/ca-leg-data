@@ -122,3 +122,45 @@ export function crossCheck(core: CoreFile, votes: VotesFile, digests: DigestsFil
   }
   if (problems.length > 0) throw new IngestError("cross-check", "the output files disagree with each other", problems);
 }
+
+/**
+ * The most analyses whose latest file may be unreadable, as a share of the bills that have an analysis row.
+ * In pubinfo_2025.zip (source 2026-11-16) 0 of 3729 bills' latest analysis files are unreadable, so a handful
+ * is already a sign of a damaged download; 0.5% (18 of 3729) leaves room for one bad file without hiding a broken one.
+ */
+export const MAX_UNREADABLE_ANALYSIS_RATIO = 0.005;
+
+/**
+ * An empty or truncated source must not become a snapshot. These checks look only at the source itself, never at an
+ * earlier manifest: no rows at all in a table the build depends on is a failure whatever was published before.
+ */
+export function assertSourceNotEmpty(s: { counts: SessionCounts; inScopeBills: number }): void {
+  const problems: string[] = [];
+  if (s.counts.bills === 0) problems.push("BILL_TBL has no bills for the session");
+  if (s.inScopeBills === 0) problems.push("no bill of an in-scope measure type (AB, SB, ACA, SCA)");
+  if (s.counts.versions === 0) problems.push("BILL_VERSION_TBL has no versions for the session");
+  if (s.counts.rollCalls === 0) problems.push("BILL_SUMMARY_VOTE_TBL has no roll calls for the session (tally total is 0)");
+  if (s.counts.memberVotes === 0) problems.push("BILL_DETAIL_VOTE_TBL has no member votes for the session");
+  if (problems.length > 0) throw new IngestError("empty-source", "the source has no data in a table the build depends on", problems);
+}
+
+/** Checks that need the bills and analyses read: history for every in-scope bill, and readable analysis files. */
+export function assertSourceReadable(s: {
+  billsWithoutHistory: string[];
+  analysisBills: number;
+  analysesRead: number;
+  unreadableLatest: number;
+}): void {
+  const problems: string[] = [];
+  if (s.billsWithoutHistory.length > 0) {
+    problems.push(`${s.billsWithoutHistory.length} in-scope bills have no BILL_HISTORY_TBL rows: ${s.billsWithoutHistory.slice(0, 10).join(", ")}`);
+  }
+  if (s.analysisBills > 0 && s.analysesRead === 0) {
+    problems.push(`${s.analysisBills} in-scope bills have analysis rows but no analysis file could be read`);
+  } else if (s.unreadableLatest > MAX_UNREADABLE_ANALYSIS_RATIO * s.analysisBills) {
+    problems.push(
+      `the latest analysis file is unreadable for ${s.unreadableLatest} of ${s.analysisBills} bills, more than ${(MAX_UNREADABLE_ANALYSIS_RATIO * 100).toFixed(1)}%`,
+    );
+  }
+  if (problems.length > 0) throw new IngestError("unreadable-source", "the source is damaged or incomplete", problems);
+}

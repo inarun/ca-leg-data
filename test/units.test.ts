@@ -8,9 +8,12 @@ import { makeFixture, rangesOf } from "../src/fixture.ts";
 import { FloorActionIndex, floorAction, historyPassage, parseTally } from "../src/passages.ts";
 import { applyHistoryRules, type HistoryCandidate } from "../src/historyKinds.ts";
 import { openSource } from "../src/reader.ts";
-import { loadTables } from "../src/tables.ts";
+import { isPassageRescission, Rescissions, rescissionHouse } from "../src/rescind.ts";
+import { loadTables, type HistoryRow } from "../src/tables.ts";
 import { docxToText, extractDigest } from "../src/text.ts";
 import { asciiSlug, compareNumericStrings, stableStringify } from "../src/util.ts";
+import { chooseVersionForVote, sameDayOrder } from "../src/versions.ts";
+import type { BillVersionRef } from "../schema/snapshot-v1.ts";
 import { cleanTemp, FIXTURE, SESSION, TABLES, tempDir } from "./helpers.ts";
 
 afterAll(cleanTemp);
@@ -91,7 +94,7 @@ describe("floor classification", () => {
     expect(c.classify("S", null, "Assembly 3rd Reading AB1250 Papan By Strickland")).toMatchObject({ kind: null, reason: null, history: "required" });
     expect(c.classify("S", "W/O REF. TO FILE", "W/O REF. TO FILE Concurrence SB1 Someone")).toMatchObject({ history: "required" });
     // A motion exclusion still applies first.
-    expect(c.classify("S", "W/O REF. TO FILE", "W/O REF. TO FILE SB1 Someone Motion to Reconsider")).toMatchObject({ kind: null, reason: "reconsideration" });
+    expect(c.classify("S", "W/O REF. TO FILE", "W/O REF. TO FILE SB1 Someone Motion to Reconsider")).toMatchObject({ kind: null, reason: null, history: "optional", noMatchReason: "reconsideration" });
   });
 
   it("the Senate consent locations are consent unless the history says concurrence", async () => {
@@ -112,7 +115,8 @@ describe("floor classification", () => {
     const c = new FloorClassifier(await table);
     const amend = "SB 280 Cervantes Third Reading Urgency By Pellerin Amend By GALLAGHER Set #2 Motion to Lay on the Table By AGUIAR-CURRY";
     expect(c.classify("A", "AF0250", amend)).toMatchObject({ kind: null, reason: "amendment" });
-    expect(c.classify("S", "Senate 3rd Reading", "Senate 3rd Reading SB274 Cervantes Motion to Reconsider")).toMatchObject({ kind: null, reason: "reconsideration" });
+    // A reconsideration is left to the bill history: it counts only when an applied passage has its bill, house, date and tally.
+    expect(c.classify("S", "Senate 3rd Reading", "Senate 3rd Reading SB274 Cervantes Motion to Reconsider")).toMatchObject({ kind: null, reason: null, history: "optional", noMatchReason: "reconsideration" });
     expect(motionExclusion("AB 1 Someone Motion to Withdraw")).toBe("withdraw");
     expect(motionExclusion("AB 1 Someone re-refer to committee")).toBe("re-refer");
     expect(motionExclusion("AB 1 Someone Motion to Lay on the Table")).toBe("lay-on-the-table");
@@ -443,9 +447,40 @@ describe("applyHistoryRules (synthetic roll calls)", () => {
 
   it("a second-reading roll call whose motion text excludes it stays excluded whatever the history says", () => {
     const passed = hist("2", "Read third time. Passed. Ordered to the Assembly. (Ayes 38. Noes  0. Page 3.).");
-    const c = cand("rc", "Assembly 2nd Reading AB1 Someone Motion to Reconsider", 38, 0, { history: "optional", excluded: true });
+    const c = cand("rc", "Assembly 2nd Reading AB1 Someone Motion to Withdraw", 38, 0, { history: "optional", excluded: true });
     applyHistoryRules([c], new FloorActionIndex([passed]));
     expect(c.kind).toBeNull();
+  });
+
+  it("a roll call on a motion to reconsider counts only with a history passage of the same bill, house, date and tally", () => {
+    const passed = hist("2", "Read third time. Passed. Ordered to the Assembly. (Ayes 26. Noes 10. Page 1468.).");
+    const group = { history: "optional" as const, group: "S Senate 3rd Reading", fileLocation: "Senate 3rd Reading", noMatchReason: "reconsideration" as const, reconsideration: true };
+    const hit = cand("hit", "Senate 3rd Reading SB1 Someone Motion to Reconsider", 26, 10, group);
+    const otherTally = cand("tally", "Senate 3rd Reading SB1 Someone Motion to Reconsider", 27, 10, group);
+    const otherDay = cand("day", "Senate 3rd Reading SB1 Someone Motion to Reconsider", 26, 10, { ...group, date: "2026-01-06" });
+    const otherBill = cand("bill", "Senate 3rd Reading SB2 Someone Motion to Reconsider", 26, 10, { ...group, billId: "b2" });
+    const otherHouse = cand("house", "Assembly 3rd Reading SB1 Someone Motion to Reconsider", 26, 10, { ...group, house: "A" });
+    const r = applyHistoryRules([hit, otherTally, otherDay, otherBill, otherHouse], new FloorActionIndex([passed]));
+    expect([hit, otherTally, otherDay, otherBill, otherHouse].map((c) => c.kind)).toEqual(["third_reading", null, null, null, null]);
+    expect(r.upgrades.map((u) => [u.id, u.wouldBeExcludedAs])).toEqual([["hit", "reconsideration"]]);
+    expect(r.excludedByReason).toEqual({ reconsideration: 4 });
+  });
+
+  it("a reconsideration roll call is excluded when another counted roll call has the same bill, house, date and tally", () => {
+    const passed = hist("2", "Read third time. Passed. Ordered to the Assembly. (Ayes 26. Noes 10. Page 1468.).");
+    const reconsideration = { history: "optional" as const, group: "S Senate 3rd Reading", fileLocation: "Senate 3rd Reading", noMatchReason: "reconsideration" as const, reconsideration: true };
+    // The other roll call stands outside the history-decided locations, with a kind of its own.
+    const plain = cand("plain", "Assembly 3rd Reading SB1 Someone By Other", 26, 10, { history: null, kind: "third_reading", group: "S Assembly 3rd Reading", fileLocation: "Assembly 3rd Reading" });
+    const re = cand("re", "Assembly 3rd Reading SB1 Someone By Other Reconsider", 26, 10, reconsideration);
+    const r = applyHistoryRules([plain, re], new FloorActionIndex([passed]));
+    expect([plain.kind, re.kind]).toEqual(["third_reading", null]);
+    expect(r.upgrades).toEqual([]);
+    expect(r.excludedByReason).toEqual({ reconsideration: 1 });
+    // Another roll call with a different tally does not stand for the passage.
+    const other = cand("other", "Assembly 3rd Reading SB1 Someone By Other", 25, 10, { history: null, kind: "third_reading" });
+    const re2 = cand("re2", "Assembly 3rd Reading SB1 Someone By Other Reconsider", 26, 10, reconsideration);
+    applyHistoryRules([other, re2], new FloorActionIndex([passed]));
+    expect(re2.kind).toBe("third_reading");
   });
 
   it("a constitutional amendment's 'Adopted and to <house>.' action is its passage: W/O REF. roll call -> third reading", () => {
@@ -475,5 +510,140 @@ describe("applyHistoryRules (synthetic roll calls)", () => {
     const r = applyHistoryRules([tr], new FloorActionIndex([]));
     expect(tr.kind).toBe("third_reading");
     expect(r.urgencyClauseOutside).toEqual({ "S Senate 3rd Reading": 1 });
+  });
+});
+
+describe("analysis lists: qualified sub-headings, none sentences and verification lines", () => {
+  const doc = (support: string, opposition: string, verified = ""): string =>
+    `SUPPORT:${verified}\n${support}\nOPPOSITION:${verified}\n${opposition}\n-- END --`;
+
+  it("a sub-heading of the same side nulls that list only; the paired list is kept", () => {
+    const r = parseAnalysisSections(doc("Org A\nOrg B", "Org C\nOppose Unless Amended\nOrg D"));
+    expect(r.support).toEqual(["Org A", "Org B"]);
+    expect(r.opposition).toBeNull();
+    expect(parseAnalysisSections(doc("Org A", "Org C\nOpposition (unless amended)\nOrg D")).opposition).toBeNull();
+    expect(parseAnalysisSections(doc("Org A\nSupport if Amended\nOrg B", "Org C")).support).toBeNull();
+    expect(parseAnalysisSections(doc("Org A\nSupport if Amended\nOrg B", "Org C")).opposition).toEqual(["Org C"]);
+  });
+
+  it("a sub-heading of the other side nulls both lists", () => {
+    const r = parseAnalysisSections(doc("Org A\nOppose Unless Amended\nOrg B", "Org C"));
+    expect(r.support).toBeNull();
+    expect(r.opposition).toBeNull();
+    const r2 = parseAnalysisSections(doc("Org A", "Org C\nSupport if Amended\nOrg D"));
+    expect(r2.support).toBeNull();
+    expect(r2.opposition).toBeNull();
+  });
+
+  it("an organisation whose name merely contains 'amended' or 'unless' is a name", () => {
+    expect(parseAnalysisSections(doc("Unless We Act Coalition\nAmended Rules Project", "Org C")).support).toEqual(["Unless We Act Coalition", "Amended Rules Project"]);
+  });
+
+  it("a single line that starts with 'None' is an empty list, whatever follows", () => {
+    for (const s of ["None Submitted", "None submitted.", "None on file. All prior opposition was to a previous version of this bill.", "None received for the current version of the bill"]) {
+      expect(parseAnalysisSections(doc("Org A", s)).opposition, s).toEqual([]);
+    }
+    // Among other lines it is not read as a list at all.
+    expect(parseAnalysisSections(doc("Org A\nNone submitted.", "Org C")).support).toBeNull();
+  });
+
+  it("a line dating a verification nulls the list; 'Verified Voting' is an organisation", () => {
+    expect(parseAnalysisSections(doc("Last verified 4/18/26\nOrg A", "Org C")).support).toBeNull();
+    expect(parseAnalysisSections(doc("Org A", "Oppose Last verified 4/19/26\nOrg C")).opposition).toBeNull();
+    expect(parseAnalysisSections(doc("Org A\nVerified Voting", "Org C")).support).toEqual(["Org A", "Verified Voting"]);
+  });
+
+  it("the verified marker the heading already gave is dropped from the list; any other date nulls it", () => {
+    const r = parseAnalysisSections(doc("Org A\nOrg B\nVerified 8/13/26", "Org C", "\t(Verified 8/13/26)"));
+    expect(r.positionsVerified).toBe("2026-08-13");
+    expect(r.support).toEqual(["Org A", "Org B"]);
+    expect(parseAnalysisSections(doc("Org A\nVerified 8/14/26", "Org C", "\t(Verified 8/13/26)")).support).toBeNull();
+    expect(parseAnalysisSections(doc("Org A\nVerified 8/13/26", "Org C")).support).toBeNull();
+  });
+});
+
+describe("rescinded passages and same-day versions (synthetic history)", () => {
+  const row = (id: string, date: string, action: string, over: Partial<HistoryRow> = {}): HistoryRow => ({
+    billId: "b1",
+    historyId: id,
+    date,
+    action,
+    sequence: Number(id),
+    status: "Applied",
+    primaryLocation: "Senate",
+    secondaryLocation: null,
+    ternaryLocation: null,
+    ...over,
+  });
+  const passed = (id: string, date: string, over: Partial<HistoryRow> = {}) =>
+    row(id, date, "Read third time. Passed. Ordered to the Assembly. (Ayes 35. Noes  0. Page 9.).", over);
+  const rescind = (id: string, date: string, over: Partial<HistoryRow> = {}) =>
+    row(id, date, "Action rescinded whereby the bill was read third time, passed, and to Assembly.", over);
+
+  it("the house comes from primary_location, else from the wording", () => {
+    expect(rescissionHouse(rescind("1", "2026-01-05"))).toBe("S");
+    expect(rescissionHouse(row("1", "2026-01-05", "Action rescinded whereby bill was read third time, passed, and ordered to the Senate.", { primaryLocation: null }))).toBe("A");
+    expect(rescissionHouse(row("1", "2026-01-05", "Action rescinded whereby bill was read third time, passed, and ordered to Senate.", { primaryLocation: null }))).toBe("A");
+    expect(rescissionHouse(row("1", "2026-01-05", "Action rescinded whereby the bill was read third time, passed, and to Assembly.", { primaryLocation: null }))).toBe("S");
+    expect(rescissionHouse(row("1", "2026-01-05", "Action rescinded whereby the bill was placed on inactive file.", { primaryLocation: null }))).toBeNull();
+  });
+
+  it("only a rescission of a passage counts: not a referral, an inactive-file placement or one that is itself not applied", () => {
+    expect(isPassageRescission(rescind("1", "2026-01-05"))).toBe(true);
+    expect(isPassageRescission(rescind("1", "2026-01-05", { status: "Rescinded" }))).toBe(false);
+    expect(isPassageRescission(row("1", "2026-01-05", "Action rescinded whereby the bill was re-referred to Com. on JUD. pursuant to Senate Rule 29.10(b)."))).toBe(false);
+    expect(isPassageRescission(row("1", "2026-01-05", "Action rescinded whereby the bill was placed on inactive file."))).toBe(false);
+  });
+
+  it("a later date rescinds; an earlier or other house does not", () => {
+    const r = new Rescissions([passed("1", "2026-01-05", { status: "Rescinded" }), rescind("2", "2026-02-01")]);
+    expect(r.rescindedBy("b1", "S", "2026-01-05", 35, 0)?.historyId).toBe("2");
+    expect(r.rescindedBy("b1", "S", "2026-02-02", 35, 0)).toBeNull();
+    expect(r.rescindedBy("b1", "A", "2026-01-05", 35, 0)).toBeNull();
+    expect(r.rescindedBy("b2", "S", "2026-01-05", 35, 0)).toBeNull();
+  });
+
+  it("on the same date the history order decides, and an unknown order keeps the roll call final", () => {
+    const after = new Rescissions([passed("1", "2026-01-05"), rescind("2", "2026-01-05")]);
+    expect(after.rescindedBy("b1", "S", "2026-01-05", 35, 0)?.historyId).toBe("2");
+    const revote = new Rescissions([passed("1", "2026-01-05"), rescind("2", "2026-01-05"), passed("3", "2026-01-05")]);
+    expect(revote.rescindedBy("b1", "S", "2026-01-05", 35, 0)).toBeNull();
+    const before = new Rescissions([rescind("1", "2026-01-05"), passed("2", "2026-01-05")]);
+    expect(before.rescindedBy("b1", "S", "2026-01-05", 35, 0)).toBeNull();
+    const noRow = new Rescissions([rescind("2", "2026-01-05")]);
+    expect(noRow.rescindedBy("b1", "S", "2026-01-05", 35, 0)).toBeNull();
+  });
+
+  const version = (id: string, date: string, action: string): BillVersionRef => ({ id, num: 99, date, action });
+  const versions = [version("v1", "2026-01-01", "Introduced"), version("v2", "2026-02-01", "Amended Senate"), version("v3", "2026-03-01", "Amended Senate")];
+
+  it("a same-day amendment that precedes the passage puts the vote on that day's version, still flagged inferred", () => {
+    const amend = row("5", "2026-03-01", "Read third time and amended. Ordered to second reading.");
+    const pass = passed("6", "2026-03-01");
+    const f = floorAction(pass) as NonNullable<ReturnType<typeof floorAction>>;
+    expect(sameDayOrder([amend, pass], [f], "Senate", "2026-03-01")).toBe("amendment-first");
+    expect(chooseVersionForVote("b1", versions, "2026-03-01", "amendment-first")).toEqual({ versionId: "v3", inferred: true });
+    // The previous-version rule, unchanged.
+    expect(chooseVersionForVote("b1", versions, "2026-03-01")).toEqual({ versionId: "v2", inferred: true });
+    expect(chooseVersionForVote("b1", versions, "2026-03-01", "passage-first")).toEqual({ versionId: "v2", inferred: true });
+    expect(chooseVersionForVote("b1", versions, "2026-03-05")).toEqual({ versionId: "v3", inferred: false });
+  });
+
+  it("an amendment after the passage, in the other house, or with no matching passage row leaves the order unsettled", () => {
+    const pass = passed("5", "2026-03-01");
+    const f = floorAction(pass) as NonNullable<ReturnType<typeof floorAction>>;
+    const later = row("6", "2026-03-01", "Amended. Ordered to third reading.");
+    expect(sameDayOrder([pass, later], [f], "Senate", "2026-03-01")).toBe("passage-first");
+    expect(sameDayOrder([later, pass], [f], "Assembly", "2026-03-01")).toBe("unknown");
+    expect(sameDayOrder([later, pass], [], "Senate", "2026-03-01")).toBe("unknown");
+    expect(sameDayOrder([row("6", "2026-03-02", "Amended. Ordered to third reading."), pass], [f], "Senate", "2026-03-01")).toBe("unknown");
+    expect(sameDayOrder([row("4", "2026-03-01", "Amended. Ordered to third reading.", { status: "Rescinded" }), pass], [f], "Senate", "2026-03-01")).toBe("unknown");
+  });
+
+  it("two versions dated the vote's day are never resolved by order", () => {
+    const two = [...versions, version("v4", "2026-03-01", "Amended Senate")];
+    expect(chooseVersionForVote("b1", two, "2026-03-01", "amendment-first")).toEqual({ versionId: "v2", inferred: true });
+    const introducedDay = [version("v1", "2026-03-01", "Introduced")];
+    expect(chooseVersionForVote("b1", introducedDay, "2026-03-01", "amendment-first")).toEqual({ versionId: "v1", inferred: true });
   });
 });

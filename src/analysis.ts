@@ -93,14 +93,47 @@ function bodyLines(lines: Line[], headingIndex: number): Line[] | null {
   return lines.slice(headingIndex + 1, stop).filter((l) => l.t !== "");
 }
 
-function listSection(lines: Line[], found: { index: number } | null, text: string): string[] | null {
-  if (!found) return null;
-  const body = bodyLines(lines, found.index);
-  if (!body || body.length === 0) return null;
-  if (body.length === 1 && NONE_MARKER.test((body[0] as Line).t)) return [];
-  if (body.some((l) => NONE_MARKER.test(l.t))) return null;
-  if (body.some((l) => l.t.length > MAX_ITEM_LENGTH)) return null;
-  return body.map((l) => text.slice(l.start, l.end));
+// A sub-heading inside a list, e.g. "Oppose Unless Amended" or "Opposition (unless amended)": the names below it
+// are not plain supporters or opponents. The word that opens the line says which side it speaks for.
+const QUALIFIED_SUBHEADING = /^(oppose|opposition|support)\b.*\b(?:unless|if) amended/i;
+// A "none" sentence in place of a list: "None submitted.", "None received for this version of the bill."
+const NONE_SENTENCE = /^none\b/i;
+// A line that dates a verification, e.g. "Last verified 4/18/26" or "Oppose Last verified 4/19/26".
+const VERIFIED_DATE_LINE = /\bverified\b[^\n]*\d{1,2}\/\d{1,2}\/\d{2,4}/i;
+const VERIFIED_MARKER_LINE = /^\(?\s*(?:last\s+)?verified\s+(\d{1,2})\/(\d{1,2})\/(\d{2}|\d{4})\s*\)?\.?$/i;
+
+type Side = "support" | "opposition";
+
+interface ListResult {
+  list: string[] | null;
+  /** The list holds a sub-heading of the other side, so the layout of the paired list cannot be trusted either. */
+  mixedSides: boolean;
+}
+
+/**
+ * The names under a SUPPORT or OPPOSITION heading. The list is null whenever it cannot be read as a plain list of
+ * that side: a "none" line among names, a qualified sub-heading ("Oppose Unless Amended"), a line dating a
+ * verification (unless it is cleanly the verified marker the heading itself already gave), or an over-long line.
+ */
+function listSection(lines: Line[], found: { index: number } | null, text: string, side: Side, headingVerified: string | null): ListResult {
+  const none: ListResult = { list: null, mixedSides: false };
+  if (!found) return none;
+  let body = bodyLines(lines, found.index);
+  if (!body || body.length === 0) return none;
+  if (body.length === 1 && NONE_SENTENCE.test((body[0] as Line).t)) return { list: [], mixedSides: false };
+  if (body.some((l) => NONE_SENTENCE.test(l.t))) return none;
+  const sub = body.find((l) => QUALIFIED_SUBHEADING.test(l.t));
+  if (sub) {
+    const subSide: Side = /^support/i.test(sub.t) ? "support" : "opposition";
+    return { list: null, mixedSides: subSide !== side };
+  }
+  const last = body[body.length - 1] as Line;
+  const marker = VERIFIED_MARKER_LINE.exec(last.t);
+  if (marker && headingVerified !== null && verifiedDate(marker) === headingVerified) body = body.slice(0, -1);
+  if (body.some((l) => VERIFIED_DATE_LINE.test(l.t))) return none;
+  if (body.length === 0) return none;
+  if (body.some((l) => l.t.length > MAX_ITEM_LENGTH)) return none;
+  return { list: body.map((l) => text.slice(l.start, l.end)), mixedSides: false };
 }
 
 function textSection(lines: Line[], found: { index: number } | null, text: string, allowNone: boolean): string | null {
@@ -153,18 +186,21 @@ export function parseAnalysisSections(text: string): ParsedSections {
   const argSupportH = findOnce(lines, ARG_SUPPORT_HEADING);
   const argOppositionH = findOnce(lines, ARG_OPPOSITION_HEADING);
 
-  const support = listSection(lines, supportH, text);
-  const opposition = listSection(lines, oppositionH, text);
-
   const dates = [supportH, oppositionH]
     .map((h) => (h ? verifiedDate(h.match) : null))
     .filter((d): d is string => d !== null);
   const positionsVerified = dates.length > 0 && dates.every((d) => d === dates[0]) ? (dates[0] as string) : null;
 
+  const supportList = listSection(lines, supportH, text, "support", positionsVerified);
+  const oppositionList = listSection(lines, oppositionH, text, "opposition", positionsVerified);
+  // A sub-heading of the other side in a list means the names around it cannot be assigned to a side with
+  // confidence, so neither list is published.
+  const mixed = supportList.mixedSides || oppositionList.mixedSides;
+
   return {
     digest: digestSection(lines, text),
-    support,
-    opposition,
+    support: mixed ? null : supportList.list,
+    opposition: mixed ? null : oppositionList.list,
     positionsVerified,
     argumentsInSupport: textSection(lines, argSupportH, text, false),
     argumentsInOpposition: textSection(lines, argOppositionH, text, false),
