@@ -1,0 +1,150 @@
+{
+  "title": "analysis-<shard>-<hash8>.json, schema v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "snapshotId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "shard": {
+      "type": "string",
+      "minLength": 1
+    },
+    "analyses": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "analysisId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "house": {
+            "type": "string",
+            "enum": [
+              "A",
+              "S"
+            ]
+          },
+          "type": {
+            "type": "string"
+          },
+          "committee": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "text": {
+            "type": "string"
+          },
+          "digest": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "support": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "opposition": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "positionsVerified": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "argumentsInSupport": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "argumentsInOpposition": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "src": {
+            "type": "object",
+            "properties": {
+              "table": {
+                "type": "string",
+                "const": "BILL_ANALYSIS_TBL"
+              },
+              "analysisId": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "table",
+              "analysisId"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "analysisId",
+          "house",
+          "type",
+          "committee",
+          "date",
+          "text",
+          "digest",
+          "support",
+          "opposition",
+          "positionsVerified",
+          "argumentsInSupport",
+          "argumentsInOpposition",
+          "src"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "snapshotId",
+    "shard",
+    "analyses"
+  ],
+  "additionalProperties": false
+}

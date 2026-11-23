@@ -1,0 +1,144 @@
+{
+  "issues": [
+    {
+      "id": "agriculture",
+      "n": 1,
+      "name": "Agriculture"
+    },
+    {
+      "id": "aging",
+      "n": 2,
+      "name": "Aging and Long Term Care"
+    },
+    {
+      "id": "arts-and-entertainment",
+      "n": 3,
+      "name": "Arts, Entertainment, Sports, and Tourism"
+    },
+    {
+      "id": "banking-and-finance",
+      "n": 4,
+      "name": "Banking and Finance"
+    },
+    {
+      "id": "business-and-professions",
+      "n": 5,
+      "name": "Business and Professions"
+    },
+    {
+      "id": "communications",
+      "n": 6,
+      "name": "Communications"
+    },
+    {
+      "id": "economic-development",
+      "n": 7,
+      "name": "Economic Development"
+    },
+    {
+      "id": "education",
+      "n": 8,
+      "name": "Education"
+    },
+    {
+      "id": "elections",
+      "n": 9,
+      "name": "Elections"
+    },
+    {
+      "id": "emergency-management",
+      "n": 10,
+      "name": "Emergency Management"
+    },
+    {
+      "id": "energy-and-utilities",
+      "n": 11,
+      "name": "Energy and Utilities"
+    },
+    {
+      "id": "environmental-quality",
+      "n": 12,
+      "name": "Environmental Quality"
+    },
+    {
+      "id": "governmental-organization",
+      "n": 13,
+      "name": "Governmental Organization"
+    },
+    {
+      "id": "health",
+      "n": 14,
+      "name": "Health"
+    },
+    {
+      "id": "higher-education",
+      "n": 15,
+      "name": "Higher Education"
+    },
+    {
+      "id": "housing",
+      "n": 16,
+      "name": "Housing"
+    },
+    {
+      "id": "human-services",
+      "n": 17,
+      "name": "Human Services"
+    },
+    {
+      "id": "insurance",
+      "n": 18,
+      "name": "Insurance"
+    },
+    {
+      "id": "judiciary",
+      "n": 19,
+      "name": "Judiciary"
+    },
+    {
+      "id": "labor-and-employment",
+      "n": 20,
+      "name": "Labor and Employment"
+    },
+    {
+      "id": "local-government",
+      "n": 21,
+      "name": "Local Government"
+    },
+    {
+      "id": "military-and-veterans-affairs",
+      "n": 22,
+      "name": "Military and Veterans Affairs"
+    },
+    {
+      "id": "natural-resources-and-water",
+      "n": 23,
+      "name": "Natural Resources and Water"
+    },
+    {
+      "id": "privacy-and-consumer-protection",
+      "n": 24,
+      "name": "Privacy and Consumer Protection"
+    },
+    {
+      "id": "public-employment-and-retirement",
+      "n": 25,
+      "name": "Public Employment and Retirement"
+    },
+    {
+      "id": "public-safety",
+      "n": 26,
+      "name": "Public Safety"
+    },
+    {
+      "id": "revenue-and-taxation",
+      "n": 27,
+      "name": "Revenue and Taxation"
+    },
+    {
+      "id": "transportation",
+      "n": 28,
+      "name": "Transportation"
+    }
+  ]
+}

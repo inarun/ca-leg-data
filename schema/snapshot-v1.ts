@@ -207,8 +207,8 @@ export interface RollCall {
   date: string;
   time: string | null;
   kind: VoteKind;
-  /** BILL_SUMMARY_VOTE_TBL.file_location verbatim. */
-  fileLocation: string;
+  /** BILL_SUMMARY_VOTE_TBL.file_location verbatim; null when the source row has none. */
+  fileLocation: string | null;
   /** BILL_MOTION_TBL.motion_text verbatim. */
   motionText: string;
   /** Official tallies from the summary row. */
