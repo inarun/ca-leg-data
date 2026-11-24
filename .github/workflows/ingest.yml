@@ -236,9 +236,10 @@ jobs:
       issues: write
       pages: write
       id-token: write
+      actions: read # to see that the Pages artifact is listed before deploying
     environment:
       name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
+      url: ${{ steps.deploy.outputs.page_url || steps.deploy_retry.outputs.page_url }}
     env:
       GH_REPO: ${{ github.repository }}
       ROLLBACK_TO: ${{ inputs.rollback_to }}
@@ -331,7 +332,28 @@ jobs:
       - uses: actions/upload-pages-artifact@v5
         with:
           path: site
+      # The deploy step looks the artifact up through the API, and the listing can lag behind the
+      # upload ("Found 0 artifact(s)"; seen on two runs out of two on 2026-11-24). Wait until this
+      # run's artifact is listed, then deploy, and try the deploy once more if it fails.
+      - name: Wait until the Pages artifact is listed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 36); do
+            n=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts" --jq '[.artifacts[] | select(.name == "github-pages")] | length' 2>/dev/null || echo 0)
+            if [ "$n" -ge 1 ]; then echo "listed after $i checks"; exit 0; fi
+            sleep 5
+          done
+          echo "The artifact was not listed after 3 minutes; trying the deploy anyway."
       - id: deploy
+        continue-on-error: true
+        uses: actions/deploy-pages@v5
+      - name: Pause before a second deploy attempt
+        if: steps.deploy.outcome == 'failure'
+        run: sleep 60
+      - id: deploy_retry
+        if: steps.deploy.outcome == 'failure'
         uses: actions/deploy-pages@v5
 
       - name: Record state (only after a successful deploy)
